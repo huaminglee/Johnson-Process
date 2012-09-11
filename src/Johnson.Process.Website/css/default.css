@@ -1,0 +1,11 @@
+﻿body{ font-size: 80%; padding: 0.2em; }
+form{margin: 0; padding:0;}
+.header{width:100%; border-collapse: collapse; border-spacing: 0; border: 0px solid #C9DEFC;}
+.panelTitle{ background: url(../images/title_bg.gif) repeat-x left top; font-size:1.3em; border: 1px solid #C9DEFC; margin: 0; padding: 0; font-weight: bold; }
+.labelCol { text-align: left; vertical-align:middle; background: #F0F7FA; }
+.textCol { text-align: left; vertical-align:middle; }
+.textInput { padding:0.2em; background: #F5FAFD; border: 1px solid #69B2D1; font-size: 1.0em; width: 200px;}
+.formInfo { border-collapse: collapse; border-spacing: 0; border-top: 1px solid #C9DEFC; border-left: 1px solid #C9DEFC;}
+.formInfo td{padding: 0.1em;}
+.btnCommon { border: 1px solid #81B7B7; background: url('../Images/button.gif') repeat-x center center; padding: 0.1em; color: #000; cursor: pointer; line-height: 20px; }
+label.error {color: Red;}

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9FC1D75-2500-4F01-B204-FDB3B5FE903C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Johnson.Process.Core</RootNamespace>
+    <AssemblyName>Johnson.Process.Core</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UltEik">
+      <HintPath>..\..\lib\UltEik.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConsultationAndQuotationForm.cs" />
+    <Compile Include="ConsultationAndQuotationProcess.cs" />
+    <Compile Include="ConsultationAndQuotationProductInfo.cs" />
+    <Compile Include="DeliveryProcess.cs" />
+    <Compile Include="DeliveryProcessForm.cs" />
+    <Compile Include="FailureProductForm.cs" />
+    <Compile Include="FailureProductProcess.cs" />
+    <Compile Include="MetadataDataProvider.cs" />
+    <Compile Include="ProcessEmailDataProvider.cs" />
+    <Compile Include="HtmlHelper.cs" />
+    <Compile Include="Material.cs" />
+    <Compile Include="ProcessEmailEntity.cs" />
+    <Compile Include="ProcessFile.cs" />
+    <Compile Include="ProductReworkForm.cs" />
+    <Compile Include="ProductReworkProcess.cs" />
+    <Compile Include="UltimusHelper.cs" />
+    <Compile Include="UltimusProcess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlHelper.cs" />
+    <Compile Include="TaskApproveInfo.cs" />
+    <Compile Include="TaskInfo.cs" />
+    <Compile Include="TaskSendResult.cs" />
+    <Compile Include="VocAction.cs" />
+    <Compile Include="VocForm.cs" />
+    <Compile Include="VocProcess.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
