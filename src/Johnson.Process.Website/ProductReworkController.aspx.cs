@@ -203,10 +203,8 @@ namespace Johnson.Process.Website
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.CidFiles = model.CidFiles;
                 form.GYFA = model.GYFA;
-                form.GSJS = model.GSJS;
-                form.HYBZ = model.HYBZ;
-                form.ZPX = model.ZPX;
-                form.BanJin = model.BanJin;
+                form.GS = model.GS;
+                form.GSLX = model.GSLX;
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);

@@ -37,9 +37,9 @@
                 </td>
                 <td class="textCol">
                     <div>
-                        <input name="Level" type="radio" value="0" checked="checked"/><label>Critical</label>
-                        <input name="Level" type="radio" value="1" /><label>Major</label>
-                        <input name="Level" type="radio" value="2" /><label>Minor</label>
+                        <input name="Level" type="radio" value="Critical" checked="checked"/><label>Critical</label>
+                        <input name="Level" type="radio" value="Major" /><label>Major</label>
+                        <input name="Level" type="radio" value="Minor" /><label>Minor</label>
                     </div>
                 </td>
             </tr>
@@ -54,29 +54,29 @@
                         <input name="QEResult" type="radio" value="3" /><label>返工/返修</label>
                         <input name="QEResult" type="radio" value="4" /><label>报废</label>
                         <input name="QEResult" type="radio" value="5" /><label>挑选</label>
+                        <input name="QEResult" type="radio" value="6" /><label>MRB会议</label>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    来料<span style="color: Red" >*</span>
+                    来料
                 </td>
                 <td class="textCol">
                     <div>
-                        <input name="SupplierDeal" type="radio" value="0" checked="checked"/><label>8D报告</label>
-                        <input name="SupplierDeal" type="radio" value="1" /><label>索赔单</label>
+                        <input name="SupplierDeal" type="radio" value="8D报告" /><label>8D报告</label>
+                        <input name="SupplierDeal" type="radio" value="索赔单" /><label>索赔单</label>
                         <label>单号</label><input name="SupplierDealBillNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    制程<span style="color: Red" >*</span>
+                    制程
                 </td>
-                <td class="textCol">
-                    
-                    <input name="ProduceDeal" type="radio" value="0" checked="checked"/><label>产品返工/返修单</label>
-                    <input name="ProduceDeal" type="radio" value="1" /><label>8D报告</label>
+                <td class="textCol">                    
+                    <input name="ProduceDeal" type="radio" value="产品返工/返修单" /><label>产品返工/返修单</label>
+                    <input name="ProduceDeal" type="radio" value="8D报告" /><label>8D报告</label>
                     <label>单号</label><input name="ProduceDealNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                 </td>
             </tr>
@@ -85,14 +85,24 @@
                     具体分析说明<span style="color: Red" >*</span>
                 </td>
                 <td class="textCol">
-                    <textarea name="Analysis" class="textInput" style="width: 688px;" rows="3"></textarea>
+                    <textarea name="Analysis" class="textInput required" style="width: 688px;" rows="3"></textarea>
                 </td>
             </tr>
         </table>
     </form>
     
     <form id="mrbForm">
-        <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">MRB小组意见</div></div>
+        <div style="margin-top: 1em;">
+            <table id="mrbMemberResults" style="width:900px;height:auto" title="MRB成员意见">
+		        <thead>
+			        <tr> 
+				        <th field="UserName" resizable="false" width="100">姓名</th>
+                        <th field="ResultName" resizable="false" width="100">意见</th>
+			        </tr>
+		        </thead>
+	        </table>
+        </div>
+        <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">我的意见</div></div>
         <div>
             <input name="MrbResult" type="radio" value="1" checked="checked"/><label>退回供应商</label>
             <input name="MrbResult" type="radio" value="2" /><label>让步接收</label>
@@ -145,12 +155,12 @@
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
             $("#mrbForm").setFormValue(data);
             $("#remarks").datagrid("loadData", data.Approves);
+            if(data.MrbResults){
+                $("#mrbMemberResults").datagrid("loadData", data.MrbResults);
+            }
         });
 
         $("#btnSubmit").button().click(function () {
-            if (!$("#basicInfoForm").validAndFocus()) {
-                return;
-            }
             var valueObj = $.getFormValue("#mrbForm, #remarkForm");
             if (!confirm("您确实要提交吗？")) {
                 return;
@@ -169,7 +179,7 @@
         });
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#basicInfoForm").validate();
-        $("#remarks").datagrid({
+        $("#remarks, #mrbMemberResults").datagrid({
             rownumbers: true
         });
     })

@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>返工返修单-ENG</title>
+    <title>返工返修单-QC</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -23,7 +23,7 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="返工返修单-ENG" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="返工返修单-QC" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
@@ -38,49 +38,7 @@
                 </td>
             </tr>
         </table>
-        <div style="margin-top: 1em;">
-            <table id="engRequireGrid" style="width:900px;height:auto" title="技术要求">
-		        <thead>
-			        <tr>
-				        <th field="Name" resizable="false" width="300">所需物料名称</th>
-                        <th field="PN" resizable="false" width="100">P.N</th>
-                        <th field="Quantity" resizable="false" width="100">数量</th>
-			        </tr>
-		        </thead>
-	        </table>
-        </div>
-    
-        <div style="margin-top: 1em;">
-            <table id="engAttachments" style="width:900px;height:auto" title="附件信息">
-		        <thead>
-			        <tr> 
-				        <th field="FileName" resizable="false" width="200">附件名称</th>
-                        <th field="FileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			        </tr>
-		        </thead>
-	        </table>
-        </div>
-    </form>
-    
-    <div id="addMaterialsDialog" title="添加物料信息">
-        <form>
-            <johnson:ProductReworkMaterials runat="server" ID="addProductReworkMaterials"></johnson:ProductReworkMaterials>
-            <div style="margin-top:1em" class="buttons">
-                <input type="submit" value="确定并继续"/>
-                <input type="button" value="确定"/>
-                <input type="button" value="关闭"/>
-            </div>
-        </form>
-    </div>
-    <div id="editMaterialsDialog" title="编辑物料信息">
-        <form >
-            <johnson:ProductReworkMaterials runat="server" ID="editProductReworkMaterials"></johnson:ProductReworkMaterials>
-            <div style="margin-top:1em" class="buttons">
-                <input type="submit" value="确定"/>
-                <input type="button" value="关闭"/>
-            </div>
-        </form>
-    </div>
+    </form>    
 
     <div style="margin-top: 1em;">
         <table id="remarks" style="width:900px;height:auto" title="提交信息">
@@ -122,14 +80,8 @@
     var tempFolderId = "<%= this.ProcessFolderId %>";
 
     $(function () {
-        $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
+        $.get("FailureProductController.aspx?action=GetReworkModel", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data);
-            if(data.Materials){
-                $('#engRequireGrid').datagrid('loadData', data.Materials);
-            }
-            if(data.EngFiles){
-                $('#engAttachments').datagrid('loadData', data.EngFiles);
-            }
             if(data.Files){
                 $('#attachments').datagrid('loadData', data.Files);
             }
@@ -140,17 +92,9 @@
             if(!$("#basicInfoForm").validAndFocus()){
                 return;
             }
-            var engRequireData = $('#engRequireGrid').datagrid('getData');
-            if (engRequireData.rows.length == 0) {
-                alert("请添加物料信息!");
-                return;
-            }
             var valueObj = $("#remarkForm, #basicInfoForm").getFormValue();
-            valueObj.Materials = engRequireData.rows;
             var files = $('#attachments').datagrid('getData');
             valueObj.Files = files.rows;
-            var engFiles = $('#engAttachments').datagrid('getData');
-            valueObj.EngFiles = engFiles.rows;
             var objJson = $.toJSON(valueObj);
             if (!confirm("您确实要提交吗？")) {
                 return;
@@ -169,10 +113,6 @@
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#remarks").datagrid();
-        $("#addMaterialsDialog form,#editMaterialsDialog form").validate();
-        var addMaterialsDialog = $("#addMaterialsDialog").dialog({ autoOpen: false, modal: true, width: 500 });
-        var editMaterialsDialog = $("#editMaterialsDialog").dialog({ autoOpen: false, modal: true, width: 500 });
-        $("#engRequireGrid").eidtableGrid(addMaterialsDialog,editMaterialsDialog);
-        $("#engAttachments, #attachments").attachmentsGrid();
+        $("#attachments").attachmentsGrid();
     })
 </script>

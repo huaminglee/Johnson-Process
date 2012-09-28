@@ -75,30 +75,21 @@
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    工时计算 Coil<span style="color: Red" >*</span>
+                    工时类型<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 280px" class="textCol">
-                    <input name="GSJS" type="text" class="textInput txtwidth required" />
+                    <select name="GSLX" class="textInput txtwidth required">
+                        <option value="Coil">Coil</option>
+                        <option value="钣金">钣金</option>
+                        <option value="装配线">装配线</option>
+                        <option value="其它">其它</option>
+                    </select>
                 </td>
                 <td style="width: 200px" class="labelCol">
-                    钣金<span style="color: Red" >*</span>
+                    工时<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 280px" class="textCol">
-                    <input name="BanJin" type="text" class="textInput txtwidth required" />
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 200px" class="labelCol">
-                    装配线<span style="color: Red" >*</span>
-                </td>
-                <td style="width: 280px" class="textCol">
-                    <input name="ZPX" type="text" class="textInput txtwidth required" />
-                </td>
-                <td style="width: 200px" class="labelCol">
-                    其它
-                </td>
-                <td style="width: 280px" class="textCol">
-                    <input name="HYBZ" type="text" class="textInput txtwidth" />
+                    <input name="GS" type="text" class="textInput txtwidth required" />
                 </td>
             </tr>
         </table>
@@ -119,7 +110,8 @@
                     QAD方案确认<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 280px" class="textCol">
-                    <input name="QADFAQR" type="text" class="textInput txtwidth required" />
+                    <input name="QADFAQR" value="OK" type="radio" checked="checked"/><label>OK</label>
+                    <input name="QADFAQR" value="NG" type="radio"/><label>NG</label>
                 </td>
             </tr>
         </table>
@@ -154,10 +146,10 @@
                     <input name="FGJGBZ" type="text" class="textInput" style="width: 80px"/>
                 </td>
                 <td style="width: 200px" class="labelCol">
-                    相关处理单号<span style="color: Red" >*</span>
+                    相关处理单号
                 </td>
                 <td style="width: 280px" class="textCol">
-                    <input name="XGCLDH" type="text" class="textInput txtwidth required" />
+                    <input name="XGCLDH" type="text" class="textInput txtwidth" />
                 </td>
             </tr>
         </table>

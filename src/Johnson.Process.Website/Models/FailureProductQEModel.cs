@@ -7,15 +7,15 @@ namespace Johnson.Process.Website.Models
 {
     public class FailureProductQEModel
     {
-        public FailureLevel Level { set; get; }
+        public string Level { set; get; }
 
         public FailureResult QEResult { set; get; }
 
-        public FailureSupplierDeal SupplierDeal { set; get; }
+        public string SupplierDeal { set; get; }
 
         public string SupplierDealBillNumber { set; get; }
 
-        public FailureProduceDeal ProduceDeal { set; get; }
+        public string ProduceDeal { set; get; }
 
         public string ProduceDealNumber { set; get; }
 
@@ -37,19 +37,11 @@ namespace Johnson.Process.Website.Models
 
         public string CsdUserName { set; get; }
 
-        public string ReworkPmcUserAccount { set; get; }
-
-        public string ReworkPmcUserName { set; get; }
-
         public string FinUserAccount { set; get; }
 
         public string FinUserName { set; get; }
 
-        public string QCUserAccount { set; get; }
-
-        public string QCUserName { set; get; }
-
-        public bool needMRB { set; get; }
+        public string emailTo { set; get; }
 
         public string submitRemark { set; get; }
     }

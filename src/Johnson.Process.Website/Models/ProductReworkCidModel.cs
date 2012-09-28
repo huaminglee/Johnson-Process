@@ -19,24 +19,14 @@ namespace Johnson.Process.Website.Models
         public List<ProcessFile> CidFiles { set; get; }
 
         /// <summary>
-        /// 工时计算
+        /// 工时类型
         /// </summary>
-        public string GSJS { set; get; }
+        public string GSLX { set; get; }
 
         /// <summary>
-        /// 钣金
+        /// 工时
         /// </summary>
-        public string BanJin { set; get; }
-
-        /// <summary>
-        /// 装配线
-        /// </summary>
-        public string ZPX { set; get; }
-
-        /// <summary>
-        /// 工艺备注
-        /// </summary>
-        public string HYBZ { set; get; }
+        public string GS { set; get; }
 
         public string submitRemark { set; get; }
     }

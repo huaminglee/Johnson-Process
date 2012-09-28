@@ -363,6 +363,7 @@
     <Content Include="ProductRework_Transfer.aspx" />
     <Content Include="Template\ConsultationAndQuotationToCsdMailTemplate.htm" />
     <Content Include="Template\ConsultationAndQuotation_TracerMailTemplate.htm" />
+    <Content Include="Template\FailureProductResultMailTemplate.htm" />
     <Content Include="UserControls\ConsultationAndQuotationDetails.ascx" />
     <Content Include="UserControls\ConsultationAndQuotationProductCsdFiceTPDetails.ascx" />
     <Content Include="UserControls\ConsultationAndQuotationProductCsdSalesTPDetails.ascx" />
@@ -381,6 +382,8 @@
     <Content Include="UserControls\VocComplaint.ascx" />
     <Content Include="UserControls\VocDetails.ascx" />
     <Content Include="VocController.aspx" />
+    <Content Include="VocReport.aspx" />
+    <Content Include="VocReportController.aspx" />
     <Content Include="VOC_ActionCompleted.aspx" />
     <Content Include="Voc_ASD.aspx" />
     <Content Include="Voc_Completed.aspx" />
@@ -712,6 +715,8 @@
     <Compile Include="Models\VocMeasuresModel.cs" />
     <Compile Include="Models\VocModel.cs" />
     <Compile Include="Models\VocMultiStart.cs" />
+    <Compile Include="Models\VocReportModel.cs" />
+    <Compile Include="Models\VocReportSearchModel.cs" />
     <Compile Include="Models\VocResponsibleModel.cs" />
     <Compile Include="Models\VocResponsibleReasonModel.cs" />
     <Compile Include="ProcessPage.cs">
@@ -923,6 +928,20 @@
     </Compile>
     <Compile Include="VocController.aspx.designer.cs">
       <DependentUpon>VocController.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VocReport.aspx.cs">
+      <DependentUpon>VocReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VocReport.aspx.designer.cs">
+      <DependentUpon>VocReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VocReportController.aspx.cs">
+      <DependentUpon>VocReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VocReportController.aspx.designer.cs">
+      <DependentUpon>VocReportController.aspx</DependentUpon>
     </Compile>
     <Compile Include="VOC_ActionCompleted.aspx.cs">
       <DependentUpon>VOC_ActionCompleted.aspx</DependentUpon>

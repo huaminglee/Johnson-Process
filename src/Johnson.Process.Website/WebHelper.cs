@@ -27,7 +27,9 @@ namespace Johnson.Process.Website
             string consultationAndQuotation_TracerMailTemplate = File.ReadAllText(consultationAndQuotation_TracerMailTemplatePath);
             ConsultationAndQuotationProcess = new ConsultationAndQuotationProcess("技术咨询及报价", consultationAndQuotationToCsdMailTemplate, consultationAndQuotation_TracerMailTemplate);
             VocProcess = new VocProcess("VOC");
-            FailureProductProcess = new FailureProductProcess("不合格品处理");
+
+            string failureProductResultMailTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["JohnsonProcessPath"] + "/Template/FailureProductResultMailTemplate.htm"));
+            FailureProductProcess = new FailureProductProcess("不合格品处理", failureProductResultMailTemplate);
             ProductReworkProcess = FailureProductProcess.ProductReworkProcess;
         }
 

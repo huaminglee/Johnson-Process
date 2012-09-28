@@ -47,8 +47,8 @@
                 </td>
                 <td class="textCol" style="width: 280px" >
                     <div class="singleUserSelect">
-                        <input type="text" name="PmcUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="PmcUserAccount" class="userName" value=""/>
+                        <input type="text" name="PmcUserAccount" class="userAccount"/>
+                        <input type="text" name="PmcUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -57,8 +57,8 @@
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="FinUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="FinUserAccount" class="userName" value=""/>
+                        <input type="text" name="FinUserAccount" class="userAccount"/>
+                        <input type="text" name="FinUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -69,8 +69,8 @@
                 </td>
                 <td class="textCol" style="width: 280px" >
                     <div class="singleUserSelect">
-                        <input type="text" name="EngUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="EngUserAccount" class="userName" value=""/>
+                        <input type="text" name="EngUserAccount" class="userAccount"/>
+                        <input type="text" name="EngUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -79,8 +79,8 @@
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="QEUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="QEUserAccount" class="userName" value=""/>
+                        <input type="text" name="QEUserAccount" class="userAccount"/>
+                        <input type="text" name="QEUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -91,8 +91,8 @@
                 </td>
                 <td class="textCol" colspan="3" >
                     <div class="singleUserSelect">
-                        <input type="text" name="CidUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="CidUserAccount" class="userName" value=""/>
+                        <input type="text" name="CidUserAccount" class="userAccount"/>
+                        <input type="text" name="CidUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>

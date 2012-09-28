@@ -376,8 +376,8 @@ $.widget(
             _create: function(){
                 var element = this.element;
                 if($.debug){
-                    element.find(".userAccount").removeAttr("readonly");
-                    element.find(".userName").show();
+                    element.find(".userName").removeAttr("readonly");
+                    element.find(".userAccount").show();
                 }
                 element.find(":button").click(function(){
                     var url = edoc2BaseUrl + "/AppExt/Common/SelectOrgnization.aspx?userTree={show:true,multiSelect:" + false + ",current: true}&deptTree={show:false}";
@@ -385,8 +385,8 @@ $.widget(
                         if (res != null && res.users != null) {
                             if(res.users.length > 0){
                                 var user = res.users[res.users.length-1];
-                                element.find(".userAccount").val(user._data.loginName).focusout();
-                                element.find(".userName").val(user._data.userRealName);
+                                element.find(".userName").val(user._data.loginName).focusout();
+                                element.find(".userAccount").val(user._data.userRealName);
                             }
                         }
                 });

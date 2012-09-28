@@ -77,8 +77,10 @@ function deleteEDoc2File(fileId, cb) {
     });
 }
 function closeWindow() {
-    window.open('', '_self', '');
-    window.close();
+    if(!$.debug){
+        window.open('', '_self', '');
+        window.close();
+    }
 }
 function fileActionFormater(fileId, row) {
     if (parseInt(fileId)) {

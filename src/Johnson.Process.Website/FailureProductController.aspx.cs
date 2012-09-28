@@ -25,6 +25,10 @@ namespace Johnson.Process.Website
             {
                 this.Get();
             }
+            else if (action.Equals("GetReworkModel", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.GetReworkModel();
+            }
             else if (action.Equals("start", StringComparison.InvariantCultureIgnoreCase))
             {
                 this.Start();
@@ -61,6 +65,10 @@ namespace Johnson.Process.Website
             {
                 this.ReworkSubmit();
             }
+            else if (action.Equals("GetFromThirdDatabase", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.GetFromThirdDatabase();
+            }
         }
 
         private void Get()
@@ -86,6 +94,49 @@ namespace Johnson.Process.Website
             }
         }
 
+        private void GetReworkModel()
+        {
+            try
+            {
+                string taskId = Request["taskid"];
+                if (string.IsNullOrEmpty(taskId))
+                {
+                    throw new ArgumentNullException("taskId");
+                }
+                taskId = taskId.Trim();
+                FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
+                if (form == null)
+                {
+                    form = new FailureProductForm();
+                }
+
+                Response.Write(JsonConvert.SerializeObject(new ProductReworkModel(form)));
+            }
+            catch (Exception ex)
+            {
+                WebHelper.Logger.Error(ex.Message, ex);
+            }
+        }
+
+        private void GetFromThirdDatabase()
+        {
+            try
+            {
+                string id = Request["id"];
+                if (string.IsNullOrEmpty(id))
+                {
+                    throw new ArgumentNullException("id");
+                }
+
+                FailureProductForm form = WebHelper.FailureProductProcess.GetFromThirdDatabase(id);
+                Response.Write(JsonConvert.SerializeObject(form));
+            }
+            catch (Exception ex)
+            {
+                WebHelper.Logger.Error(ex.Message, ex);
+            }
+        }
+
         private void Start()
         {
             ActionResultModel resultModel = new ActionResultModel();
@@ -101,6 +152,7 @@ namespace Johnson.Process.Website
                 FailureStartModel model = JsonConvert.DeserializeObject<FailureStartModel>(formJson);
                 string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
                 FailureProductForm form = new FailureProductForm();
+                form.StartDepartment = WebHelper.CurrentUserInfo.DepartmentName;
                 this.SetFormProperty(form, model);
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
                 form.Approves = new List<TaskApproveInfo>();
@@ -169,11 +221,8 @@ namespace Johnson.Process.Website
                 form.EngUserName = model.EngUserName;
                 form.FinUserAccount = model.FinUserAccount;
                 form.FinUserName = model.FinUserName;
-                form.QCUserAccount = model.QCUserAccount;
-                form.QCUserName = model.QCUserName;
+                form.QCUserAccount = form.StartUserAccount;
                 form.Level = model.Level;
-                form.ReworkPmcUserAccount = model.ReworkPmcUserAccount;
-                form.ReworkPmcUserName = model.ReworkPmcUserName;
                 form.ProduceDeal = model.ProduceDeal;
                 form.ProduceDealNumber = model.ProduceDealNumber;
                 form.QEResult = model.QEResult;
@@ -185,7 +234,7 @@ namespace Johnson.Process.Website
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.FailureProductProcess.QESend(taskId, model.needMRB, form);
+                WebHelper.FailureProductProcess.QESend(taskId, form, model.emailTo);
             }
             catch (Exception ex)
             {
@@ -215,7 +264,13 @@ namespace Johnson.Process.Website
                 {
                     form.MrbResults = new List<MrbFailureResult>();
                 }
-                form.MrbResults.Add(new MrbFailureResult { Result = model.MrbResult, UserAccount = WebHelper.CurrentUserInfo.UserLoginName, UserName = currentUserName });
+                MrbFailureResult mrbResult = new MrbFailureResult
+                {
+                    Result = model.MrbResult,
+                    UserAccount = WebHelper.CurrentUserInfo.UserLoginName,
+                    UserName = currentUserName
+                };
+                form.MrbResults.Add(mrbResult);
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
@@ -386,6 +441,14 @@ namespace Johnson.Process.Website
 
         private void SetFormProperty(FailureProductForm form, FailureStartModel model)
         {
+            form.ProductType = model.ProductType;
+            form.BJXLH = model.BJXLH;
+            form.JZXLH = model.JZXLH;
+            form.ZRBM = model.ZRBM;
+            form.UM = model.UM;
+            form.MO = model.MO;
+            form.GYSDM = model.GYSDM;
+            form.GYSMC = model.GYSMC;
             form.ComponentCode = model.ComponentCode;
 
             form.ComponentName = model.ComponentName;
@@ -393,8 +456,6 @@ namespace Johnson.Process.Website
             form.OrderCode = model.OrderCode;
 
             form.FailurePlace = model.FailurePlace;
-
-            form.Supplier = model.Supplier;
 
             form.Source = model.Source;
 

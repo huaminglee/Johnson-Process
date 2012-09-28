@@ -64,8 +64,8 @@
                 </td>
                 <td class="textCol" style="width: 280px" >
                     <div class="singleUserSelect">
-                        <input type="text" name="QCUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="QCUserAccount" class="userName" value=""/>
+                        <input type="text" name="QCUserAccount" class="userAccount"/>
+                        <input type="text" name="QCUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>

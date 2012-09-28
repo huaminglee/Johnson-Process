@@ -99,37 +99,38 @@
             <div>
                 <input name="FYCD" type="radio" value="0" checked="checked"/><label>客户</label>
                 <input name="FYCD" type="radio" value="1" /><label>办事处</label>
-                <input name="FYCD" type="radio" value="1" /><label>保险公司</label>
-                <input name="FYCD" type="radio" value="1" /><label>供方</label>
-                <input name="FYCD" type="radio" value="1" /><label>工厂内部</label>
+                <input name="FYCD" type="radio" value="2" /><label>保险公司</label>
+                <input name="FYCD" type="radio" value="3" /><label>供方</label>
+                <input name="FYCD" type="radio" value="4" /><label>工厂内部</label>
+                <input name="FYCD" type="radio" value="5" /><label>无费用承担</label>
             </div>
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            承担者<span style="color: Red" >*</span>
+            承担者
         </td>
         <td class="textCol">
             <div>
-                <input name="FYCDZ" type="text" class="textInput txtwidth required" />
+                <input name="FYCDZ" type="text" class="textInput txtwidth" />
             </div>
         </td>
         <td style="width: 200px" class="labelCol">
-            索赔单号<span style="color: Red" >*</span>
+            索赔单号
         </td>
         <td class="textCol">
             <div>
-                <input name="SPDH" type="text" class="textInput txtwidth required" />
+                <input name="SPDH" type="text" class="textInput txtwidth" />
             </div>
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            确认人<span style="color: Red" >*</span>
+            确认人
         </td>
         <td class="textCol" colspan="3">
             <div>
-                <input name="FYQRR" type="text" class="textInput txtwidth required" />
+                <input name="FYQRR" type="text" class="textInput txtwidth" />
             </div>
         </td>
     </tr>

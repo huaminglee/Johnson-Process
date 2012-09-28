@@ -12,11 +12,30 @@ namespace Johnson.Process.Website.Models
 
         }
 
+        public ProductReworkModel(FailureProductForm form)
+        {
+            this.Name = form.ComponentName;
+            this.SapNo = form.ComponentCode;
+            this.ProductType = form.ProductType;
+            if (form.ProductType == Core.ProductType.LJ)
+            {
+                this.XLH = form.BJXLH;
+            }
+            else
+            {
+                this.XLH = form.JZXLH;
+            }
+            this.Quantity = form.Quantity;
+            this.OrderNumber = form.OrderCode;
+            this.StartDepartment = form.StartDepartment;
+            this.ProductArea = form.FailurePlace;
+            this.Approves = form.Approves;
+        }
+
         public ProductReworkModel(ProductReworkForm form)
         {
             this.StartDepartment = form.StartDepartment;
             this.Approves = form.Approves;
-            this.BanJin = form.BanJin;
             this.CBCLYJ = form.CBCLYJ;
             this.CBCLYJBZ = form.CBCLYJBZ;
             this.CidUserAccount = form.CidUserAccount;
@@ -36,9 +55,9 @@ namespace Johnson.Process.Website.Models
             {
                 this.GSFY = form.GSFY.ToString();
             }
-            this.GSJS = form.GSJS;
+            this.GS = form.GS;
+            this.GSLX = form.GSLX;
             this.GYFA = form.GYFA;
-            this.HYBZ = form.HYBZ;
             this.Materials = form.Materials;
             this.Name = form.Name;
             this.OrderNumber = form.OrderNumber;
@@ -51,10 +70,7 @@ namespace Johnson.Process.Website.Models
             this.QCUserName = form.QCUserName;
             this.QEUserAccount = form.QEUserAccount;
             this.QEUserName = form.QEUserName;
-            if (form.Quantity > 0)
-            {
-                this.Quantity = form.Quantity.ToString();
-            }
+            this.Quantity = form.Quantity;
             this.SapNo = form.SapNo;
             this.Source = form.Source;
             this.SPDH = form.SPDH;
@@ -68,7 +84,6 @@ namespace Johnson.Process.Website.Models
             {
                 this.ZFY = form.ZFY.ToString();
             }
-            this.ZPX = form.ZPX;
             this.Files = form.Files;
             this.CidFiles = form.CidFiles;
             this.EngFiles = form.EngFiles;
@@ -79,7 +94,7 @@ namespace Johnson.Process.Website.Models
             this.XGCLDH = form.XGCLDH;
         }
 
-        public string ProductType { set; get; }
+        public ProductType ProductType { set; get; }
 
         /// <summary>
         /// 系列号
@@ -197,24 +212,14 @@ namespace Johnson.Process.Website.Models
         public List<ProcessFile> CidFiles { set; get; }
 
         /// <summary>
+        /// 工时类型
+        /// </summary>
+        public string GSLX { set; get; }
+
+        /// <summary>
         /// 工时计算
         /// </summary>
-        public string GSJS { set; get; }
-
-        /// <summary>
-        /// 钣金
-        /// </summary>
-        public string BanJin { set; get; }
-
-        /// <summary>
-        /// 装配线
-        /// </summary>
-        public string ZPX { set; get; }
-
-        /// <summary>
-        /// 工艺备注
-        /// </summary>
-        public string HYBZ { set; get; }
+        public string GS { set; get; }
 
         /// <summary>
         /// QAD方案确认

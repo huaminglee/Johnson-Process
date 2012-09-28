@@ -37,9 +37,9 @@
                 </td>
                 <td class="textCol">
                     <div>
-                        <input name="Level" type="radio" value="0" checked="checked"/><label>Critical</label>
-                        <input name="Level" type="radio" value="1" /><label>Major</label>
-                        <input name="Level" type="radio" value="2" /><label>Minor</label>
+                        <input name="Level" type="radio" value="Critical" checked="checked"/><label>Critical</label>
+                        <input name="Level" type="radio" value="Major" /><label>Major</label>
+                        <input name="Level" type="radio" value="Minor" /><label>Minor</label>
                     </div>
                 </td>
             </tr>
@@ -54,29 +54,29 @@
                         <input name="QEResult" type="radio" value="3" /><label>返工/返修</label>
                         <input name="QEResult" type="radio" value="4" /><label>报废</label>
                         <input name="QEResult" type="radio" value="5" /><label>挑选</label>
+                        <input name="QEResult" type="radio" value="6" /><label>MRB会议</label>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    来料<span style="color: Red" >*</span>
+                    来料
                 </td>
                 <td class="textCol">
                     <div>
-                        <input name="SupplierDeal" type="radio" value="0" checked="checked"/><label>8D报告</label>
-                        <input name="SupplierDeal" type="radio" value="1" /><label>索赔单</label>
+                        <input name="SupplierDeal" type="radio" value="8D报告" /><label>8D报告</label>
+                        <input name="SupplierDeal" type="radio" value="索赔单" /><label>索赔单</label>
                         <label>单号</label><input name="SupplierDealBillNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    制程<span style="color: Red" >*</span>
+                    制程
                 </td>
-                <td class="textCol">
-                    
-                    <input name="ProduceDeal" type="radio" value="0" checked="checked"/><label>产品返工/返修单</label>
-                    <input name="ProduceDeal" type="radio" value="1" /><label>8D报告</label>
+                <td class="textCol">                    
+                    <input name="ProduceDeal" type="radio" value="产品返工/返修单" /><label>产品返工/返修单</label>
+                    <input name="ProduceDeal" type="radio" value="8D报告" /><label>8D报告</label>
                     <label>单号</label><input name="ProduceDealNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                 </td>
             </tr>
@@ -85,7 +85,7 @@
                     具体分析说明<span style="color: Red" >*</span>
                 </td>
                 <td class="textCol">
-                    <textarea name="Analysis" class="textInput" style="width: 688px;" rows="3"></textarea>
+                    <textarea name="Analysis" class="textInput required" style="width: 688px;" rows="3"></textarea>
                 </td>
             </tr>
         </table>

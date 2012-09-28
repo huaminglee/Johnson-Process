@@ -38,23 +38,5 @@ namespace Johnson.Process.Website {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::Johnson.Process.Website.UserControls.ProductReworkDetails productReworkDetails;
-        
-        /// <summary>
-        /// addProductReworkMaterials 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Johnson.Process.Website.UserControls.ProductReworkMaterialsDetails addProductReworkMaterials;
-        
-        /// <summary>
-        /// editProductReworkMaterials 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Johnson.Process.Website.UserControls.ProductReworkMaterialsDetails editProductReworkMaterials;
     }
 }

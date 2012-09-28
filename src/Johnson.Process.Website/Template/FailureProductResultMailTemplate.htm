@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        table{border-collapse: collapse;}
+	    table th, table td{border: solid 1px; }
+    </style>
+</head>
+<body>
+    <h3>基本信息</h3>
+    <table>
+        <tr>
+            <td style="width:200px">零件号</td>
+            <td style="width:200px">${ComponentCode}</td>
+            <td style="width:200px">零件名称</td>
+            <td style="width:200px">${ComponentName}</td>
+        </tr>
+        <tr>
+            <td>部件系列号</td>
+            <td>${BJXLH}</td>
+            <td>机组系列号</td>
+            <td>${JZXLH}</td>
+        </tr>
+        <tr>
+            <td>供应商代码</td>
+            <td>${GYSDM}</td>
+            <td>供应商名称</td>
+            <td>${GYSMC}</td>
+        </tr>
+        <tr>
+            <td>MO</td>
+            <td>${MO}</td>
+            <td>UM</td>
+            <td>${UM}</td>
+        </tr>
+        <tr>
+            <td>订单号</td>
+            <td>${OrderCode}</td>
+            <td>发现地点</td>
+            <td>${FailurePlace}</td>
+        </tr>
+        <tr>
+            <td>责任部门</td>
+            <td>${ZRBM}</td>
+            <td>不合品数量</td>
+            <td>${Quantity}</td>
+        </tr>
+        <tr>
+            <td>不合品来源</td>
+            <td>${Source}</td>
+            <td>主要产生原因</td>
+            <td>${Reason}</td>
+        </tr>
+        <tr>
+            <td>不合格现象描述</td>
+            <td colspan="3">${Remark}</td>
+        </tr>
+    </table>
+    <h3>QAD判断</h3>
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width:200px">缺陷评级</td>
+            <td style="width:200px">${Level}</td>
+            <td style="width:200px">处理结果</td>
+            <td style="width:200px">${QEResult}</td>
+        </tr>
+        <tr>
+            <td>具体分析说明</td>
+            <td colspan="3">${Analysis}</td>
+        </tr>
+    </table>
+</body>
+</html>

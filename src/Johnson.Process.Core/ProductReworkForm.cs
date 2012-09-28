@@ -24,9 +24,26 @@ namespace Johnson.Process.Core
         public string FanAn { set; get; }
     }
 
+    public enum ProductType
+    {
+        /// <summary>
+        /// 零件
+        /// </summary>
+        LJ,
+
+        /// <summary>
+        /// 产品
+        /// </summary>
+        CP
+    }
+
     public class ProductReworkForm
     {
-        public string ProductType { set; get; }
+        public ProductReworkForm()
+        {
+        }
+
+        public ProductType ProductType { set; get; }
 
         /// <summary>
         /// 系列号
@@ -51,7 +68,7 @@ namespace Johnson.Process.Core
         /// <summary>
         /// 数量
         /// </summary>
-        public int Quantity { set; get; }
+        public string Quantity { set; get; }
 
         /// <summary>
         /// 订单号
@@ -144,24 +161,14 @@ namespace Johnson.Process.Core
         public List<ProcessFile> CidFiles { set; get; }
 
         /// <summary>
-        /// 工时计算
+        /// 工时类型
         /// </summary>
-        public string GSJS { set; get; }
+        public string GSLX { set; get; }
 
         /// <summary>
-        /// 钣金
+        /// 工时
         /// </summary>
-        public string BanJin { set; get; }
-
-        /// <summary>
-        /// 装配线
-        /// </summary>
-        public string ZPX { set; get; }
-
-        /// <summary>
-        /// 工艺备注
-        /// </summary>
-        public string HYBZ { set; get; }
+        public string GS { set; get; }
 
         /// <summary>
         /// QAD方案确认

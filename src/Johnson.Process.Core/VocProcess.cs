@@ -29,6 +29,16 @@ namespace Johnson.Process.Core
             return this.Get<VocForm>(taskId);
         }
 
+        public VocForm Get(int incidentNo)
+        {
+            return this.Get<VocForm>(incidentNo);
+        }
+
+        public List<ProcessForm<VocForm>> Get()
+        {
+            return this.Get<VocForm>();
+        }
+
         public TaskSendResult Start(string startUserAccount, string taskId, VocForm form)
         {
             if (string.IsNullOrEmpty(startUserAccount))

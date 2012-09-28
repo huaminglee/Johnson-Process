@@ -53,7 +53,21 @@
         </tr>
     </table>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
-
+    <form id="searchForm">
+        <div>
+            <table class="formInfo">
+                <tr>
+                    <td style="width: 200px" class="labelCol">
+                        不合格编号
+                    </td>
+                    <td class="textCol" >
+                        <input type="text" name="id" class="textInput required"/>
+                        <input id="btnGetFailureProduct" type="button" value="获取不合品信息" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
     <form id="basicInfoForm">
         <johnson:FailureProductDetails runat="server" ID="failureProductDetails"></johnson:FailureProductDetails>
     </form>
@@ -64,10 +78,10 @@
                 <td style="width: 200px" class="labelCol">
                     PMC<span style="color: Red" >*</span>
                 </td>
-                <td class="textCol" style="width: 280px" >
+                <td class="textCol" >
                     <div class="singleUserSelect">
-                        <input type="text" name="pmcUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="pmcUserAccount" class="userName" value=""/>
+                        <input type="text" name="pmcUserAccount" class="userAccount"/>
+                        <input type="text" name="pmcUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -78,8 +92,8 @@
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="qeUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="qeUserAccount" class="userName" value=""/>
+                        <input type="text" name="qeUserAccount" class="userAccount"/>
+                        <input type="text" name="qeUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -145,6 +159,20 @@
         });
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
-        $("#basicInfoForm").validate();
+        $("#basicInfoForm, #searchForm").validate();
+        $("#btnGetFailureProduct").button().click(function(){
+            if (!$("#searchForm").validAndFocus()) {
+                return;
+            }
+            var formValue = $("#searchForm").getFormValue();
+            $.get("FailureProductController.aspx?action=GetFromThirdDatabase", { id: formValue.id }, function (data) {
+                if(!data){
+                    alert("找不到编号的不合品信息!");
+                }
+                else{
+                    $("#basicInfoForm").setFormValue(data);
+                }
+            });
+        });
     })
 </script>

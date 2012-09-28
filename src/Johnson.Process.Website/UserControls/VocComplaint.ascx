@@ -62,10 +62,8 @@
         </td>
         <td class="textCol" >
             <div class="singleUserSelect">
-                <input type="text" name="responsibleUserName" class="textInput required userAccount" readonly="readonly"/>
-                <input type="text" style="display: none" name="responsibleUserAccount" class="userName" value=""/>
-                <%--<input type="text" name="responsibleUserName" class="textInput required userAccount" />
-                <input type="text" name="responsibleUserAccount" class="userName" value=""/>--%>
+                <input type="text" name="responsibleUserAccount" class="userAccount"/>
+                <input type="text" name="responsibleUserName" class="textInput userName required"/>
                 <input type="button" value="选择" class="btnCommon" />
             </div>
         </td>

@@ -22,8 +22,8 @@
         </td>
         <td style="width: 280px" class="textCol">
             <div class="singleUserSelect">
-                <input type="text" name="userAccount" class="textInput required userAccount" readonly="readonly"/>
-                <input type="text" style="display: none" name="userName" class="userName" value=""/>
+                <input type="text" name="userAccount" class="userAccount"/>
+                <input type="text" name="userName" class="textInput userName required"/>
                 <input type="button" value="选择" class="btnCommon" />
             </div>
         </td>

@@ -88,6 +88,16 @@
                 </td>
             </tr>
         </table>
+        <div style="margin-top: 1em;">
+            <table id="mrbMemberResults" style="width:900px;height:auto" title="MRB成员意见">
+		        <thead>
+			        <tr> 
+				        <th field="UserName" resizable="false" width="100">姓名</th>
+                        <th field="ResultName" resizable="false" width="100">意见</th>
+			        </tr>
+		        </thead>
+	        </table>
+        </div>
     </form>
     
     <form id="qaForm">
@@ -157,6 +167,9 @@
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
             $("#qaForm, #qaReceiveForm").setFormValue(data);
             $("#remarks").datagrid("loadData", data.Approves);
+            if(data.MrbResults){
+                $("#mrbMemberResults").datagrid("loadData", data.MrbResults);
+            }
         });
 
         $("#btnSubmit").button().click(function () {
@@ -195,7 +208,7 @@
                 $("#qaReceiveForm").hide();
             }
         });
-        $("#remarks").datagrid({
+        $("#remarks, #mrbMemberResults").datagrid({
             rownumbers: true
         });
     })

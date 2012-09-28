@@ -140,10 +140,7 @@
 
         $("#btnSubmit").button().click(function () {
             var engRequireData = $('#engRequireGrid').datagrid('getData');
-            if (engRequireData.rows.length == 0) {
-                alert("请添加物料信息!");
-                return;
-            }
+
             var valueObj = $("#remarkForm").getFormValue();
             valueObj.Materials = engRequireData.rows;
             var engFiles = $('#engAttachments').datagrid('getData');

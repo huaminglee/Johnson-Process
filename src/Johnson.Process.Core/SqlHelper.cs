@@ -7,6 +7,7 @@ namespace Johnson.Process.Core
     public class SqlHelper
     {
         public static string ConnectString = System.Configuration.ConfigurationSettings.AppSettings["GZJohnsonProcess_ConnectionString"];
+        public static string FailPdct_ConnectionString = System.Configuration.ConfigurationSettings.AppSettings["FailPdct_ConnectionString"];
 
         #region 执行一条SQL语句或存储过程，返回SqlDataReader
         /// <summary>

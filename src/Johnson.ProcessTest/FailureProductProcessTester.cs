@@ -19,7 +19,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -41,13 +41,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
             form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, false, form);
-            Thread.Sleep(20000);
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
 
             //QC
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -63,7 +62,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -85,13 +84,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
             form.QEResult = FailureResult.Receive;
-            process.QESend(taskId, false, form);
-            Thread.Sleep(20000);
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
 
             //QA
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -107,7 +105,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -129,13 +127,13 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
             form.QEResult = FailureResult.Return;
-            process.QESend(taskId, false, form);
-            Thread.Sleep(20000);
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -151,7 +149,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -173,13 +171,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
             form.QEResult = FailureResult.Scrap;
-            process.QESend(taskId, false, form);
-            Thread.Sleep(20000);
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -195,7 +192,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -217,13 +214,17 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
             form.QEResult = FailureResult.Rework;
-            process.QESend(taskId, false, form);
-            Thread.Sleep(20000);
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
+
+            //发起人
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
 
             //Eng
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -268,7 +269,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -290,12 +291,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -311,7 +312,11 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //QC
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -327,7 +332,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -349,12 +354,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Receive;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -370,7 +375,11 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Receive });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Receive });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -386,7 +395,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -408,12 +417,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Return;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -429,7 +438,11 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Return });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Return });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -445,7 +458,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -467,12 +480,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Scrap;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -488,7 +501,11 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Scrap });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Scrap });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -504,7 +521,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -526,12 +543,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Rework;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -547,7 +564,16 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+
+            //填写返工返修单
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
 
             //Eng
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -591,7 +617,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -613,12 +639,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -634,13 +660,17 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //QA
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.QAResult = FailureResult.Pick;
             process.QASend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
 
             //QC
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -657,7 +687,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -679,12 +709,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -700,13 +730,17 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //QA
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.QAResult = FailureResult.Receive;
             process.QASend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
         }
 
         /// <summary>
@@ -718,7 +752,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -740,12 +774,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -761,13 +795,17 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //QA
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.QAResult = FailureResult.Return;
             process.QASend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -784,7 +822,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -806,12 +844,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -827,13 +865,17 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //QA
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.QAResult = FailureResult.Scrap;
             process.QASend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
 
             //仓库
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -850,7 +892,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName);
+            FailureProductProcess process = new FailureProductProcess(processName, "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -872,12 +914,12 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            form.ReworkPmcUserAccount = qiAccount;
+            
             form.FinUserAccount = qiAccount;
             form.StorehouseUserAccount = qiAccount;
             form.QCUserAccount = qiAccount;
-            form.QEResult = FailureResult.Pick;
-            process.QESend(taskId, true, form);
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
             Thread.Sleep(2000);
 
             //MRB
@@ -893,13 +935,22 @@ namespace Johnson.ProcessTest
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
             process.MrbSend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Pick });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
 
             //QA
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             form.QAResult = FailureResult.Rework;
             process.QASend(taskId, form);
-            Thread.Sleep(20000);
+            Thread.Sleep(2000);
+
+            //填写返工返修单
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
 
             //Eng
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
@@ -945,7 +996,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             ProductReworkForm form = new ProductReworkForm { };
 
-            ProductReworkProcess process = new FailureProductProcess(processName).ProductReworkProcess;
+            ProductReworkProcess process = new FailureProductProcess(processName, "").ProductReworkProcess;
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -963,7 +1014,7 @@ namespace Johnson.ProcessTest
 
             //QC确认返工返修
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
-            process.Send(taskId, form);
+            process.QCSend(taskId, form);
             Thread.Sleep(2000);
 
             //Eng

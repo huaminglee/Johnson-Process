@@ -4,103 +4,6 @@ using System.Text;
 
 namespace Johnson.Process.Core
 {
-    [Flags]
-    public enum FailureSource
-    {
-        /// <summary>
-        /// 制程不合格
-        /// </summary>
-        Manufacture,
-
-        /// <summary>
-        /// 来料不合格
-        /// </summary>
-        Material,
-
-        /// <summary>
-        /// 成品不合格
-        /// </summary>
-        Product,
-
-        /// <summary>
-        /// 客户退回
-        /// </summary>
-        Return,
-    }
-
-    [Flags]
-    public enum FailureReason 
-    {
-        /// <summary>
-        /// 设计
-        /// </summary>
-        A,
-
-        /// <summary>
-        /// 工艺
-        /// </summary>
-        B,
-
-        /// <summary>
-        /// 合同变更
-        /// </summary>
-        C,
-
-        /// <summary>
-        /// 采购计划
-        /// </summary>
-        D,
-
-        /// <summary>
-        /// 生产计划
-        /// </summary>
-        E,
-
-        /// <summary>
-        /// 图纸计划
-        /// </summary>
-        F,
-
-        /// <summary>
-        /// 来料质量
-        /// </summary>
-        G,
-
-        /// <summary>
-        /// 工装设备
-        /// </summary>
-        H,
-
-        /// <summary>
-        /// 操作失误
-        /// </summary>
-        I,
-
-        /// <summary>
-        /// 厂内搬运存储
-        /// </summary>
-        J,
-
-        /// <summary>
-        /// 场外运输
-        /// </summary>
-        K,
-
-        /// <summary>
-        /// 其他
-        /// </summary>
-        L
-    }
-
-    public enum FailureLevel
-    {
-        Critical,
-
-        Major,
-
-        Minor
-    }
-
     public enum FailureResult
     {
         None,
@@ -128,21 +31,12 @@ namespace Johnson.Process.Core
         /// <summary>
         /// 挑选
         /// </summary>
-        Pick
-    }
+        Pick,
 
-    public enum FailureSupplierDeal
-    {
-        ReportOf8D,
-
-        ClaimIndemnity
-    }
-
-    public enum FailureProduceDeal
-    {
-        Rework,
-
-        ReportOf8D
+        /// <summary>
+        /// MRB
+        /// </summary>
+        MRB
     }
 
     public class MrbFailureResult
@@ -152,25 +46,78 @@ namespace Johnson.Process.Core
         public string UserName { set; get; }
 
         public FailureResult Result { set; get; }
+
+        public string ResultName
+        {
+            get
+            {
+                switch (Result)
+                {
+                    case FailureResult.MRB: return "MRB会议";
+                    case FailureResult.Pick: return "挑选";
+                    case FailureResult.Receive: return "让步接收";
+                    case FailureResult.Return: return "退回供应商";
+                    case FailureResult.Rework: return "返工/返修";
+                    case FailureResult.Scrap: return "报废";
+                }
+                return "";
+            }
+        }
     }
 
     public class FailureProductForm
     {
+        public string StartUserAccount { set; get; }
+
+        public string StartDepartment { set; get; }
+
+        public ProductType ProductType { set; get; }
+
+        /// <summary>
+        /// 零件号
+        /// </summary>
         public string ComponentCode { set; get; }
+
+        /// <summary>
+        /// 部件系列号
+        /// </summary>
+        public string BJXLH { set; get; }
+
+        /// <summary>
+        /// 机组系列号
+        /// </summary>
+        public string JZXLH { set; get; }
 
         public string ComponentName { set; get; }
 
         public string OrderCode { set; get; }
 
+        /// <summary>
+        /// 责任部门
+        /// </summary>
+        public string ZRBM { set; get; }
+
+        public string UM { set; get; }
+
+        public string MO { set; get; }
+
+        /// <summary>
+        /// 供应商代码
+        /// </summary>
+        public string GYSDM { set; get; }
+
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        public string GYSMC { set; get; }
+
         public string FailurePlace { set; get; }
 
-        public string Supplier { set; get; }
-
-        public FailureSource Source { set; get; }
+        public string Source { set; get; }
 
         public string Quantity { set; get; }
 
-        public FailureReason Reason { set;get; }
+        public string Reason { set;get; }
 
         public string ReasonRemark { set; get; }
         /// <summary>
@@ -180,15 +127,15 @@ namespace Johnson.Process.Core
 
         public string PmcOpinion { set; get; }
 
-        public FailureLevel Level { set; get; }
+        public string Level { set; get; }
 
         public FailureResult QEResult { set; get; }
 
-        public FailureSupplierDeal SupplierDeal { set; get; }
+        public string SupplierDeal { set; get; }
 
         public string SupplierDealBillNumber { set; get; }
 
-        public FailureProduceDeal ProduceDeal { set; get; }
+        public string ProduceDeal { set; get; }
 
         public string ProduceDealNumber { set; get; }
 
@@ -222,17 +169,11 @@ namespace Johnson.Process.Core
 
         public string PmcUserName { set; get; }
 
-        public string ReworkPmcUserAccount { set; get; }
-
-        public string ReworkPmcUserName { set; get; }
-
         public string FinUserAccount { set; get; }
 
         public string FinUserName { set; get; }
 
         public string QCUserAccount { set; get; }
-
-        public string QCUserName { set; get; }
 
         public string QEUserAccount { set; get; }
 

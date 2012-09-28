@@ -40,9 +40,9 @@
                 </td>
                 <td class="textCol">
                     <div>
-                        <input name="Level" type="radio" value="0" checked="checked"/><label>Critical</label>
-                        <input name="Level" type="radio" value="1" /><label>Major</label>
-                        <input name="Level" type="radio" value="2" /><label>Minor</label>
+                        <input name="Level" type="radio" value="Critical" checked="checked"/><label>Critical</label>
+                        <input name="Level" type="radio" value="Major" /><label>Major</label>
+                        <input name="Level" type="radio" value="Minor" /><label>Minor</label>
                     </div>
                 </td>
             </tr>
@@ -57,29 +57,29 @@
                         <input name="QEResult" type="radio" value="3" /><label>返工/返修</label>
                         <input name="QEResult" type="radio" value="4" /><label>报废</label>
                         <input name="QEResult" type="radio" value="5" /><label>挑选</label>
+                        <input name="QEResult" type="radio" value="6" /><label>MRB会议</label>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    来料<span style="color: Red" >*</span>
+                    来料
                 </td>
                 <td class="textCol">
                     <div>
-                        <input name="SupplierDeal" type="radio" value="0" checked="checked"/><label>8D报告</label>
-                        <input name="SupplierDeal" type="radio" value="1" /><label>索赔单</label>
+                        <input name="SupplierDeal" type="radio" value="8D报告" /><label>8D报告</label>
+                        <input name="SupplierDeal" type="radio" value="索赔单" /><label>索赔单</label>
                         <label>单号</label><input name="SupplierDealBillNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    制程<span style="color: Red" >*</span>
+                    制程
                 </td>
-                <td class="textCol">
-                    
-                    <input name="ProduceDeal" type="radio" value="0" checked="checked"/><label>产品返工/返修单</label>
-                    <input name="ProduceDeal" type="radio" value="1" /><label>8D报告</label>
+                <td class="textCol">                    
+                    <input name="ProduceDeal" type="radio" value="产品返工/返修单" /><label>产品返工/返修单</label>
+                    <input name="ProduceDeal" type="radio" value="8D报告" /><label>8D报告</label>
                     <label>单号</label><input name="ProduceDealNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                 </td>
             </tr>
@@ -91,109 +91,72 @@
                     <textarea name="Analysis" class="textInput required" style="width: 688px;" rows="3"></textarea>
                 </td>
             </tr>
-            <tr>
-                <td style="width: 200px" class="labelCol">
-                    需要MRB小组意见<span style="color: Red" >*</span>
-                </td>
-                <td class="textCol">
-                    <input type="checkbox" name="needMRB" value="true" />
-                </td>
-            </tr>
         </table>
         
         <table class="formInfo">
-            <tr>
-                <td style="width: 200px" class="labelCol">
-                    PMC<span style="color: Red" >*</span>
-                </td>
-                <td class="textCol" style="width: 280px" >
-                    <div class="singleUserSelect">
-                        <input type="text" name="ReworkPmcUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="ReworkPmcUserAccount" class="userName" value=""/>
-                        <input type="button" value="选择" class="btnCommon" />
-                    </div>
-                </td>
+            <tr id="trFIN" style="display: none">
                 <td style="width: 200px" class="labelCol">
                     FIN<span style="color: Red" >*</span>
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="FinUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="FinUserAccount" class="userName" value=""/>
+                        <input type="text" name="FinUserAccount" class="userAccount"/>
+                        <input type="text" name="FinUserName" class="textInput userName"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td style="width: 200px" class="labelCol">
-                    QC<span style="color: Red" >*</span>
-                </td>
-                <td class="textCol" style="width: 280px" >
-                    <div class="singleUserSelect">
-                        <input type="text" name="QCUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="QCUserAccount" class="userName" value=""/>
-                        <input type="button" value="选择" class="btnCommon" />
-                    </div>
-                </td>
+            <tr id="trCQ">
                 <td style="width: 200px" class="labelCol">
                     仓库<span style="color: Red" >*</span>
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="StorehouseUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="StorehouseUserAccount" class="userName" value=""/>
+                        <input type="text" name="StorehouseUserAccount" class="userAccount"/>
+                        <input type="text" name="StorehouseUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
             </tr>
-        </table>
-    </form>
-    
-    <form id="MRBForm" >
-        <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">MRB成员</div></div>
-        <table class="formInfo">
-            <tr>
+            <tr id="trENG" style="display: none">
                 <td style="width: 200px" class="labelCol">
                     ENG<span style="color: Red" >*</span>
                 </td>
-                <td class="textCol" style="width: 280px" >
+                <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="EngUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="EngUserAccount" class="userName" value=""/>
+                        <input type="text" name="EngUserAccount" class="userAccount"/>
+                        <input type="text" name="EngUserName" class="textInput userName"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
+            </tr>
+            <tr id="trCID" style="display: none">
                 <td style="width: 200px" class="labelCol">
                     CID<span style="color: Red" >*</span>
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="CidUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="CidUserAccount" class="userName" value=""/>
+                        <input type="text" name="CidUserAccount" class="userAccount"/>
+                        <input type="text" name="CidUserName" class="textInput userName"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
             </tr>
-            <tr>
+            <tr id="trCSD" style="display: none">
                 <td style="width: 200px" class="labelCol">
                     CSD<span style="color: Red" >*</span>
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
-                        <input type="text" name="CsdUserName" class="textInput required userAccount" readonly="readonly"/>
-                        <input type="text" style="display: none" name="CsdUserAccount" class="userName" value=""/>
+                        <input type="text" name="CsdUserAccount" class="userAccount"/>
+                        <input type="text" name="CsdUserName" class="textInput userName"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
-                </td>
-                <td style="width: 200px" class="labelCol">
-                    
-                </td>
-                <td class="textCol">
-                    
                 </td>
             </tr>
         </table>
     </form>
+
     <div style="margin-top: 1em;">
         <table id="remarks" style="width:900px;height:auto" title="提交信息">
 		    <thead>
@@ -235,7 +198,8 @@
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
-            $("#qeForm, #MRBForm").setFormValue(data);
+            $("#qeForm").setFormValue(data);
+            setUserSelectors(data.QEResult.toString());
             $("#remarks").datagrid("loadData", data.Approves);
         });
 
@@ -243,10 +207,8 @@
             if (!$("#qeForm").validAndFocus()) {
                 return;
             }
-            if (!$("#MRBForm").validAndFocus()) {
-                return;
-            }
-            var valueObj = $("#qeForm, #MRBForm, #remarkForm").getFormValue();
+
+            var valueObj = $("#qeForm, #remarkForm").getFormValue();
             
             var objJson = $.toJSON(valueObj);
             if (!confirm("您确实要提交吗？")) {
@@ -263,12 +225,38 @@
                 }
             });
         });
+        $(".userEmailMultiSelect").userEmailMultiSelect();
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
-        $("#qeForm, #MRBForm").validate();
+        $("#qeForm").validate();
         $("#remarks").datagrid({
             rownumbers: true
         });
+        $("#qeForm input[name='QEResult']").click(function(){
+            var value = $(this).val();
+            setUserSelectors(value);
+        });
         
     })
+
+    function setUserSelectors(value){
+        switch(value){
+            case "1":
+            case "4":
+                $("#trCQ").show().find(".userName").addClass("required");
+                $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName").removeClass("required");
+                break;
+            case "3":
+                $("#trFIN, #trENG, #trCID").show().find(".userName").addClass("required");
+                $("#trCQ, #trCSD").hide().find(".userName").removeClass("required");
+                break;
+            case "2":
+            case "5":
+                $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").hide().find(".userName").removeClass("required");
+                break;
+            case "6":
+                $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").show().find(".userName").addClass("required");
+                break;
+        }
+    }
 </script>
