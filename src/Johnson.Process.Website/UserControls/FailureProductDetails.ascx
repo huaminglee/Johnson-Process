@@ -1,82 +1,96 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FailureProductDetails.ascx.cs" Inherits="Johnson.Process.Website.UserControls.FailureProductDetails" %>
 <table class="formInfo">
-    <tr>
+    <tr class="trNo">
         <td style="width: 200px" class="labelCol">
-            零件号<span style="color: Red" >*</span>
+            不合格编号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="ComponentCode" type="text" class="textInput txtwidth required" />
+            <input  name="No" type="text" class="textInput txtwidth " />
+        </td>
+        <td style="width: 200px" >
+            
+        </td>
+        <td style="width: 280px" >
+            
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 200px" class="labelCol">
+            零件号
+        </td>
+        <td style="width: 280px" class="textCol">
+            <input  name="ComponentCode" type="text" class="textInput txtwidth " />
             <input name="ProductType" type="hidden" />
         </td>
         <td style="width: 200px" class="labelCol">
-            零件名称<span style="color: Red" >*</span>
+            零件名称
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="ComponentName" type="text" class="textInput txtwidth required" />
+            <input  name="ComponentName" type="text" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            部件系列号<span style="color: Red" >*</span>
+            部件系列号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="BJXLH" type="text" class="textInput txtwidth required" />
+            <input  name="BJXLH" type="text" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
-            机组系列号<span style="color: Red" >*</span>
+            机组系列号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="JZXLH" type="text" class="textInput txtwidth required" />
+            <input  name="JZXLH" type="text" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            供应商代码<span style="color: Red" >*</span>
+            供应商代码
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="GYSDM" type="text" class="textInput txtwidth required" />
+            <input  name="GYSDM" type="text" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
-            供应商名称<span style="color: Red" >*</span>
+            供应商名称
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="GYSMC" type="text" class="textInput txtwidth required" />
+            <input  name="GYSMC" type="text" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            MO<span style="color: Red" >*</span>
+            MO
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="MO" type="text" class="textInput txtwidth required" />
+            <input  name="MO" type="text" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
-            UM<span style="color: Red" >*</span>
+            UM
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="UM" type="text" class="textInput txtwidth required" />
+            <input  name="UM" type="text" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            订单号<span style="color: Red" >*</span>
+            订单号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="OrderCode" type="text" class="textInput txtwidth required" />
+            <input  name="OrderCode" type="text" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
-            发现地点<span style="color: Red" >*</span>
+            发现地点
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="FailurePlace" type="text" class="textInput txtwidth required" />
+            <input  name="FailurePlace" type="text" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            责任部门<span style="color: Red" >*</span>
+            责任部门
         </td>
         <td class="textCol">
-            <input name="ZRBM" type="text" class="textInput txtwidth required" />
+            <input name="ZRBM" type="text" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
             不合品数量<span style="color: Red" >*</span>
@@ -87,15 +101,15 @@
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            不合格现象描述<span style="color: Red" >*</span>
+            不合格现象描述
         </td>
         <td colspan="3" class="textCol">
-            <textarea name="Remark" class="textInput required" style="width: 688px;" rows="3"></textarea>
+            <textarea name="Remark" class="textInput " style="width: 688px;" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            不合品来源<span style="color: Red" >*</span>
+            不合品来源
         </td>
         <td colspan="3" class="textCol">
             <input name="Source" type="radio" value="制程不合格品" checked="checked"/><label>制程不合格品</label>
@@ -106,7 +120,7 @@
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            主要产生原因<span style="color: Red" >*</span>
+            主要产生原因
         </td>
         <td colspan="3" class="textCol">
             <div>

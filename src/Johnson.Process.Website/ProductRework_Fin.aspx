@@ -137,7 +137,7 @@
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    工时费用<span style="color: Red" >*</span>
+                    工时费用(FIN 费用核算)<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 280px" class="textCol">
                     <input name="GSFY" type="text" class="textInput txtwidth required number" />
@@ -244,7 +244,7 @@
         $("#finForm input[name='GSFY'], #finForm input[name='WLFY']").keyup(function(){
             var GSFY = parseFloat($("#finForm input[name='GSFY']").val());
             var WLFY = parseFloat($("#finForm input[name='WLFY']").val());
-            var total = GSFY * WLFY;
+            var total = GSFY + WLFY;
             if(total){
                 $("#finForm input[name='ZFY']").val(total.toFixed(2));
             }

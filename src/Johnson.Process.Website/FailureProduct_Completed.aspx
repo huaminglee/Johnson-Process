@@ -92,6 +92,24 @@
 
         <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">跟踪验证<span style="color: Red" >*</span></div></div>
         <textarea name="QCValidateResult" class="textInput required" style="width: 890px;" rows="3"></textarea>
+        <table id="mrbMemberResults" style="width:900px;height:auto" title="MRB成员意见">
+		    <thead>
+			    <tr> 
+				    <th field="UserName" resizable="false" width="100">姓名</th>
+                    <th field="ResultName" resizable="false" width="100">意见</th>
+			    </tr>
+		    </thead>
+	    </table>
+        <div id="qaResultPanel">
+            <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">QA经理意见</div></div>
+            <div>
+                <input name="QAResult" type="radio" value="1" checked="checked"/><label>退回供应商</label>
+                <input name="QAResult" type="radio" value="2" /><label>让步接收</label>
+                <input name="QAResult" type="radio" value="3" /><label>返工/返修</label>
+                <input name="QAResult" type="radio" value="4" /><label>报废</label>
+                <input name="QAResult" type="radio" value="5" /><label>挑选</label>
+            </div>
+        </div>
     </form>
     
     <div style="margin-top: 1em;">
@@ -116,10 +134,22 @@
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
+            if(data.MrbResults){
+                $("#mrbMemberResults").show();
+                $("#mrbMemberResults").datagrid("loadData", data.MrbResults);
+            }else{
+                $("#mrbMemberResults").hide();
+            }
+            if(data.QAResult){
+                $("#qaResultPanel").show();
+            }
+            else{
+                $("#qaResultPanel").hide();
+            }
             $("#remarks").datagrid("loadData", data.Approves);
         });
 
-        $("#remarks").datagrid({
+        $("#remarks, #mrbMemberResults").datagrid({
             rownumbers: true
         });
     })

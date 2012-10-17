@@ -88,6 +88,10 @@ namespace Johnson.Process.Core
             {
                 form = this.GetFromInprocess(id);
             }
+            if (form != null)
+            {
+                form.No = id;
+            }
             return form;
         }
 
@@ -413,6 +417,15 @@ namespace Johnson.Process.Core
                 throw new ArgumentNullException("form");
             }
             this.Send(taskId, null, "", this.GetSummary(form), form);
+        }
+
+        public void Return(string taskId, FailureProductForm form)
+        {
+            if (form == null)
+            {
+                throw new ArgumentNullException("form");
+            }
+            this.Return(taskId, null, "", this.GetSummary(form), form);
         }
     }
 }

@@ -73,7 +73,7 @@
         </div>
     
         <div style="margin-top: 1em;">
-            <table id="engAttachments" style="width:900px;height:auto" title="附件信息">
+            <table id="engAttachments" style="width:900px;height:auto" title="技术要求附件信息">
 		        <thead>
 			        <tr> 
 				        <th field="FileName" resizable="false" width="200">附件名称</th>
@@ -167,6 +167,6 @@
         var addMaterialsDialog = $("#addMaterialsDialog").dialog({ autoOpen: false, modal: true, width: 500 });
         var editMaterialsDialog = $("#editMaterialsDialog").dialog({ autoOpen: false, modal: true, width: 500 });
         $("#engRequireGrid").eidtableGrid(addMaterialsDialog,editMaterialsDialog);
-        $("#engAttachments").attachmentsGrid();
+        $("#engAttachments").attachmentsGrid1();
     })
 </script>

@@ -222,6 +222,6 @@
         var addCidDialog = $("#addCidDialog").dialog({ autoOpen: false, modal: true, width: 500 });
         var editCidDialog = $("#editCidDialog").dialog({ autoOpen: false, modal: true, width: 500 });
         $("#cidGrid").eidtableGrid(addCidDialog,editCidDialog);
-        $("#cidFiles").attachmentsGrid();
+        $("#cidFiles").attachmentsGrid1();
     })
 </script>

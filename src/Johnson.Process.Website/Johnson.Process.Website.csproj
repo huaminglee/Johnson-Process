@@ -118,6 +118,7 @@
     <Content Include="FailureProduct_QE.aspx" />
     <Content Include="FailureProduct_Rework.aspx" />
     <Content Include="FailureProduct_Start.aspx" />
+    <Content Include="FailureProduct_Start_Return.aspx" />
     <Content Include="FailureProduct_Storehouse.aspx" />
     <Content Include="FailureProduct_Transfer.aspx" />
     <Content Include="jquery-easyui\jquery.easyui.min.js" />
@@ -668,6 +669,13 @@
     </Compile>
     <Compile Include="FailureProduct_Start.aspx.designer.cs">
       <DependentUpon>FailureProduct_Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FailureProduct_Start_Return.aspx.cs">
+      <DependentUpon>FailureProduct_Start_Return.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FailureProduct_Start_Return.aspx.designer.cs">
+      <DependentUpon>FailureProduct_Start_Return.aspx</DependentUpon>
     </Compile>
     <Compile Include="FailureProduct_Storehouse.aspx.cs">
       <DependentUpon>FailureProduct_Storehouse.aspx</DependentUpon>

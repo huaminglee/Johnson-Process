@@ -22,7 +22,7 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="不合格品处理单-QA" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="不合格品处理单-让步接收QA经理意见" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
@@ -134,7 +134,8 @@
     </form>
 
     <div style="padding: 2em 0 0 30em;">
-        <input type="button" id="btnSubmit" value="提交" />
+        <input type="button" id="btnSubmit" value="同意" />
+        <input type="button" id="btnReturn" value="不同意" />
     </div>
 </body>
 </html>
@@ -164,6 +165,23 @@
                 }
                 else {
                     alert("提交成功");
+                    closeWindow();
+                }
+            });
+        });
+        $("#btnReturn").button().click(function () {
+            var valueObj = $("#remarkForm, #qaReceiveForm").getFormValue();
+            
+            if (!confirm("您确实要退回吗？")) {
+                return;
+            }
+            $(this).attr("disabled", "disabled");
+            $.post("FailureProductController.aspx?action=QAOnReceiveReturn", { taskId: taskId, ReceiveQARemark: valueObj.ReceiveQARemark, submitRemark: valueObj.submitRemark }, function (data) {
+                if (data.result != 0) {
+                    alert(data.message);
+                }
+                else {
+                    alert("退回成功");
                     closeWindow();
                 }
             });

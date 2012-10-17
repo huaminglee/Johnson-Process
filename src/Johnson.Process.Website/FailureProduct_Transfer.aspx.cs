@@ -19,6 +19,7 @@ namespace Johnson.Process.Website
             }
 
             TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(TaskId);
+            WebHelper.Logger.Info(taskInfo.SubStatus);
             object objStepId = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "StepId");
             if (objStepId == null || string.IsNullOrEmpty(objStepId.ToString()))
             {
@@ -28,9 +29,9 @@ namespace Johnson.Process.Website
             switch (objStepId.ToString())
             {
                 case "11":
-                    if (taskInfo.SubStatus == 16)
+                    if (taskInfo.IncidentNo > 0 && taskInfo.Status == 1)
                     {
-                        
+                        Response.Redirect("FailureProduct_Start_Return.aspx?" + Request.QueryString.ToString());
                     }
                     else if (taskInfo.Status == 1)
                     {

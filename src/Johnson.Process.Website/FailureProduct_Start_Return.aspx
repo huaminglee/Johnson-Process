@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FailureProduct_Start.aspx.cs" Inherits="Johnson.Process.Website.FailureProduct_Start" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FailureProduct_Start_Return.aspx.cs" Inherits="Johnson.Process.Website.FailureProduct_Start_Return" %>
 <%@ Register Src="UserControls/Header.ascx" TagName="Header" TagPrefix="johnson" %>
 <%@ Register Src="UserControls/FailureProductDetails.ascx" TagName="FailureProductDetails" TagPrefix="johnson" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -100,6 +100,20 @@
             </tr>
         </table>
     </form>
+
+    <div style="margin-top: 1em;">
+        <table id="remarks" style="width:900px;height:auto" title="提交信息">
+		    <thead>
+			    <tr> 
+				    <th field="StepName" resizable="false" width="200">流程步骤</th>
+                    <th field="ApproveUserName" resizable="false" width="100">提交人</th>
+                    <th field="ApproveTime" resizable="false" width="130">提交日期</th>
+                    <th field="Remark" resizable="false" width="300">备注</th>
+			    </tr>
+		    </thead>
+	    </table>
+    </div>
+
     <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">备注</div></div>
     <form id="remarkForm">
         <table class="formInfo">
@@ -128,6 +142,9 @@
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
+            $("#remarks").datagrid("loadData", data.Approves);
+            $("#usersForm").setFormValue({pmcUserAccount: data.PmcUserAccount, pmcUserName: data.PmcUserName, qeUserAccount: data.QEUserAccount, qeUserName: data.QEUserName});
+            $("#searchForm input[name='id']").val(data.No);
         });
         $(".trNo").hide();
         $("#btnSubmit").button().click(function () {
@@ -160,7 +177,7 @@
                         return;
                     }
                     $(this).attr("disabled", "disabled");
-                    $.post("FailureProductController.aspx?action=start", { taskId: taskId, formJson: objJson }, function (data) {
+                    $.post("FailureProductController.aspx?action=startResubmit", { taskId: taskId, formJson: objJson }, function (data) {
                         if (data.result != 0) {
                             alert(data.message);
                         }
@@ -188,6 +205,10 @@
                     $("#basicInfoForm").setFormValue(data);
                 }
             });
+        });
+
+        $("#remarks").datagrid({
+            rownumbers: true
         });
     })
 </script>

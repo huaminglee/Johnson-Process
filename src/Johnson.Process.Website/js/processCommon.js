@@ -160,6 +160,45 @@ jQuery.fn.extend({
             }]
         });
     },
+    attachmentsGrid1: function () {
+        var thiz = this;
+        this.datagrid({
+            rownumbers: true,
+            showFooter: true,
+            singleSelect: true,
+            toolbar: [{
+                text: '上传',
+                iconCls: 'icon-add',
+                handler: function () {
+                    uploadFile(tempFolderId, function (files) {
+                        $.each(files, function (i, file) {
+                            thiz.datagrid("appendRow", { FileName: file.fileName, FileId: file.fileId });
+                        });
+                    });
+                }
+            }, {
+                text: '删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    if (!confirm("确实要删除吗?")) {
+                        return;
+                    }
+                    var row = thiz.datagrid('getSelected');
+                    if (row) {
+                        $.post("EDoc2Controller.aspx?action=DeleteFile", { fileId: row.FileId }, function (data) {
+                            if (data.result != 0) {
+                                alert(data.message);
+                            }
+                            else {
+                                var index = thiz.datagrid('getRowIndex', row);
+                                thiz.datagrid('deleteRow', index);
+                            }
+                        });
+                    }
+                }
+            }]
+        });
+    },
     eidtableGrid: function (addDialog, editDialog, addedRow, editedRow, deletedRow) {
         var thiz = this;
 

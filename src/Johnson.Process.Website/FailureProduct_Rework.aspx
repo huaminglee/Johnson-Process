@@ -113,6 +113,6 @@
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#remarks").datagrid();
-        $("#attachments").attachmentsGrid();
+        $("#attachments").attachmentsGrid1();
     })
 </script>

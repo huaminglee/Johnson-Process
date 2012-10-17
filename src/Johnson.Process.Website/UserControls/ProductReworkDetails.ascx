@@ -146,8 +146,8 @@
 <table id="attachments" style="width:900px;height:auto" title="附件信息">
 	<thead>
 		<tr> 
-			<th field="fileName" resizable="false" width="200">附件名称</th>
-            <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			<th field="FileName" resizable="false" width="200">附件名称</th>
+            <th field="FileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
 		</tr>
 	</thead>
 </table>

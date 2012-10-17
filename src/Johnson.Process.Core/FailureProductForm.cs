@@ -74,6 +74,10 @@ namespace Johnson.Process.Core
         public ProductType ProductType { set; get; }
 
         /// <summary>
+        /// 不合品编号
+        /// </summary>
+        public string No { set; get; }
+        /// <summary>
         /// 零件号
         /// </summary>
         public string ComponentCode { set; get; }

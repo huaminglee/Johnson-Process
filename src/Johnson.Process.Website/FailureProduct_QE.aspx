@@ -188,6 +188,7 @@
 
     <div style="padding: 2em 0 0 30em;">
         <input type="button" id="btnSubmit" value="提交" />
+        <input type="button" id="btnReturn" value="退回" />
     </div>
 </body>
 </html>
@@ -238,7 +239,24 @@
         });
         
     })
-
+    $("#btnReturn").button().click(function () {
+            var valueObj = $("#qeForm, #remarkForm").getFormValue();
+            
+            var objJson = $.toJSON(valueObj);
+            if (!confirm("您确实要退回吗？")) {
+                return;
+            }
+            $(this).attr("disabled", "disabled");
+            $.post("FailureProductController.aspx?action=QEReturn", { taskId: taskId, formJson: objJson }, function (data) {
+                if (data.result != 0) {
+                    alert(data.message);
+                }
+                else {
+                    alert("退回成功");
+                    closeWindow();
+                }
+            });
+        });
     function setUserSelectors(value){
         switch(value){
             case "1":

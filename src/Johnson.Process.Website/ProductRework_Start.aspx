@@ -109,12 +109,12 @@
                 return;
             }
             var valueObj = $("#basicInfoForm,#remarkForm").getFormValue();
+            var files = $('#attachments').datagrid('getData');
+            valueObj.Files = files.rows;
             var objJson = $.toJSON(valueObj);
             if (!confirm("您确实要提交吗？")) {
                 return;
             }
-            var files = $('#attachments').datagrid('getData');
-            valueObj.Files = files.rows;
             $(this).attr("disabled", "disabled");
             $.post("ProductReworkController.aspx?action=start", { taskId: taskId, formJson: objJson, submitRemark: objJson.submitRemark }, function (data) {
                 if (data.result != 0) {
@@ -129,6 +129,6 @@
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#basicInfoForm").validate();
-        $("#attachments").attachmentsGrid();
+        $("#attachments").attachmentsGrid1();
     })
 </script>

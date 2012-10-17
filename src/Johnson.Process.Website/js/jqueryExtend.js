@@ -379,6 +379,10 @@ $.widget(
                     element.find(".userName").removeAttr("readonly");
                     element.find(".userAccount").show();
                 }
+                else{
+                    element.find(".userName").attr("readonly", "readonly");
+                    element.find(".userAccount").hide();
+                }
                 element.find(":button").click(function(){
                     var url = edoc2BaseUrl + "/AppExt/Common/SelectOrgnization.aspx?userTree={show:true,multiSelect:" + false + ",current: true}&deptTree={show:false}";
                         var res = window.showModalDialog(url, "", "dialogWidth:750px; dialogHeight:450px;");
@@ -405,6 +409,10 @@ $.widget(
                 if($.debug){
                     userAccount.show();
                     userName.removeAttr("readonly");
+                }
+                else{
+                    userName.attr("readonly", "readonly");
+                    userAccount.hide();
                 }
                 element.find(".selectButton").click(function(){
                     var url = edoc2BaseUrl + "/AppExt/Common/SelectOrgnization.aspx?userTree={show:true,multiSelect:true,current: true}&deptTree={show:false}";

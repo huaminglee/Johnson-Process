@@ -9,6 +9,7 @@ namespace Johnson.Process.Website.Models
     {
         public ProductType ProductType { set; get; }
 
+        public string No { set; get; }
         /// <summary>
         /// 部件系列号
         /// </summary>

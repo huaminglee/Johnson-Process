@@ -33,6 +33,10 @@ namespace Johnson.Process.Website
             {
                 this.Start();
             }
+            else if (action.Equals("startResubmit", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.StartResubmit();
+            }
             else if (action.Equals("PmcSubmit", StringComparison.InvariantCultureIgnoreCase))
             {
                 this.PmcSubmit();
@@ -40,6 +44,10 @@ namespace Johnson.Process.Website
             else if (action.Equals("QESubmit", StringComparison.InvariantCultureIgnoreCase))
             {
                 this.QESubmit();
+            }
+            else if (action.Equals("QEReturn", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.QEReturn();
             }
             else if (action.Equals("MrbSubmit", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -52,6 +60,10 @@ namespace Johnson.Process.Website
             else if (action.Equals("QAOnReceiveSubmit", StringComparison.InvariantCultureIgnoreCase))
             {
                 this.QAOnReceiveSubmit();
+            }
+            else if (action.Equals("QAOnReceiveReturn", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.QAOnReceiveReturn();
             }
             else if (action.Equals("QCSubmit", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -169,6 +181,37 @@ namespace Johnson.Process.Website
             Response.Write(JsonConvert.SerializeObject(resultModel));
         }
 
+        private void StartResubmit()
+        {
+            ActionResultModel resultModel = new ActionResultModel();
+            try
+            {
+                string taskId = Request["taskid"];
+                if (string.IsNullOrEmpty(taskId))
+                {
+                    throw new ArgumentNullException("taskId");
+                }
+                taskId = taskId.Trim();
+                string formJson = Request["formJson"];
+                FailureStartModel model = JsonConvert.DeserializeObject<FailureStartModel>(formJson);
+                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
+                form.StartDepartment = WebHelper.CurrentUserInfo.DepartmentName;
+                this.SetFormProperty(form, model);
+                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+
+                WebHelper.FailureProductProcess.Send(taskId, form);
+            }
+            catch (Exception ex)
+            {
+                resultModel.result = ActionResult.Error;
+                resultModel.message = ex.Message;
+                WebHelper.Logger.Error(ex.Message, ex);
+            }
+            Response.Write(JsonConvert.SerializeObject(resultModel));
+        }
+
         private void PmcSubmit()
         {
             ActionResultModel resultModel = new ActionResultModel();
@@ -235,6 +278,54 @@ namespace Johnson.Process.Website
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.QESend(taskId, form, model.emailTo);
+            }
+            catch (Exception ex)
+            {
+                resultModel.result = ActionResult.Error;
+                resultModel.message = ex.Message;
+                WebHelper.Logger.Error(ex.Message, ex);
+            }
+            Response.Write(JsonConvert.SerializeObject(resultModel));
+        }
+
+        private void QEReturn()
+        {
+            ActionResultModel resultModel = new ActionResultModel();
+            try
+            {
+                string taskId = Request["taskid"];
+                if (string.IsNullOrEmpty(taskId))
+                {
+                    throw new ArgumentNullException("taskId");
+                }
+                taskId = taskId.Trim();
+                string formJson = Request["formJson"];
+                FailureProductQEModel model = JsonConvert.DeserializeObject<FailureProductQEModel>(formJson);
+                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
+                form.Analysis = model.Analysis;
+                form.CidUserAccount = model.CidUserAccount;
+                form.CidUserName = model.CidUserName;
+                form.CsdUserAccount = model.CsdUserAccount;
+                form.CsdUserName = model.CsdUserName;
+                form.EngUserAccount = model.EngUserAccount;
+                form.EngUserName = model.EngUserName;
+                form.FinUserAccount = model.FinUserAccount;
+                form.FinUserName = model.FinUserName;
+                form.QCUserAccount = form.StartUserAccount;
+                form.Level = model.Level;
+                form.ProduceDeal = model.ProduceDeal;
+                form.ProduceDealNumber = model.ProduceDealNumber;
+                form.QEResult = model.QEResult;
+                form.StorehouseUserAccount = model.StorehouseUserAccount;
+                form.StorehouseUserName = model.StorehouseUserName;
+                form.SupplierDeal = model.SupplierDeal;
+                form.SupplierDealBillNumber = model.SupplierDealBillNumber;
+
+                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+
+                WebHelper.FailureProductProcess.Return(taskId, form);
             }
             catch (Exception ex)
             {
@@ -347,6 +438,37 @@ namespace Johnson.Process.Website
             Response.Write(JsonConvert.SerializeObject(resultModel));
         }
 
+        private void QAOnReceiveReturn()
+        {
+            ActionResultModel resultModel = new ActionResultModel();
+            try
+            {
+                string taskId = Request["taskid"];
+                if (string.IsNullOrEmpty(taskId))
+                {
+                    throw new ArgumentNullException("taskId");
+                }
+                taskId = taskId.Trim();
+                string ReceiveQARemark = Request["ReceiveQARemark"];
+                string submitRemark = Request["submitRemark"];
+
+                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
+                form.ReceiveQARemark = ReceiveQARemark;
+                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+
+                WebHelper.FailureProductProcess.Return(taskId, form);
+            }
+            catch (Exception ex)
+            {
+                resultModel.result = ActionResult.Error;
+                resultModel.message = ex.Message;
+                WebHelper.Logger.Error(ex.Message, ex);
+            }
+            Response.Write(JsonConvert.SerializeObject(resultModel));
+        }
+
         private void QCSubmit()
         {
             ActionResultModel resultModel = new ActionResultModel();
@@ -441,6 +563,7 @@ namespace Johnson.Process.Website
 
         private void SetFormProperty(FailureProductForm form, FailureStartModel model)
         {
+            form.No = model.No;
             form.ProductType = model.ProductType;
             form.BJXLH = model.BJXLH;
             form.JZXLH = model.JZXLH;
@@ -472,7 +595,6 @@ namespace Johnson.Process.Website
             form.PmcUserName = model.PmcUserName;
             form.QEUserAccount = model.QEUserAccount;
             form.QEUserName = model.QEUserName;
-
         }
     }
 }
