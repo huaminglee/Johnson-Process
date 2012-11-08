@@ -98,10 +98,10 @@ namespace Johnson.Process.Website
                 string formJson = Request["formJson"];
                 string submitRemark = Request["submitRemark"];
                 ProductReworkForm form = JsonConvert.DeserializeObject<ProductReworkForm>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 form.Approves = new List<TaskApproveInfo>();
-                form.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Start(currentUserName, taskId, form);
             }
@@ -127,7 +127,7 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 ProductReworkQcModel model = JsonConvert.DeserializeObject<ProductReworkQcModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.CidUserAccount = model.CidUserAccount;
@@ -141,7 +141,7 @@ namespace Johnson.Process.Website
                 form.QEUserAccount = model.QEUserAccount;
                 form.QEUserName = model.QEUserName;
                 form.PZZTMS = model.PZZTMS;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.QCSend(taskId, form);
             }
@@ -167,12 +167,12 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 ProductReworkEngModel model = JsonConvert.DeserializeObject<ProductReworkEngModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.EngFiles = model.EngFiles;
                 form.Materials = model.Materials;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);
             }
@@ -198,14 +198,14 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 ProductReworkCidModel model = JsonConvert.DeserializeObject<ProductReworkCidModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.CidFiles = model.CidFiles;
                 form.GYFA = model.GYFA;
                 form.GS = model.GS;
                 form.GSLX = model.GSLX;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);
             }
@@ -232,11 +232,11 @@ namespace Johnson.Process.Website
                 string formJson = Request["formJson"];
                 string submitRemark = Request["submitRemark"];
                 string QADFAQR = Request["QADFAQR"];
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.QADFAQR = QADFAQR;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);
             }
@@ -264,12 +264,12 @@ namespace Johnson.Process.Website
                 string submitRemark = Request["submitRemark"];
                 string WLJHAP = Request["WLJHAP"];
                 string SCJHAP = Request["SCJHAP"];
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.WLJHAP = WLJHAP;
                 form.SCJHAP = SCJHAP;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);
             }
@@ -296,13 +296,13 @@ namespace Johnson.Process.Website
                 string formJson = Request["formJson"];
 
                 ProductReworkQC2Model model = JsonConvert.DeserializeObject<ProductReworkQC2Model>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.FGJG = model.FGJG;
                 form.FGJGBZ = model.FGJGBZ;
                 form.XGCLDH = model.XGCLDH;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);
             }
@@ -329,13 +329,13 @@ namespace Johnson.Process.Website
                 string formJson = Request["formJson"];
 
                 ProductReworkFinModel model = JsonConvert.DeserializeObject<ProductReworkFinModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ProductReworkProcess.GetTaskInfo(taskId);
                 ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
                 form.GSFY = model.GSFY;
                 form.WLFY = model.WLFY;
                 form.ZFY = model.ZFY;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ProductReworkProcess.Send(taskId, form);
             }

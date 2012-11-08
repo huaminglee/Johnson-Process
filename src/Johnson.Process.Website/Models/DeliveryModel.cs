@@ -13,7 +13,6 @@ namespace Johnson.Process.Website.Models
 
         public DeliveryModel(DeliveryProcessForm form)
         {
-            this.bookDate = form.BookDate.ToString("yyyy-MM-dd");
             List<UploadFileModel> fileModels = new List<UploadFileModel>();
             if(form.Files != null)
             {
@@ -43,6 +42,7 @@ namespace Johnson.Process.Website.Models
             }
             this.remarks = remarks;
 
+            this.bookDate = form.BookDate.ToString("yyyy-MM-dd");
             this.materials = materialModels;
             this.orderNumber = form.OrderNumber;
             this.projectName = form.ProjectName;

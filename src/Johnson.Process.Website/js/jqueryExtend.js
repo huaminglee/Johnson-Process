@@ -389,8 +389,8 @@ $.widget(
                         if (res != null && res.users != null) {
                             if(res.users.length > 0){
                                 var user = res.users[res.users.length-1];
-                                element.find(".userName").val(user._data.loginName).focusout();
-                                element.find(".userAccount").val(user._data.userRealName);
+                                element.find(".userName").val(user._data.userRealName).focusout();
+                                element.find(".userAccount").val(user._data.loginName);
                             }
                         }
                 });
@@ -568,6 +568,17 @@ jQuery.fn.extend({
             this.validate().focusInvalid();
         }
         return validValue;
+    },
+    dateRange: function(){
+        this.each(function(){
+            var inputs = $(this).find("input");
+            inputs.eq(0).datepicker({ changeMonth: true, changeYear: true, onSelect: function(selectedDate){
+                inputs.eq(1).datepicker( "option", "minDate", selectedDate );
+            }});
+            inputs.eq(1).datepicker({ changeMonth: true, changeYear: true, onSelect: function(selectedDate){
+                inputs.eq(0).datepicker( "option", "maxDate", selectedDate );
+            }});
+        }); 
     }
 });
 
@@ -588,7 +599,3 @@ jQuery.validator.addMethod(
 
     "邮件格式不正确,多个邮件之间请用\";\"隔开"
 );
-
-jQuery.extend({
-    debug: true
-});

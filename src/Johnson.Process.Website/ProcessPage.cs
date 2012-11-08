@@ -41,5 +41,14 @@ namespace Johnson.Process.Website
                 return _processFolderId;
             }
         }
+
+        protected override void Render(System.Web.UI.HtmlTextWriter writer)
+        {
+            base.Render(writer);
+
+#if DEBUG
+            writer.Write("<script language='javascript' type='text/javascript'>jQuery.extend({debug: true});</script>");
+#endif
+        }
     }
 }

@@ -113,12 +113,12 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationStartModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationStartModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(taskId);
                 ConsultationAndQuotationForm newForm = model.Map();
                 newForm.Approves = new List<TaskApproveInfo>();
-                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.Start(currentUserName, model.marketingEngineer, taskId, newForm);
             }
@@ -144,13 +144,13 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationStartModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationStartModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(taskId);
                 ConsultationAndQuotationForm oldForm = WebHelper.ConsultationAndQuotationProcess.Get(taskId);
                 ConsultationAndQuotationForm newForm = model.Map();
                 newForm.Approves = oldForm.Approves;
-                newForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.StartReturnedSend(model.marketingEngineer, taskId, newForm);
             }
@@ -170,7 +170,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationMarketingModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationMarketingModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
@@ -178,7 +178,7 @@ namespace Johnson.Process.Website
                 form.CsdEngineerName = model.csdEngineerName;
                 form.MarketingReply = model.marketingReply;
                 form.MarketingEmailTo = model.toCsdEmailAddress;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needCsdReply)
                 {
@@ -216,14 +216,14 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationMarketingModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationMarketingModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.CsdEngineerAccount = model.csdEngineerAccount;
                 form.CsdEngineerName = model.csdEngineerName;
                 form.MarketingReply = model.marketingReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needCsdReply)
                 {
@@ -261,7 +261,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationCsdModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationCsdModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
@@ -269,7 +269,7 @@ namespace Johnson.Process.Website
                 form.CsdTracerName = model.csdTracerName;
                 form.CsdReply = model.csdReply;
                 form.CsdEmailTo = model.csdEmailTo;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needTrace)
                 {
@@ -307,14 +307,14 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationCsdModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationCsdModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.CsdTracerAccount = model.csdTracerAccount;
                 form.CsdTracerName = model.csdTracerName;
                 form.CsdReply = model.csdReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needTrace)
                 {
@@ -352,13 +352,13 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationTracerModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationTracerModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.CsdReply = model.csdReply;
                 form.CsdTracerEmailTo = model.csdTracerEmailTo;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needEngReply)
                 {
@@ -408,12 +408,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationEngModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationEngModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.EngReply = model.engReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needCidReply && model.needQadReply)
                 {
@@ -448,12 +448,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationCidModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationCidModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.CidReply = model.cidReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.CidSend(model.taskId, form);
             }
@@ -473,12 +473,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationQadModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationQadModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.QadReply = model.qadReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.QadSend(model.taskId, form);
             }
@@ -498,12 +498,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationScmModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationScmModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.ScmReply = model.scmReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.ScmSend(model.taskId, form);
             }
@@ -523,12 +523,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationLogModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationLogModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.LogReply = model.logReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.LogSend(model.taskId, form);
             }
@@ -548,13 +548,13 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationTracerModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationTracerModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.CsdReply = model.csdReply;
                 form.CsdTracerEmailTo = model.csdTracerEmailTo;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 form.LeadTime = model.leadTime;
                 form.LeadTimeRemark = model.leadTimeRemark;
@@ -585,12 +585,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationMarketingModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationMarketingModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.MarketingReply = model.marketingReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 form.LeadTime = model.leadTime;
                 form.LeadTimeRemark = model.leadTimeRemark;
@@ -621,12 +621,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 ConsultationAndQuotationMarketingModel model = JsonConvert.DeserializeObject<ConsultationAndQuotationMarketingModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(model.taskId);
                 ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(model.taskId);
                 form.MarketingReply = model.marketingReply;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 form.LeadTime = model.leadTime;
                 form.LeadTimeRemark = model.leadTimeRemark;
@@ -663,11 +663,11 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string submitRemark = Request["submitRemark"];
 
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(taskId);
 
                 ConsultationAndQuotationForm oldForm = WebHelper.ConsultationAndQuotationProcess.Get(taskId);
-                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.Send(taskId, oldForm);
             }
@@ -693,11 +693,11 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string submitRemark = Request["submitRemark"];
 
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(taskId);
 
                 ConsultationAndQuotationForm oldForm = WebHelper.ConsultationAndQuotationProcess.Get(taskId);
-                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.ConsultationAndQuotationProcess.Send(taskId, oldForm);
             }

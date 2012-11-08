@@ -104,7 +104,7 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 VocMultiStart multiStartModel = JsonConvert.DeserializeObject<VocMultiStart>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 string vocCode = WebHelper.VocProcess.GetAndSetVocCode();
                 foreach (VocStartModel model in multiStartModel.complaints)
                 {
@@ -117,7 +117,7 @@ namespace Johnson.Process.Website
                     VocForm newForm = model.Map();
                     newForm.VocCode = vocCode;
                     newForm.Approves = new List<TaskApproveInfo>();
-                    newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                    newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                     WebHelper.VocProcess.Start(currentUserName, taskId, newForm);
                 }
@@ -144,14 +144,14 @@ namespace Johnson.Process.Website
                 taskId = taskId.Trim();
                 string formJson = Request["formJson"];
                 VocStartModel model = JsonConvert.DeserializeObject<VocStartModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
                 VocForm oldForm = WebHelper.VocProcess.Get(taskId);
                 VocForm newForm = model.Map();
                 newForm.Actions = oldForm.Actions;
                 newForm.Approves = oldForm.Approves;
-                newForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.StartResend(taskId, newForm);
             }
@@ -171,7 +171,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocActinPlanModel model = JsonConvert.DeserializeObject<VocActinPlanModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -186,7 +186,7 @@ namespace Johnson.Process.Website
                     }
                 }
                 form.SolutionsFiles = solutionsFiles;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(model.taskId, form);
             }
@@ -206,7 +206,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocActinPlanModel model = JsonConvert.DeserializeObject<VocActinPlanModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -225,7 +225,7 @@ namespace Johnson.Process.Website
                     }
                 }
                 form.SolutionsFiles = solutionsFiles;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.ResponsiblePlanAction(model.taskId, form);
             }
@@ -245,7 +245,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocActinPlanModel model = JsonConvert.DeserializeObject<VocActinPlanModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -264,7 +264,7 @@ namespace Johnson.Process.Website
                     }
                 }
                 form.SolutionsFiles = solutionsFiles;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Return(model.taskId, form);
             }
@@ -284,12 +284,12 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocCompletedSolutionsModel model = JsonConvert.DeserializeObject<VocCompletedSolutionsModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
                 form.SolutionsCompleteTime = model.solutionsCompleteTime;
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(model.taskId, form);
             }
@@ -309,11 +309,11 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocCompletedSolutionsModel model = JsonConvert.DeserializeObject<VocCompletedSolutionsModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Return(model.taskId, form);
             }
@@ -333,7 +333,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocActinCompletedModel model = JsonConvert.DeserializeObject<VocActinCompletedModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -343,7 +343,7 @@ namespace Johnson.Process.Website
                     form.Actions.Add(actMdl.Map());
                 }
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(model.taskId, form);
             }
@@ -363,7 +363,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocResponsibleReasonModel model = JsonConvert.DeserializeObject<VocResponsibleReasonModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -381,7 +381,7 @@ namespace Johnson.Process.Website
                 }
                 form.ReasonFiles = reasonFiles;
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.ResponsibleReason(model.taskId, form);
             }
@@ -401,7 +401,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocMeasuresModel model = JsonConvert.DeserializeObject<VocMeasuresModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -416,7 +416,7 @@ namespace Johnson.Process.Website
                 }
                 form.MeasuresFiles = measuresFiles;
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(model.taskId, form);
             }
@@ -436,7 +436,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocResponsibleModel model = JsonConvert.DeserializeObject<VocResponsibleModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -464,7 +464,7 @@ namespace Johnson.Process.Website
                 }
                 form.MeasuresFiles = measuresFiles;
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.ResponsibleHandle(model.taskId, form);
             }
@@ -484,7 +484,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocResponsibleModel model = JsonConvert.DeserializeObject<VocResponsibleModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -510,7 +510,7 @@ namespace Johnson.Process.Website
                 }
                 form.MeasuresFiles = measuresFiles;
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(model.taskId, form);
             }
@@ -530,7 +530,7 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 VocResponsibleModel model = JsonConvert.DeserializeObject<VocResponsibleModel>(formJson);
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
@@ -556,7 +556,7 @@ namespace Johnson.Process.Website
                 }
                 form.MeasuresFiles = measuresFiles;
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Return(model.taskId, form);
             }
@@ -576,12 +576,12 @@ namespace Johnson.Process.Website
             {
                 string taskId = Request["taskId"];
                 string submitRemark = Request["submitRemark"];
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
                 VocForm form = WebHelper.VocProcess.Get(taskId);
 
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(taskId, form);
             }
@@ -601,12 +601,12 @@ namespace Johnson.Process.Website
             {
                 string taskId = Request["taskId"];
                 string submitRemark = Request["submitRemark"];
-                string currentUserName = WebHelper.CurrentUserInfo.UserRealName;
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
 
                 VocForm form = WebHelper.VocProcess.Get(taskId);
-                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Return(taskId, form);
             }

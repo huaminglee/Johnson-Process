@@ -67,5 +67,31 @@ namespace Johnson.Process.Website
         public static ProductReworkProcess ProductReworkProcess { private set; get; }
 
         public static VocProcess VocProcess { private set; get; }
+
+        public static bool InDateRange(DateTime date, DateTime? startDate, DateTime? endDate)
+        {
+            if (endDate.HasValue && startDate.HasValue)
+            {
+                if (date < startDate || date > endDate)
+                {
+                    return false;
+                }
+            }
+            else if (endDate.HasValue)
+            {
+                if (date > endDate)
+                {
+                    return false;
+                }
+            }
+            else if (startDate.HasValue)
+            {
+                if (date < startDate)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

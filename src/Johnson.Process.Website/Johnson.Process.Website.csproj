@@ -81,6 +81,8 @@
   <ItemGroup>
     <Content Include="App_Data\table_create.sql" />
     <Content Include="ConsultationAndQuotationController.aspx" />
+    <Content Include="ConsultationAndQuotationReport.aspx" />
+    <Content Include="ConsultationAndQuotationReportController.aspx" />
     <Content Include="ConsultationAndQuotation_CID.aspx" />
     <Content Include="ConsultationAndQuotation_Completed.aspx" />
     <Content Include="ConsultationAndQuotation_CSD.aspx" />
@@ -99,6 +101,8 @@
     <Content Include="css\default.css" />
     <Content Include="Default.aspx" />
     <Content Include="DeliveryController.aspx" />
+    <Content Include="DeliveryReport.aspx" />
+    <Content Include="DeliveryReportController.aspx" />
     <Content Include="Delivery_Completed.aspx" />
     <Content Include="Delivery_Custom.aspx" />
     <Content Include="Delivery_Custom2.aspx" />
@@ -418,6 +422,20 @@
     <Compile Include="ConsultationAndQuotationController.aspx.designer.cs">
       <DependentUpon>ConsultationAndQuotationController.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ConsultationAndQuotationReport.aspx.cs">
+      <DependentUpon>ConsultationAndQuotationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultationAndQuotationReport.aspx.designer.cs">
+      <DependentUpon>ConsultationAndQuotationReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultationAndQuotationReportController.aspx.cs">
+      <DependentUpon>ConsultationAndQuotationReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultationAndQuotationReportController.aspx.designer.cs">
+      <DependentUpon>ConsultationAndQuotationReportController.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ConsultationAndQuotation_CID.aspx.cs">
       <DependentUpon>ConsultationAndQuotation_CID.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -536,6 +554,20 @@
     </Compile>
     <Compile Include="DeliveryController.aspx.designer.cs">
       <DependentUpon>DeliveryController.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryReport.aspx.cs">
+      <DependentUpon>DeliveryReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeliveryReport.aspx.designer.cs">
+      <DependentUpon>DeliveryReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryReportController.aspx.cs">
+      <DependentUpon>DeliveryReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeliveryReportController.aspx.designer.cs">
+      <DependentUpon>DeliveryReportController.aspx</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Completed.aspx.cs">
       <DependentUpon>Delivery_Completed.aspx</DependentUpon>
@@ -699,8 +731,12 @@
     <Compile Include="Models\ConsultationAndQuotationModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationProductModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationQadModel.cs" />
+    <Compile Include="Models\ConsultationAndQuotationReportModel.cs" />
+    <Compile Include="Models\ConsultationAndQuotationReportSearchModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationScmModel.cs" />
     <Compile Include="Models\DeliveryModel.cs" />
+    <Compile Include="Models\DeliveryReportModel.cs" />
+    <Compile Include="Models\DeliveryReportSearchModel.cs" />
     <Compile Include="Models\FailureProductMrbModel.cs" />
     <Compile Include="Models\FailureProductQAModel.cs" />
     <Compile Include="Models\FailureProductQEModel.cs" />

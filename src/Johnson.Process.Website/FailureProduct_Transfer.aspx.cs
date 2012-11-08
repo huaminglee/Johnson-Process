@@ -12,18 +12,20 @@ namespace Johnson.Process.Website
     {
         protected override void Transfer()
         {
-            object dealWay = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "dealWay");
-            if (dealWay != null && dealWay.ToString().Equals("Rework", StringComparison.InvariantCultureIgnoreCase))
-            {
-                Response.Redirect("ProductRework_Transfer.aspx?" + Request.QueryString.ToString());
-            }
-
             TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(TaskId);
             WebHelper.Logger.Info(taskInfo.SubStatus);
             object objStepId = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "StepId");
             if (objStepId == null || string.IsNullOrEmpty(objStepId.ToString()))
             {
                 throw new ArgumentNullException("objStepId");
+            }
+            string[] stepIds = new string[]{"11", "21", "31", "41", "51", "61", "71", "81", "91"};
+            List<string> stepIdList = new List<string>();
+            stepIdList.AddRange(stepIds);
+            if (!stepIdList.Contains(objStepId.ToString()))
+            {
+                //object dealWay = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "dealWay");
+                Response.Redirect("ProductRework_Transfer.aspx?" + Request.QueryString.ToString());
             }
 
             switch (objStepId.ToString())
@@ -93,7 +95,9 @@ namespace Johnson.Process.Website
                         Response.Redirect("FailureProduct_Rework.aspx?" + Request.QueryString.ToString());
                     }
                     break;
+
             }
+
             if (taskInfo.Status != 1)
             {
                 Response.Redirect("FailureProduct_Completed.aspx?" + Request.QueryString.ToString());

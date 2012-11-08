@@ -123,7 +123,7 @@
             sumQuantity();
         });
         $("#basicInfoForm").validate();
-
+        $(".singleUserSelect").singleSelectUser();
         var addDialog = $("#addMaterialInfoFormDialog").dialog({ autoOpen: false, modal: true, width: 500 });
         var editDialog = $("#editMaterialInfoFormDialog").dialog({ autoOpen: false, modal: true, width: 500 });
         $("#grid").eidtableGrid(addDialog, editDialog, sumQuantity, sumQuantity, sumQuantity);

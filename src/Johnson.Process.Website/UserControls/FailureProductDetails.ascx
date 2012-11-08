@@ -5,7 +5,7 @@
             不合格编号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="No" type="text" class="textInput txtwidth " />
+            <input  name="No" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" >
             
@@ -19,28 +19,28 @@
             零件号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="ComponentCode" type="text" class="textInput txtwidth " />
+            <input  name="ComponentCode" type="text" readonly="readonly" class="textInput txtwidth " />
             <input name="ProductType" type="hidden" />
         </td>
         <td style="width: 200px" class="labelCol">
             零件名称
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="ComponentName" type="text" class="textInput txtwidth " />
+            <input  name="ComponentName" readonly="readonly" type="text" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            部件系列号
+            部件系列号<span style="color: Red" >*</span>
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="BJXLH" type="text" class="textInput txtwidth " />
+            <input  name="BJXLH" type="text" class="textInput txtwidth required" />
         </td>
         <td style="width: 200px" class="labelCol">
-            机组系列号
+            机组系列号<span style="color: Red" >*</span>
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="JZXLH" type="text" class="textInput txtwidth " />
+            <input  name="JZXLH" type="text" class="textInput txtwidth required" />
         </td>
     </tr>
     <tr>
@@ -48,13 +48,13 @@
             供应商代码
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="GYSDM" type="text" class="textInput txtwidth " />
+            <input  name="GYSDM" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
             供应商名称
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="GYSMC" type="text" class="textInput txtwidth " />
+            <input  name="GYSMC" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
@@ -62,13 +62,13 @@
             MO
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="MO" type="text" class="textInput txtwidth " />
+            <input  name="MO" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
             UM
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="UM" type="text" class="textInput txtwidth " />
+            <input  name="UM" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
@@ -76,13 +76,13 @@
             订单号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="OrderCode" type="text" class="textInput txtwidth " />
+            <input  name="OrderCode" type="text" class="textInput txtwidth" readonly="readonly" />
         </td>
         <td style="width: 200px" class="labelCol">
             发现地点
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="FailurePlace" type="text" class="textInput txtwidth " />
+            <input  name="FailurePlace" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
     </tr>
     <tr>
@@ -90,7 +90,7 @@
             责任部门
         </td>
         <td class="textCol">
-            <input name="ZRBM" type="text" class="textInput txtwidth " />
+            <input name="ZRBM" type="text" readonly="readonly" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" class="labelCol">
             不合品数量<span style="color: Red" >*</span>

@@ -82,8 +82,10 @@ namespace Johnson.Process.Website
 #endif
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 DeliveryProcessForm newForm = model.Map();
+                newForm.ApplyUserName = WebHelper.CurrentUserInfo.UserRealName;
+                newForm.ApplyTime = DateTime.Now;
                 newForm.Approves = new List<TaskApproveInfo>();
-                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
                 
                 WebHelper.DeliveryProcess.Start(currentUserName, model.csdEngineer, taskId, newForm);
             }
@@ -120,7 +122,7 @@ namespace Johnson.Process.Website
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 DeliveryProcessForm newForm = model.Map();
                 newForm.Approves = new List<TaskApproveInfo>();
-                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
                 newForm.Approves.AddRange(oldForm.Approves);
 
                 if (model.needLogisticsReply)
@@ -164,7 +166,7 @@ namespace Johnson.Process.Website
                 DeliveryProcessForm oldForm = WebHelper.DeliveryProcess.Get(taskId);
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 oldForm.LogReply = logReply;
-                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.DeliveryProcess.Send(taskId, oldForm);
             }
@@ -200,7 +202,7 @@ namespace Johnson.Process.Website
                 DeliveryProcessForm oldForm = WebHelper.DeliveryProcess.Get(taskId);
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 oldForm.LogReply = logReply;
-                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.DeliveryProcess.Return(taskId, oldForm);
             }
@@ -236,7 +238,7 @@ namespace Johnson.Process.Website
                 DeliveryProcessForm oldForm = WebHelper.DeliveryProcess.Get(taskId);
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 oldForm.CsdReply = csdReply;
-                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.DeliveryProcess.Send(taskId, oldForm);
             }
@@ -272,7 +274,7 @@ namespace Johnson.Process.Website
                 DeliveryProcessForm oldForm = WebHelper.DeliveryProcess.Get(taskId);
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 oldForm.CsdReply = csdReply;
-                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = submitRemark, StepName = taskInfo.StepName });
+                oldForm.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.DeliveryProcess.Return(taskId, oldForm);
             }
@@ -309,7 +311,7 @@ namespace Johnson.Process.Website
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 DeliveryProcessForm newForm = model.Map();
                 newForm.Approves = new List<TaskApproveInfo>();
-                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
                 newForm.Approves.AddRange(oldForm.Approves);
 
                 WebHelper.DeliveryProcess.Send(taskId, newForm);
@@ -347,7 +349,7 @@ namespace Johnson.Process.Website
                 TaskInfo taskInfo = WebHelper.DeliveryProcess.GetTaskInfo(taskId);
                 DeliveryProcessForm newForm = model.Map();
                 newForm.Approves = new List<TaskApproveInfo>();
-                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = currentUserName, Remark = model.submitRemark, StepName = taskInfo.StepName });
+                newForm.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
                 newForm.Approves.AddRange(oldForm.Approves);
 
                 WebHelper.DeliveryProcess.Return(taskId, newForm);

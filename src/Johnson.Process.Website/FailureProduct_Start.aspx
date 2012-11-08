@@ -127,7 +127,7 @@
 
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
-            $("#basicInfoForm").setFormValue(data).setFormReadOnly();
+            $("#basicInfoForm").setFormValue(data);
         });
         $(".trNo").hide();
         $("#btnSubmit").button().click(function () {
@@ -135,40 +135,32 @@
                 return;
             }
             var formValue = $("#searchForm").getFormValue();
-            $.get("FailureProductController.aspx?action=GetFromThirdDatabase", { id: formValue.id }, function (data) {
-                if(!data){
-                    alert("找不到编号的不合品信息!");
+            if (!$("#basicInfoForm").validAndFocus()) {
+                        return;
+            }
+            if (!$("#usersForm").validAndFocus()) {
+                return;
+            }
+            var valueObj = $("#basicInfoForm").getFormValue();
+            var remarkObj = $.getFormValue("#remarkForm");
+            valueObj.submitRemark = remarkObj.submitRemark;
+            var users = $("#usersForm").getFormValue();
+            valueObj.PmcUserAccount = users.pmcUserAccount;
+            valueObj.PmcUserName = users.pmcUserName;
+            valueObj.QEUserAccount = users.qeUserAccount;
+            valueObj.QEUserName = users.qeUserName;
+            var objJson = $.toJSON(valueObj);
+            if (!confirm("您确实要提交吗？")) {
+                return;
+            }
+            $(this).attr("disabled", "disabled");
+            $.post("FailureProductController.aspx?action=start", { taskId: taskId, formJson: objJson }, function (data) {
+                if (data.result != 0) {
+                    alert(data.message);
                 }
-                else{
-                    $("#basicInfoForm").setFormValue(data);
-                    if (!$("#basicInfoForm").validAndFocus()) {
-                        return;
-                    }
-                    if (!$("#usersForm").validAndFocus()) {
-                        return;
-                    }
-                    var valueObj = $("#basicInfoForm").getFormValue();
-                    var remarkObj = $.getFormValue("#remarkForm");
-                    valueObj.submitRemark = remarkObj.submitRemark;
-                    var users = $("#usersForm").getFormValue();
-                    valueObj.PmcUserAccount = users.pmcUserAccount;
-                    valueObj.PmcUserName = users.pmcUserName;
-                    valueObj.QEUserAccount = users.qeUserAccount;
-                    valueObj.QEUserName = users.qeUserName;
-                    var objJson = $.toJSON(valueObj);
-                    if (!confirm("您确实要提交吗？")) {
-                        return;
-                    }
-                    $(this).attr("disabled", "disabled");
-                    $.post("FailureProductController.aspx?action=start", { taskId: taskId, formJson: objJson }, function (data) {
-                        if (data.result != 0) {
-                            alert(data.message);
-                        }
-                        else {
-                            alert("提交成功");
-                            closeWindow();
-                        }
-                    });
+                else {
+                    alert("提交成功");
+                    closeWindow();
                 }
             });
         });

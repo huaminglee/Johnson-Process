@@ -6,6 +6,10 @@ namespace Johnson.Process.Core
 {
     public class DeliveryProcessForm
     {
+        public string ApplyUserName { set; get; }
+
+        public DateTime ApplyTime { set; get; }
+
         public string OrderNumber { set; get; }
 
         public string ProjectName { set; get; }

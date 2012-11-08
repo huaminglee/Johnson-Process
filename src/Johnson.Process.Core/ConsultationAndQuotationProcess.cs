@@ -104,6 +104,11 @@ namespace Johnson.Process.Core
             return this.Get<ConsultationAndQuotationForm>(taskId);
         }
 
+        public List<ProcessForm<ConsultationAndQuotationForm>> Get()
+        {
+            return this.Get<ConsultationAndQuotationForm>();
+        }
+
         private string GetSummary(ConsultationAndQuotationForm form)
         {
             return form.ProjectName;

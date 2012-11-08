@@ -18,6 +18,11 @@ namespace Johnson.Process.Core
             return this.Get<DeliveryProcessForm>(taskId);
         }
 
+        public List<ProcessForm<DeliveryProcessForm>> Get()
+        {
+            return this.Get<DeliveryProcessForm>();
+        }
+
         /// <summary>
         /// 
         /// </summary>

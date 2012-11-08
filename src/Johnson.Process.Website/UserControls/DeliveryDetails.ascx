@@ -56,13 +56,11 @@
                 客服部工程师<span style="color: Red" >*</span>
             </td>
             <td class="textCol" colspan="3">
-                <input type="text" id="txtCSDRealName" class="textInput required" name="csdEngineerName" readonly="readonly"/>
-                <input type="text" style="display: none" id="hidCsdReplyUser" name="csdEngineer" value=""/>
-                <%--<input type="text" id="txtCSDRealName" name="csdEngineerName" class="textInput required" />
-                <input type="text" id="hidCsdReplyUser" name="csdEngineer" value=""/>--%>
-                <input type="hidden" id="hidCSDUserId" name="csdAuditUserId" value="0"/>
-                <input type="button" onclick="selUser('hidCSDUserId','hidCsdReplyUser','txtCSDRealName',false);"
-                    value="选择" class="btnCommon" />
+                <div class="singleUserSelect">
+                    <input type="text" name="csdEngineer" class="userAccount"/>
+                    <input type="text" name="csdEngineerName" class="textInput userName required"/>
+                    <input type="button" value="选择" class="btnCommon" />
+                </div>
             </td>
         </tr>
     </tbody>

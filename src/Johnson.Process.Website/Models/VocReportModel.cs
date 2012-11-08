@@ -15,14 +15,6 @@ namespace Johnson.Process.Website.Models
         public VocReportModel(ProcessForm<VocForm> processForm)
         {
             VocForm form = processForm.Form;
-            List<UploadFileModel> fileModels = new List<UploadFileModel>();
-            if (form.Files != null)
-            {
-                foreach (ProcessFile file in form.Files)
-                {
-                    fileModels.Add(new UploadFileModel(file));
-                }
-            }
 
             this.applyTime = form.ApplyTime.ToString("yyyy-MM-dd");
             this.applyUserDepartmentName = form.ApplyUserDepartmentName;

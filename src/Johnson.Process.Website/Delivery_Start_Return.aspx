@@ -124,7 +124,7 @@
         rows[0]['quantity'] = quantity;
         $('#grid').datagrid('reloadFooter');
     }
-
+    $(".singleUserSelect").singleSelectUser();
     $(function () {
         //初始化
         $.get("DeliveryController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
