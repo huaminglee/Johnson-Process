@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using Johnson.Process.Core;
+using Ultimus.WFServer;
 
 namespace Johnson.Process.Website.Models
 {

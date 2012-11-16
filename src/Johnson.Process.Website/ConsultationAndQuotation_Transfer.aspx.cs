@@ -13,7 +13,7 @@ namespace Johnson.Process.Website
         protected override void Transfer()
         {
             TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(TaskId);
-            object objStepId = WebHelper.VocProcess.GetVariableValue(TaskId, "StepId");
+            object objStepId = WebHelper.VocProcess.GetVariableValue(TaskId, "stepId");
             if (objStepId == null || string.IsNullOrEmpty(objStepId.ToString()))
             {
                 throw new ArgumentNullException("objStepId");
