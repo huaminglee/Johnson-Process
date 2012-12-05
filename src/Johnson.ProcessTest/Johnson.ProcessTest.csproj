@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ConsultationAndQuotationProcessTester.cs" />
     <Compile Include="FailureProductProcessTester.cs" />
+    <Compile Include="OrderPingShenProcessTester.cs" />
     <Compile Include="ProcessMailServiceTester.cs" />
     <Compile Include="ProcessTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

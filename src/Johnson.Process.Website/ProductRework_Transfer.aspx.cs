@@ -18,16 +18,11 @@ namespace Johnson.Process.Website
             {
                 throw new ArgumentNullException("objStepId");
             }
-            WebHelper.Logger.Info(taskInfo.Status);
-            WebHelper.Logger.Info(taskInfo.SubStatus);
+
             switch (objStepId.ToString())
             {
                 case "101":
-                    if (taskInfo.SubStatus == 16)
-                    {
-                       
-                    }
-                    else if (taskInfo.Status == 1)
+                    if (taskInfo.Status == 1)
                     {
                         Response.Redirect("ProductRework_QC.aspx?" + Request.QueryString.ToString());
                     }

@@ -14,6 +14,7 @@ namespace Johnson.Process.Website.Models
 
         public ProductReworkModel(FailureProductForm form)
         {
+            this.FailureNo = form.No;
             this.Name = form.ComponentName;
             this.SapNo = form.ComponentCode;
             this.ProductType = form.ProductType;
@@ -34,6 +35,7 @@ namespace Johnson.Process.Website.Models
 
         public ProductReworkModel(ProductReworkForm form)
         {
+            this.FailureNo = form.FailureNo;
             this.StartDepartment = form.StartDepartment;
             this.Approves = form.Approves;
             this.CBCLYJ = form.CBCLYJ;
@@ -95,6 +97,8 @@ namespace Johnson.Process.Website.Models
         }
 
         public ProductType ProductType { set; get; }
+
+        public string FailureNo { set; get; }
 
         /// <summary>
         /// 系列号

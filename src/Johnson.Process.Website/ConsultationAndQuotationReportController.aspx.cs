@@ -43,12 +43,19 @@ namespace Johnson.Process.Website
                     {
                         continue;
                     }
-                    ConsultationAndQuotationReportModel model = new ConsultationAndQuotationReportModel(form);
-                    if (model.taskStatus != 1)
+                    try
                     {
-                        continue;
+                        ConsultationAndQuotationReportModel model = new ConsultationAndQuotationReportModel(form);
+                        if (model.taskStatus != 1)
+                        {
+                            continue;
+                        }
+                        models.Add(model);
                     }
-                    models.Add(model);
+                    catch (Exception ex)
+                    {
+                        WebHelper.Logger.Error(ex.Message, ex);
+                    }
                 }
 
                 Response.Write(JsonConvert.SerializeObject(models));
@@ -71,58 +78,65 @@ namespace Johnson.Process.Website
 
                 foreach (ProcessForm<ConsultationAndQuotationForm> form in forms)
                 {
-                    ConsultationAndQuotationReportModel model = new ConsultationAndQuotationReportModel(form);
-                    if (form.Form == null)
+                    try
                     {
-                        continue;
-                    }
-
-                    if (!WebHelper.InDateRange(form.Form.ApplyTime, searchModel.applyTimeStart, searchModel.applyTimeEnd))
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.applyUserName))
-                    {
-                        if (form.Form.ApplyUserName.IndexOf(searchModel.applyUserName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        ConsultationAndQuotationReportModel model = new ConsultationAndQuotationReportModel(form);
+                        if (form.Form == null)
                         {
                             continue;
                         }
-                    }
 
-                    if (model.taskStatus != searchModel.taskStatus)
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.applyUserDepartmentName))
-                    {
-                        if (form.Form.ApplyUserDepartmentName.IndexOf(searchModel.applyUserDepartmentName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!WebHelper.InDateRange(form.Form.ApplyTime, searchModel.applyTimeStart, searchModel.applyTimeEnd))
                         {
                             continue;
                         }
-                    }
-                    if (!string.IsNullOrEmpty(searchModel.projectName))
-                    {
-                        if (form.Form.ProjectName.IndexOf(searchModel.projectName, StringComparison.InvariantCultureIgnoreCase) == -1)
+
+                        if (!string.IsNullOrEmpty(searchModel.applyUserName))
+                        {
+                            if (form.Form.ApplyUserName.IndexOf(searchModel.applyUserName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (model.taskStatus != searchModel.taskStatus)
                         {
                             continue;
                         }
-                    }
 
-                    if (!string.IsNullOrEmpty(searchModel.marketingEngineer))
-                    {
-                        if (form.Form.MarketingEngineer.IndexOf(searchModel.marketingEngineer, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!string.IsNullOrEmpty(searchModel.applyUserDepartmentName))
+                        {
+                            if (form.Form.ApplyUserDepartmentName.IndexOf(searchModel.applyUserDepartmentName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(searchModel.projectName))
+                        {
+                            if (form.Form.ProjectName.IndexOf(searchModel.projectName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.marketingEngineer))
+                        {
+                            if (form.Form.MarketingEngineer.IndexOf(searchModel.marketingEngineer, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!WebHelper.InDateRange(form.Form.ExpectSignContact, searchModel.expectSignContactDateStart, searchModel.expectSignContactDateEnd))
                         {
                             continue;
                         }
+                        models.Add(model);
                     }
-
-                    if (!WebHelper.InDateRange(form.Form.ExpectSignContact, searchModel.expectSignContactDateStart, searchModel.expectSignContactDateEnd))
+                    catch (Exception ex)
                     {
-                        continue;
+                        WebHelper.Logger.Error(ex.Message, ex);
                     }
-                    models.Add(model);
                 }
 
                 Response.Write(JsonConvert.SerializeObject(models));

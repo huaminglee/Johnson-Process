@@ -52,12 +52,19 @@ namespace Johnson.Process.WindowsService
 
                 while (true)
                 {
-                    vocService.Start();
-                    deliveryService.Start();
-                    consultationAndQuotationService.Start();
-                    processMailService.Start();
+                    try
+                    {
+                        vocService.Start();
+                        deliveryService.Start();
+                        consultationAndQuotationService.Start();
+                        processMailService.Start();
 
-                    Thread.Sleep(5000);
+                        Thread.Sleep(5000);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex.Message, ex);
+                    }
                 }
             }
             catch (Exception ex)

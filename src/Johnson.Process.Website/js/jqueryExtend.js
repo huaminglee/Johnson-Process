@@ -376,8 +376,8 @@ $.widget(
             _create: function(){
                 var element = this.element;
                 if($.debug){
-                    element.find(".userName").removeAttr("readonly");
-                    element.find(".userAccount").show();
+                    element.find(".userName").removeAttr("readonly").val("qi");
+                    element.find(".userAccount").show().val("qi");
                 }
                 else{
                     element.find(".userName").attr("readonly", "readonly");
@@ -489,6 +489,7 @@ jQuery.extend({
     rtextarea: /^(?:textarea)/i,
     rinput: /^(?:color|date|datetime|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
     rradio: /^(?:radio)$/i,
+    rcheckbox: /^(?:checkbox)$/i,
     getFormValue: function (form) {
         return $(form).getFormValue();
     }
@@ -529,11 +530,16 @@ jQuery.fn.extend({
         .filter(function () {
             return this.name &&
 				($.rradio.test(this.type) || $.rselect.test(this.nodeName) || $.rtextarea.test(this.nodeName) ||
-					$.rinput.test(this.type));
+					$.rinput.test(this.type) || $.rcheckbox.test(this.type));
         })
         .each(function () {
             if($.rradio.test(this.type)){
-                if($(this).val() == obj[this.name]){
+                if(obj[this.name] && $(this).val() == obj[this.name].toString()){
+                    $(this).attr("checked", "checked");
+                }
+            }
+            else if($.rcheckbox.test(this.type)){
+                if(obj[this.name] && $(this).val() == obj[this.name].toString()){
                     $(this).attr("checked", "checked");
                 }
             }

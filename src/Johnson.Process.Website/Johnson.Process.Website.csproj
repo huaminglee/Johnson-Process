@@ -355,6 +355,29 @@
     <Content Include="images\logo.gif" />
     <Content Include="images\title_bg.gif" />
     <Content Include="js\processDataGrid.js" />
+    <Content Include="OrderPingShenController.aspx" />
+    <Content Include="OrderPingShen_BOM.aspx" />
+    <Content Include="OrderPingShen_CID.aspx" />
+    <Content Include="OrderPingShen_Completed1.aspx" />
+    <Content Include="OrderPingShen_Completed2.aspx" />
+    <Content Include="OrderPingShen_Dept.aspx" />
+    <Content Include="OrderPingShen_DianQiEngineer.aspx" />
+    <Content Include="OrderPingShen_FilePublish.aspx" />
+    <Content Include="OrderPingShen_JiShuJianCha.aspx" />
+    <Content Include="OrderPingShen_JiShuZuGuanShenPi.aspx" />
+    <Content Include="OrderPingShen_JiZuWanGong.aspx" />
+    <Content Include="OrderPingShen_JiZuWanGongQueRen.aspx" />
+    <Content Include="OrderPingShen_PMC.aspx" />
+    <Content Include="OrderPingShen_QAD.aspx" />
+    <Content Include="OrderPingShen_SapBom.aspx" />
+    <Content Include="OrderPingShen_SCM.aspx" />
+    <Content Include="OrderPingShen_SheJiEngineer.aspx" />
+    <Content Include="OrderPingShen_SheJiFuZeRen.aspx" />
+    <Content Include="OrderPingShen_SheJiFuZeRen2.aspx" />
+    <Content Include="OrderPingShen_SheJiTiJiao.aspx" />
+    <Content Include="OrderPingShen_Start.aspx" />
+    <Content Include="OrderPingShen_Transfer.aspx" />
+    <Content Include="OrderPingShen_XinWuLiaoXinXiWeiHu.aspx" />
     <Content Include="ProductReworkController.aspx" />
     <Content Include="ProductRework_CID.aspx" />
     <Content Include="ProductRework_Completed.aspx" />
@@ -379,6 +402,7 @@
     <Content Include="UserControls\FailureProductDetails.ascx" />
     <Content Include="UserControls\Header.ascx" />
     <Content Include="UserControls\MaterialDetails.ascx" />
+    <Content Include="UserControls\OrderDetails.ascx" />
     <Content Include="UserControls\ProductReworkCidDetails.ascx" />
     <Content Include="UserControls\ProductReworkDetails.ascx" />
     <Content Include="UserControls\ProductReworkMaterialsDetails.ascx" />
@@ -724,6 +748,7 @@
       <DependentUpon>FailureProduct_Transfer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\ActionResultModel.cs" />
+    <Compile Include="Models\CidSubmitModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationCidModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationEngModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationLogModel.cs" />
@@ -737,18 +762,23 @@
     <Compile Include="Models\DeliveryModel.cs" />
     <Compile Include="Models\DeliveryReportModel.cs" />
     <Compile Include="Models\DeliveryReportSearchModel.cs" />
+    <Compile Include="Models\OrderPingEngFuZeRenSubmitModel.cs" />
     <Compile Include="Models\FailureProductMrbModel.cs" />
     <Compile Include="Models\FailureProductQAModel.cs" />
     <Compile Include="Models\FailureProductQEModel.cs" />
     <Compile Include="Models\FailureStartModel.cs" />
     <Compile Include="Models\MaterialModel.cs" />
+    <Compile Include="Models\OrderPingShenModel.cs" />
+    <Compile Include="Models\OrderPingShenStartModel.cs" />
     <Compile Include="Models\ProductReworkCidModel.cs" />
     <Compile Include="Models\ProductReworkEngModel.cs" />
     <Compile Include="Models\ProductReworkFinModel.cs" />
     <Compile Include="Models\ProductReworkModel.cs" />
     <Compile Include="Models\ProductReworkQC2Model.cs" />
     <Compile Include="Models\ProductReworkQcModel.cs" />
+    <Compile Include="Models\QadSubmitModel.cs" />
     <Compile Include="Models\RemarkModel.cs" />
+    <Compile Include="Models\SheJiTiJiaoSubmitModel.cs" />
     <Compile Include="Models\UploadFileModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationCsdModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationTracerModel.cs" />
@@ -763,6 +793,167 @@
     <Compile Include="Models\VocReportSearchModel.cs" />
     <Compile Include="Models\VocResponsibleModel.cs" />
     <Compile Include="Models\VocResponsibleReasonModel.cs" />
+    <Compile Include="OrderPingShenController.aspx.cs">
+      <DependentUpon>OrderPingShenController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShenController.aspx.designer.cs">
+      <DependentUpon>OrderPingShenController.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_BOM.aspx.cs">
+      <DependentUpon>OrderPingShen_BOM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_BOM.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_BOM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_CID.aspx.cs">
+      <DependentUpon>OrderPingShen_CID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_CID.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_CID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_Completed1.aspx.cs">
+      <DependentUpon>OrderPingShen_Completed1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_Completed1.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Completed1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_Completed2.aspx.cs">
+      <DependentUpon>OrderPingShen_Completed2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_Completed2.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Completed2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_Dept.aspx.cs">
+      <DependentUpon>OrderPingShen_Dept.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_Dept.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Dept.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_DianQiEngineer.aspx.cs">
+      <DependentUpon>OrderPingShen_DianQiEngineer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_DianQiEngineer.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_DianQiEngineer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_FilePublish.aspx.cs">
+      <DependentUpon>OrderPingShen_FilePublish.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_FilePublish.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_FilePublish.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_JiShuJianCha.aspx.cs">
+      <DependentUpon>OrderPingShen_JiShuJianCha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_JiShuJianCha.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_JiShuJianCha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_JiShuZuGuanShenPi.aspx.cs">
+      <DependentUpon>OrderPingShen_JiShuZuGuanShenPi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_JiShuZuGuanShenPi.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_JiShuZuGuanShenPi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_JiZuWanGong.aspx.cs">
+      <DependentUpon>OrderPingShen_JiZuWanGong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_JiZuWanGong.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_JiZuWanGong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_JiZuWanGongQueRen.aspx.cs">
+      <DependentUpon>OrderPingShen_JiZuWanGongQueRen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_JiZuWanGongQueRen.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_JiZuWanGongQueRen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_PMC.aspx.cs">
+      <DependentUpon>OrderPingShen_PMC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_PMC.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_PMC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_QAD.aspx.cs">
+      <DependentUpon>OrderPingShen_QAD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_QAD.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_QAD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_SapBom.aspx.cs">
+      <DependentUpon>OrderPingShen_SapBom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_SapBom.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_SapBom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_SCM.aspx.cs">
+      <DependentUpon>OrderPingShen_SCM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_SCM.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_SCM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiEngineer.aspx.cs">
+      <DependentUpon>OrderPingShen_SheJiEngineer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiEngineer.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_SheJiEngineer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiFuZeRen.aspx.cs">
+      <DependentUpon>OrderPingShen_SheJiFuZeRen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiFuZeRen.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_SheJiFuZeRen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiFuZeRen2.aspx.cs">
+      <DependentUpon>OrderPingShen_SheJiFuZeRen2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiFuZeRen2.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_SheJiFuZeRen2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiTiJiao.aspx.cs">
+      <DependentUpon>OrderPingShen_SheJiTiJiao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_SheJiTiJiao.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_SheJiTiJiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_Start.aspx.cs">
+      <DependentUpon>OrderPingShen_Start.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_Start.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_Transfer.aspx.cs">
+      <DependentUpon>OrderPingShen_Transfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_Transfer.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Transfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_XinWuLiaoXinXiWeiHu.aspx.cs">
+      <DependentUpon>OrderPingShen_XinWuLiaoXinXiWeiHu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_XinWuLiaoXinXiWeiHu.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_XinWuLiaoXinXiWeiHu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProcessPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -916,6 +1107,13 @@
     </Compile>
     <Compile Include="UserControls\MaterialDetails.ascx.designer.cs">
       <DependentUpon>MaterialDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderDetails.ascx.cs">
+      <DependentUpon>OrderDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\OrderDetails.ascx.designer.cs">
+      <DependentUpon>OrderDetails.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ProductReworkCidDetails.ascx.cs">
       <DependentUpon>ProductReworkCidDetails.ascx</DependentUpon>

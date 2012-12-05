@@ -39,16 +39,23 @@ namespace Johnson.Process.Website
 
                 foreach (ProcessForm<DeliveryProcessForm> form in forms)
                 {
-                    if (form.Form == null)
+                    try
                     {
-                        continue;
+                        if (form.Form == null)
+                        {
+                            continue;
+                        }
+                        DeliveryReportModel model = new DeliveryReportModel(form);
+                        if (model.taskStatus != 1)
+                        {
+                            continue;
+                        }
+                        models.Add(model);
                     }
-                    DeliveryReportModel model = new DeliveryReportModel(form);
-                    if (model.taskStatus != 1)
+                    catch (Exception ex)
                     {
-                        continue;
+                        WebHelper.Logger.Error(ex.Message, ex);
                     }
-                    models.Add(model);
                 }
 
                 Response.Write(JsonConvert.SerializeObject(models));
@@ -71,80 +78,87 @@ namespace Johnson.Process.Website
 
                 foreach (ProcessForm<DeliveryProcessForm> form in forms)
                 {
-                    DeliveryReportModel model = new DeliveryReportModel(form);
-                    if (form.Form == null)
+                    try
                     {
-                        continue;
-                    }
-
-                    if (!WebHelper.InDateRange(form.Form.ApplyTime, searchModel.applyTimeStart, searchModel.applyTimeEnd))
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.applyUserName))
-                    {
-                        if (form.Form.ApplyUserName.IndexOf(searchModel.applyUserName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        DeliveryReportModel model = new DeliveryReportModel(form);
+                        if (form.Form == null)
                         {
                             continue;
                         }
-                    }
 
-                    if (model.taskStatus != searchModel.taskStatus)
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.orderNumber))
-                    {
-                        if (form.Form.OrderNumber.IndexOf(searchModel.orderNumber, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!WebHelper.InDateRange(form.Form.ApplyTime, searchModel.applyTimeStart, searchModel.applyTimeEnd))
                         {
                             continue;
                         }
-                    }
 
-                    if (!string.IsNullOrEmpty(searchModel.projectName))
-                    {
-                        if (form.Form.ProjectName.IndexOf(searchModel.projectName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!string.IsNullOrEmpty(searchModel.applyUserName))
+                        {
+                            if (form.Form.ApplyUserName.IndexOf(searchModel.applyUserName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (model.taskStatus != searchModel.taskStatus)
                         {
                             continue;
                         }
-                    }
 
-                    if (!string.IsNullOrEmpty(searchModel.saleOffice))
-                    {
-                        if (form.Form.SaleOffice.IndexOf(searchModel.saleOffice, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!string.IsNullOrEmpty(searchModel.orderNumber))
+                        {
+                            if (form.Form.OrderNumber.IndexOf(searchModel.orderNumber, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.projectName))
+                        {
+                            if (form.Form.ProjectName.IndexOf(searchModel.projectName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.saleOffice))
+                        {
+                            if (form.Form.SaleOffice.IndexOf(searchModel.saleOffice, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.saleGroup))
+                        {
+                            if (form.Form.SaleGroup.IndexOf(searchModel.saleGroup, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.saleEngineerYT))
+                        {
+                            if (form.Form.SaleEngineer.IndexOf(searchModel.saleEngineerYT, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!WebHelper.InDateRange(form.Form.BookDate, searchModel.bookDateStart, searchModel.bookDateEnd))
                         {
                             continue;
                         }
-                    }
 
-                    if (!string.IsNullOrEmpty(searchModel.saleGroup))
-                    {
-                        if (form.Form.SaleGroup.IndexOf(searchModel.saleGroup, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!WebHelper.InDateRange(form.Form.RequestOutDate, searchModel.requestOutDateStart, searchModel.requestOutDateEnd))
                         {
                             continue;
                         }
+                        models.Add(model);
                     }
-
-                    if (!string.IsNullOrEmpty(searchModel.saleEngineerYT))
+                    catch (Exception ex)
                     {
-                        if (form.Form.SaleEngineer.IndexOf(searchModel.saleEngineerYT, StringComparison.InvariantCultureIgnoreCase) == -1)
-                        {
-                            continue;
-                        }
+                        WebHelper.Logger.Error(ex.Message, ex);
                     }
-
-                    if (!WebHelper.InDateRange(form.Form.BookDate, searchModel.bookDateStart, searchModel.bookDateEnd))
-                    {
-                        continue;
-                    }
-
-                    if (!WebHelper.InDateRange(form.Form.RequestOutDate, searchModel.requestOutDateStart, searchModel.requestOutDateEnd))
-                    {
-                        continue;
-                    }
-                    models.Add(model);
                 }
 
                 Response.Write(JsonConvert.SerializeObject(models));

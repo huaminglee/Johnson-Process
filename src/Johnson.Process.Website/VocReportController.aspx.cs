@@ -41,16 +41,23 @@ namespace Johnson.Process.Website
 
                 foreach (ProcessForm<VocForm> form in forms)
                 {
-                    if (form.Form == null)
+                    try
                     {
-                        continue;
+                        if (form.Form == null)
+                        {
+                            continue;
+                        }
+                        VocReportModel model = new VocReportModel(form);
+                        if (model.taskStatus != 1)
+                        {
+                            continue;
+                        }
+                        models.Add(model);
                     }
-                    VocReportModel model = new VocReportModel(form);
-                    if (model.taskStatus != 1)
+                    catch (Exception ex)
                     {
-                        continue;
+                        WebHelper.Logger.Error(ex.Message, ex);
                     }
-                    models.Add(model);
                 }
 
                 Response.Write(JsonConvert.SerializeObject(models));
@@ -73,94 +80,101 @@ namespace Johnson.Process.Website
 
                 foreach (ProcessForm<VocForm> form in forms)
                 {
-                    VocReportModel model = new VocReportModel(form);
-                    if(form.Form == null)
+                    try
                     {
-                        continue;
-                    }
-                    if (searchModel.applyTimeEnd.HasValue && searchModel.applyTimeStart.HasValue )
-                    {
-                        if (form.Form.ApplyTime < searchModel.applyTimeStart || form.Form.ApplyTime > searchModel.applyTimeEnd)
+                        VocReportModel model = new VocReportModel(form);
+                        if (form.Form == null)
                         {
                             continue;
                         }
-                    }
-                    else if (searchModel.applyTimeEnd.HasValue)
-                    {
-                        if (form.Form.ApplyTime > searchModel.applyTimeEnd)
+                        if (searchModel.applyTimeEnd.HasValue && searchModel.applyTimeStart.HasValue)
                         {
-                            continue;
+                            if (form.Form.ApplyTime < searchModel.applyTimeStart || form.Form.ApplyTime > searchModel.applyTimeEnd)
+                            {
+                                continue;
+                            }
                         }
-                    }
-                    else if (searchModel.applyTimeStart.HasValue)
-                    {
-                        if (form.Form.ApplyTime < searchModel.applyTimeStart)
+                        else if (searchModel.applyTimeEnd.HasValue)
                         {
-                            continue;
+                            if (form.Form.ApplyTime > searchModel.applyTimeEnd)
+                            {
+                                continue;
+                            }
                         }
-                    }
+                        else if (searchModel.applyTimeStart.HasValue)
+                        {
+                            if (form.Form.ApplyTime < searchModel.applyTimeStart)
+                            {
+                                continue;
+                            }
+                        }
 
-                    if (!string.IsNullOrEmpty(searchModel.applyUserDepartmentName))
-                    {
-                        if (form.Form.ApplyUserDepartmentName.IndexOf(searchModel.applyUserDepartmentName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!string.IsNullOrEmpty(searchModel.applyUserDepartmentName))
+                        {
+                            if (form.Form.ApplyUserDepartmentName.IndexOf(searchModel.applyUserDepartmentName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.applyUserName))
+                        {
+                            if (form.Form.ApplyUserName.IndexOf(searchModel.applyUserName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.faultRemark))
+                        {
+                            if (form.Form.FaultRemark.IndexOf(searchModel.faultRemark, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.machineCode))
+                        {
+                            if (form.Form.MachineCode.IndexOf(searchModel.machineCode, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.machineModel))
+                        {
+                            if (form.Form.MachineModel.IndexOf(searchModel.machineModel, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(searchModel.projectName))
+                        {
+                            if (form.Form.ProjectName.IndexOf(searchModel.projectName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (model.taskStatus != searchModel.taskStatus)
                         {
                             continue;
                         }
-                    }
 
-                    if (!string.IsNullOrEmpty(searchModel.applyUserName))
-                    {
-                        if (form.Form.ApplyUserName.IndexOf(searchModel.applyUserName, StringComparison.InvariantCultureIgnoreCase) == -1)
+                        if (!string.IsNullOrEmpty(searchModel.vocCode))
                         {
-                            continue;
+                            if (form.Form.VocCode.IndexOf(searchModel.vocCode, StringComparison.InvariantCultureIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
                         }
+                        models.Add(model);
                     }
-
-                    if (!string.IsNullOrEmpty(searchModel.faultRemark))
+                    catch (Exception ex)
                     {
-                        if (form.Form.FaultRemark.IndexOf(searchModel.faultRemark, StringComparison.InvariantCultureIgnoreCase) == -1)
-                        {
-                            continue;
-                        }
+                        WebHelper.Logger.Error(ex.Message, ex);
                     }
-
-                    if (!string.IsNullOrEmpty(searchModel.machineCode))
-                    {
-                        if (form.Form.MachineCode.IndexOf(searchModel.machineCode, StringComparison.InvariantCultureIgnoreCase) == -1)
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.machineModel))
-                    {
-                        if (form.Form.MachineModel.IndexOf(searchModel.machineModel, StringComparison.InvariantCultureIgnoreCase) == -1)
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.projectName))
-                    {
-                        if (form.Form.ProjectName.IndexOf(searchModel.projectName, StringComparison.InvariantCultureIgnoreCase) == -1)
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (model.taskStatus != searchModel.taskStatus)
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrEmpty(searchModel.vocCode))
-                    {
-                        if (form.Form.VocCode.IndexOf(searchModel.vocCode, StringComparison.InvariantCultureIgnoreCase) == -1)
-                        {
-                            continue;
-                        }
-                    }
-                    models.Add(model);
                 }
 
                 Response.Write(JsonConvert.SerializeObject(models));

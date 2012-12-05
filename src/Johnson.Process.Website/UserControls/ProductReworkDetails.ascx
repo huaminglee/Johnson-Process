@@ -1,5 +1,19 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProductReworkDetails.ascx.cs" Inherits="Johnson.Process.Website.UserControls.ProductReworkDetails" %>
 <table class="formInfo">
+    <tr class="trNo">
+        <td style="width: 200px" class="labelCol">
+            不合格编号
+        </td>
+        <td style="width: 280px" class="textCol">
+            <input  name="FailureNo" type="text" readonly="readonly" class="textInput txtwidth " />
+        </td>
+        <td style="width: 200px" >
+            
+        </td>
+        <td style="width: 280px" >
+            
+        </td>
+    </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
             产品类型<span style="color: Red" >*</span>
@@ -9,10 +23,10 @@
             <input name="ProductType" type="radio" value="1" /><label>产品</label>
         </td>
         <td style="width: 200px" class="labelCol">
-            系列号<span style="color: Red" >*</span>
+            系列号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="XLH" type="text" class="textInput txtwidth required" />
+            <input  name="XLH" type="text" class="textInput txtwidth" />
         </td>
     </tr>
     <tr>
@@ -23,10 +37,10 @@
             <input  name="Name" type="text" class="textInput txtwidth required" />
         </td>
         <td style="width: 200px" class="labelCol">
-            SAP号<span style="color: Red" >*</span>
+            SAP号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="SapNo" type="text" class="textInput txtwidth required" />
+            <input  name="SapNo" type="text" class="textInput txtwidth" />
         </td>
     </tr>
     <tr>
@@ -37,10 +51,10 @@
             <input  name="Quantity" type="text" class="textInput txtwidth required digits " />
         </td>
         <td style="width: 200px" class="labelCol">
-            订单号<span style="color: Red" >*</span>
+            订单号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="OrderNumber" type="text" class="textInput txtwidth required" />
+            <input  name="OrderNumber" type="text" class="textInput txtwidth" />
         </td>
     </tr>
     <tr>

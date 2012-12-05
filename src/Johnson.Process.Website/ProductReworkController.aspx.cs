@@ -10,7 +10,7 @@ using Johnson.Process.Website.Models;
 
 namespace Johnson.Process.Website
 {
-    public partial class ProductReworkController : ProcessPage
+    public partial class ProductReworkController : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -51,6 +51,7 @@
     <Compile Include="FailureProductForm.cs" />
     <Compile Include="FailureProductProcess.cs" />
     <Compile Include="MetadataDataProvider.cs" />
+    <Compile Include="OrderEngFuZeRenPingShenInfo.cs" />
     <Compile Include="ProcessEmailDataProvider.cs" />
     <Compile Include="HtmlHelper.cs" />
     <Compile Include="Material.cs" />
@@ -59,6 +60,9 @@
     <Compile Include="ProcessForm.cs" />
     <Compile Include="ProductReworkForm.cs" />
     <Compile Include="ProductReworkProcess.cs" />
+    <Compile Include="OrderPingShenForm.cs" />
+    <Compile Include="OrderPingShenProcess.cs" />
+    <Compile Include="OrderPingShenStartInfo.cs" />
     <Compile Include="UltimusHelper.cs" />
     <Compile Include="UltimusProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

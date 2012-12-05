@@ -21,11 +21,19 @@ namespace Johnson.Process.Core
 
         public string GetUltimusUserAccount(string account)
         {
+            if (string.IsNullOrEmpty(account))
+            {
+                return "";
+            }
             return string.Format("{0}/{1}", ConfigurationManager.AppSettings["ultimusDomain"], account);
         }
 
-        public string[] GetUltimusUserAccounts(string accounts)
+        public object[] GetUltimusUserAccounts(string accounts)
         {
+            if (string.IsNullOrEmpty(accounts))
+            {
+                return null;
+            }
             List<string> formatAccounts = new List<string>();
             string[] accountSplit = accounts.Split(',');
             foreach (string account in accountSplit)

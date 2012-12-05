@@ -18,16 +18,17 @@ namespace Johnson.Process.Website
             {
                 throw new ArgumentNullException("objStepId");
             }
+            WebHelper.Logger.Info("IncidentNo:" + taskInfo.IncidentNo);
             switch (objStepId.ToString())
             {
                 case "11":
-                    if (taskInfo.SubStatus == 16)
+                    if (taskInfo.IncidentNo == 0)
                     {
-                        Response.Redirect("Voc_Start_Return.aspx?" + Request.QueryString.ToString());
+                        Response.Redirect("Voc_Start.aspx?" + Request.QueryString.ToString());
                     }
                     else if (taskInfo.Status == 1)
                     {
-                        Response.Redirect("Voc_Start.aspx?" + Request.QueryString.ToString());
+                        Response.Redirect("Voc_Start_Return.aspx?" + Request.QueryString.ToString());
                     }
                     else
                     {

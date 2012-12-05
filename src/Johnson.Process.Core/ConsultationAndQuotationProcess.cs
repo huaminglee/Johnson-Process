@@ -312,9 +312,9 @@ namespace Johnson.Process.Core
             {
                 throw new ArgumentNullException("form");
             }
-            string[] accounts = this.GetUltimusUserAccounts(logEnigneer);
+            object[] accounts = this.GetUltimusUserAccounts(logEnigneer);
             List<object> objAccounts = new List<object>();
-            foreach (string account in accounts)
+            foreach (object account in accounts)
             {
                 objAccounts.Add(account);
             }

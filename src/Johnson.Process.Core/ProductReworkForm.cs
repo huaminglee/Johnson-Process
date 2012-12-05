@@ -45,6 +45,8 @@ namespace Johnson.Process.Core
 
         public ProductType ProductType { set; get; }
 
+        public string FailureNo { set; get; }
+
         /// <summary>
         /// 系列号
         /// </summary>

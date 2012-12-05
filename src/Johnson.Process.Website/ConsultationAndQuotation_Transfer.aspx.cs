@@ -21,13 +21,13 @@ namespace Johnson.Process.Website
             switch (objStepId.ToString())
             {
                 case "11":
-                    if (taskInfo.SubStatus == 16)
+                    if (taskInfo.IncidentNo == 0)
                     {
-                        Response.Redirect("ConsultationAndQuotation_Start_Return.aspx?" + Request.QueryString.ToString());
+                        Response.Redirect("ConsultationAndQuotation_Start.aspx?" + Request.QueryString.ToString());
                     }
                     else if (taskInfo.Status == 1)
                     {
-                        Response.Redirect("ConsultationAndQuotation_Start.aspx?" + Request.QueryString.ToString());
+                        Response.Redirect("ConsultationAndQuotation_Start_Return.aspx?" + Request.QueryString.ToString());
                     }
                     else
                     {

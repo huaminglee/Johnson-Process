@@ -32,7 +32,7 @@ namespace Johnson.Process.EMail
         {
             try
             {
-                
+                recipientsAddress = recipientsAddress.Replace(";", ",");
 
 #if DEBUG
                 EDoc2.Mail.CommonMailSender mailSender = new EDoc2.Mail.CommonMailSender(1);
