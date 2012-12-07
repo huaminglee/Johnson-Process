@@ -28,10 +28,11 @@ namespace Johnson.Process.EMail
 
         public void Start()
         {
+            Tasklist tasklist = null;
             try
             {
                 ApiManager.NewApi();
-                Tasklist tasklist = this._process.GetAllTask();
+                tasklist = this._process.GetAllTask();
                 if (tasklist != null)
                 {
                     int taskCount = tasklist.GetTasksCount();
@@ -75,6 +76,10 @@ namespace Johnson.Process.EMail
             catch (TaskEmailNotifySerivceException ex)
             {
                 this._logger.Error(ex.Message, ex);
+            }
+            finally
+            {
+                tasklist = null;
             }
         }
 

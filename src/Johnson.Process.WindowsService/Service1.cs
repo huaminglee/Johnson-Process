@@ -59,7 +59,7 @@ namespace Johnson.Process.WindowsService
                         consultationAndQuotationService.Start();
                         processMailService.Start();
 
-                        Thread.Sleep(5000);
+                        Thread.Sleep(15000);
                     }
                     catch (Exception ex)
                     {
