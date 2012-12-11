@@ -196,6 +196,7 @@
 <script language="javascript" type="text/javascript">
     var edoc2BaseUrl = "<%= Johnson.Process.Website.WebHelper.EDoc2BaseUrl %>";
     var taskId = "<%= this.TaskId %>";
+    var tempFolderId = "<%= this.ProcessFolderId %>";
 
     function sumProductQuantityAndTP(){
         $("#gridProductSalesTp").sumProductQuantityAndTP();
@@ -254,6 +255,8 @@
                 toCsdEmailAddress: marketingFormValue.toCsdEmailAddress, submitRemark: submitRemark,
                 leadTime: leadTime, leadTimeRemark: productLeadTimeFormValue.leadTimeRemark
             };
+            var attachments = $('#attachments').datagrid('getData');
+            args.files = attachments.rows;
             if (!needCsdReply) {
                 var gridData = $('#gridProductSalesTp').datagrid('getData');
                 args.products = gridData.rows;
@@ -329,13 +332,13 @@
 
         $(".userEmailMultiSelect").userEmailMultiSelect();
 
-        $("#gridProduct, #remarks, #attachments").datagrid({
+        $("#gridProduct, #remarks").datagrid({
             rownumbers: true,
             showFooter: true,
             singleSelect: true,
             nowrap: false
         });
-
+        $("#attachments").attachmentsGrid();
         var editDialog = $("#editProductDialog").productMarketingSalesTPDialog();
         $("#gridProductSalesTp").productSalesTpGrid(editDialog, sumProductQuantityAndTP);
     })

@@ -207,6 +207,7 @@ namespace Johnson.Process.Core
             }
             return this._toCsdEmailContentTemplate
                 .Replace("${ProjectName}", form.ProjectName)
+                .Replace("${ApplyUserDepartmentName}", form.ApplyUserDepartmentName)
                 .Replace("${SucceedProbability}", form.SucceedProbability)
                 .Replace("${ExpectSignContact}", form.ExpectSignContact.ToString("yyyy-MM-dd"))
                 .Replace("${LeadTime}", form.LeadTime.Value.ToString())
@@ -228,6 +229,7 @@ namespace Johnson.Process.Core
             }
             return this._tracerMailTemplate
                 .Replace("${ProjectName}", form.ProjectName)
+                .Replace("${ApplyUserDepartmentName}", form.ApplyUserDepartmentName)
                 .Replace("${SucceedProbability}", form.SucceedProbability)
                 .Replace("${ExpectSignContact}", form.ExpectSignContact.ToString("yyyy-MM-dd"))
                 .Replace("${LeadTime}", form.LeadTime.Value.ToString())

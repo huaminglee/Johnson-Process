@@ -178,6 +178,12 @@ namespace Johnson.Process.Website
                 form.CsdEngineerName = model.csdEngineerName;
                 form.MarketingReply = model.marketingReply;
                 form.MarketingEmailTo = model.toCsdEmailAddress;
+                List<ProcessFile> files = new List<ProcessFile>();
+                foreach (UploadFileModel fileModel in model.files)
+                {
+                    files.Add(fileModel.Map());
+                }
+                form.Files = files;
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 if (model.needCsdReply)

@@ -15,6 +15,7 @@ namespace Johnson.Process.Website.Models
         public int? leadTime;
         public string leadTimeRemark;
         public string toCsdEmailAddress;
+        public List<UploadFileModel> files;
         public List<ConsultationAndQuotationProductModel> products;
     }
 }
