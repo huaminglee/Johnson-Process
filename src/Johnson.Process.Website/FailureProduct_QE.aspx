@@ -58,6 +58,7 @@
                         <input name="QEResult" type="radio" value="4" /><label>报废</label>
                         <input name="QEResult" type="radio" value="5" /><label>挑选</label>
                         <input name="QEResult" type="radio" value="6" /><label>MRB会议</label>
+                        <input name="QEResult" type="radio" value="7" /><label>其它</label>
                     </div>
                 </td>
             </tr>
@@ -274,6 +275,9 @@
                 break;
             case "6":
                 $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").show().find(".userName").addClass("required");
+                break;
+            case "7":
+                $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").hide().find(".userName").removeClass("required");
                 break;
         }
     }

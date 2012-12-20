@@ -122,6 +122,7 @@
     <Content Include="FailureProduct_QE.aspx" />
     <Content Include="FailureProduct_Rework.aspx" />
     <Content Include="FailureProduct_Start.aspx" />
+    <Content Include="FailureProduct_StarterQueren.aspx" />
     <Content Include="FailureProduct_Start_Return.aspx" />
     <Content Include="FailureProduct_Storehouse.aspx" />
     <Content Include="FailureProduct_Transfer.aspx" />
@@ -725,6 +726,13 @@
     </Compile>
     <Compile Include="FailureProduct_Start.aspx.designer.cs">
       <DependentUpon>FailureProduct_Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FailureProduct_StarterQueren.aspx.cs">
+      <DependentUpon>FailureProduct_StarterQueren.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FailureProduct_StarterQueren.aspx.designer.cs">
+      <DependentUpon>FailureProduct_StarterQueren.aspx</DependentUpon>
     </Compile>
     <Compile Include="FailureProduct_Start_Return.aspx.cs">
       <DependentUpon>FailureProduct_Start_Return.aspx</DependentUpon>

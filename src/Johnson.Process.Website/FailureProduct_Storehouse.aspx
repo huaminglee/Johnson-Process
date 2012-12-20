@@ -89,9 +89,10 @@
                 </td>
             </tr>
         </table>
-
-        <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">跟踪验证<span style="color: Red" >*</span></div></div>
-        <textarea name="QCValidateResult" class="textInput" style="width: 890px;" rows="3"></textarea>
+        <div id="pnlQCValidateResult">
+            <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">跟踪验证<span style="color: Red" >*</span></div></div>
+            <textarea name="QCValidateResult" class="textInput" style="width: 890px;" rows="3"></textarea>
+        </div>
     </form>
     
     <div style="margin-top: 1em;">
@@ -135,6 +136,9 @@
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
+            if(!data.QCValidateResult){
+                $("#pnlQCValidateResult").hide();
+            }
             $("#qcForm").setFormValue(data);
             $("#remarks").datagrid("loadData", data.Approves);
         });

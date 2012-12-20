@@ -13,13 +13,14 @@ namespace Johnson.Process.Website
         protected override void Transfer()
         {
             TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(TaskId);
-            WebHelper.Logger.Info(taskInfo.SubStatus);
+            
             object objStepId = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "StepId");
+            
             if (objStepId == null || string.IsNullOrEmpty(objStepId.ToString()))
             {
                 throw new ArgumentNullException("objStepId");
             }
-            string[] stepIds = new string[]{"11", "21", "31", "41", "51", "61", "71", "81", "91"};
+            string[] stepIds = new string[]{"11", "21", "31", "41", "51", "61", "71", "81", "91", "101"};
             List<string> stepIdList = new List<string>();
             stepIdList.AddRange(stepIds);
             if (!stepIdList.Contains(objStepId.ToString()))
@@ -93,6 +94,13 @@ namespace Johnson.Process.Website
                     if (taskInfo.Status == 1)
                     {
                         Response.Redirect("FailureProduct_Rework.aspx?" + Request.QueryString.ToString());
+                    }
+                    break;
+                case "101":
+
+                    if (taskInfo.Status == 1)
+                    {
+                        Response.Redirect("FailureProduct_StarterQueren.aspx?" + Request.QueryString.ToString());
                     }
                     break;
 

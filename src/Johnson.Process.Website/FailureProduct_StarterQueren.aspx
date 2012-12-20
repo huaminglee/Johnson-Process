@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FailureProduct_Completed.aspx.cs" Inherits="Johnson.Process.Website.FailureProduct_Completed" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FailureProduct_StarterQueren.aspx.cs" Inherits="Johnson.Process.Website.FailureProduct_StarterQueren" %>
 <%@ Register Src="UserControls/Header.ascx" TagName="Header" TagPrefix="johnson" %>
 <%@ Register Src="UserControls/FailureProductDetails.ascx" TagName="FailureProductDetails" TagPrefix="johnson" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>不合格品处理单</title>
+    <title>不合格品处理单-发起人确认</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -22,7 +22,7 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="不合格品处理单" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="不合格品处理单-发起人确认" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
@@ -90,27 +90,6 @@
                 </td>
             </tr>
         </table>
-
-        <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">跟踪验证<span style="color: Red" >*</span></div></div>
-        <textarea name="QCValidateResult" class="textInput required" style="width: 890px;" rows="3"></textarea>
-        <table id="mrbMemberResults" style="width:900px;height:auto" title="MRB成员意见">
-		    <thead>
-			    <tr> 
-				    <th field="UserName" resizable="false" width="100">姓名</th>
-                    <th field="ResultName" resizable="false" width="100">意见</th>
-			    </tr>
-		    </thead>
-	    </table>
-        <div id="qaResultPanel">
-            <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">QA经理意见</div></div>
-            <div>
-                <input name="QAResult" type="radio" value="1" checked="checked"/><label>退回供应商</label>
-                <input name="QAResult" type="radio" value="2" /><label>让步接收</label>
-                <input name="QAResult" type="radio" value="3" /><label>返工/返修</label>
-                <input name="QAResult" type="radio" value="4" /><label>报废</label>
-                <input name="QAResult" type="radio" value="5" /><label>挑选</label>
-            </div>
-        </div>
     </form>
     
     <div style="margin-top: 1em;">
@@ -126,6 +105,25 @@
 	    </table>
     </div>
 
+    <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">备注</div></div>
+    <form id="remarkForm">
+        <table class="formInfo">
+            <tbody >
+                <tr>
+                    <td class="labelCol" style="width: 200px">
+                        备注
+                    </td>
+                    <td class="textCol">
+                        <textarea name="submitRemark" class="textInput" style="width: 688px;" rows="3"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div style="padding: 2em 0 0 30em;">
+        <input type="button" id="btnSubmit" value="提交" />
+    </div>
 </body>
 </html>
 <script language="javascript" type="text/javascript">
@@ -135,22 +133,28 @@
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
-            if(data.MrbResults){
-                $("#mrbMemberResults").show();
-                $("#mrbMemberResults").datagrid("loadData", data.MrbResults);
-            }else{
-                $("#mrbMemberResults").hide();
-            }
-            if(data.QAResult){
-                $("#qaResultPanel").show();
-            }
-            else{
-                $("#qaResultPanel").hide();
-            }
             $("#remarks").datagrid("loadData", data.Approves);
         });
 
-        $("#remarks, #mrbMemberResults").datagrid({
+        $("#btnSubmit").button().click(function () {
+            var valueObj = $.getFormValue("#remarkForm");
+            
+            if (!confirm("您确实要提交吗？")) {
+                return;
+            }
+            $(this).attr("disabled", "disabled");
+            $.post("FailureProductController.aspx?action=StarterQuerenSubmit", { taskId: taskId, submitRemark: valueObj.submitRemark  }, function (data) {
+                if (data.result != 0) {
+                    alert(data.message);
+                }
+                else {
+                    alert("提交成功");
+                    closeWindow();
+                }
+            });
+        });
+        $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
+        $("#remarks").datagrid({
             rownumbers: true
         });
     })

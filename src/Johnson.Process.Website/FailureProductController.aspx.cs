@@ -77,6 +77,10 @@ namespace Johnson.Process.Website
             {
                 this.ReworkSubmit();
             }
+            else if (action.Equals("StarterQuerenSubmit", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.StarterQuerenSubmit();
+            }
             else if (action.Equals("GetFromThirdDatabase", StringComparison.InvariantCultureIgnoreCase))
             {
                 this.GetFromThirdDatabase();
@@ -501,6 +505,35 @@ namespace Johnson.Process.Website
         }
 
         private void StorehouseSubmit()
+        {
+            ActionResultModel resultModel = new ActionResultModel();
+            try
+            {
+                string taskId = Request["taskid"];
+                if (string.IsNullOrEmpty(taskId))
+                {
+                    throw new ArgumentNullException("taskId");
+                }
+                taskId = taskId.Trim();
+                string submitRemark = Request["submitRemark"];
+
+                string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
+                FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
+                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
+
+                WebHelper.FailureProductProcess.Send(taskId, form);
+            }
+            catch (Exception ex)
+            {
+                resultModel.result = ActionResult.Error;
+                resultModel.message = ex.Message;
+                WebHelper.Logger.Error(ex.Message, ex);
+            }
+            Response.Write(JsonConvert.SerializeObject(resultModel));
+        }
+
+        private void StarterQuerenSubmit()
         {
             ActionResultModel resultModel = new ActionResultModel();
             try

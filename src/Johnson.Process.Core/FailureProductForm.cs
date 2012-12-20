@@ -36,7 +36,12 @@ namespace Johnson.Process.Core
         /// <summary>
         /// MRB
         /// </summary>
-        MRB
+        MRB,
+
+        /// <summary>
+        /// 其它
+        /// </summary>
+        OTHER
     }
 
     public class MrbFailureResult

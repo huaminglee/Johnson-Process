@@ -103,6 +103,8 @@
         $.get("ProductReworkController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data);
         });
+        
+        $("#basicInfoForm input[name='FailureNo']").removeAttr("readonly");
 
         $("#btnSubmit").button().click(function () {
             if (!$("#basicInfoForm").validAndFocus()) {

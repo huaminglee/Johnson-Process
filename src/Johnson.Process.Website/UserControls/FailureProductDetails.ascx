@@ -31,16 +31,16 @@
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            部件系列号<span style="color: Red" >*</span>
+            部件系列号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="BJXLH" type="text" class="textInput txtwidth required" />
+            <input  name="BJXLH" type="text" class="textInput txtwidth" />
         </td>
         <td style="width: 200px" class="labelCol">
-            机组系列号<span style="color: Red" >*</span>
+            机组系列号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="JZXLH" type="text" class="textInput txtwidth required" />
+            <input  name="JZXLH" type="text" class="textInput txtwidth" />
         </td>
     </tr>
     <tr>
