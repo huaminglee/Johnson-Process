@@ -89,6 +89,14 @@
                     <textarea name="Analysis" class="textInput required" style="width: 688px;" rows="3"></textarea>
                 </td>
             </tr>
+            <tr>
+                <td style="width: 200px" class="labelCol">
+                    让步接收意见<span style="color: Red" >*</span>
+                </td>
+                <td class="textCol">
+                    <textarea name="ReceiveQARemark" class="textInput required" style="width: 688px;" rows="3"></textarea>
+                </td>
+            </tr>
         </table>
 
         <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">跟踪验证<span style="color: Red" >*</span></div></div>

@@ -174,7 +174,7 @@ namespace Johnson.Process.Website
                 form.Approves = new List<TaskApproveInfo>();
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.FailureProductProcess.Start(currentUserName, taskId, form);
+                WebHelper.FailureProductProcess.Start(currentUserName, WebHelper.CurrentUserInfo.UserRealName, taskId, form);
             }
             catch (Exception ex)
             {
@@ -273,8 +273,6 @@ namespace Johnson.Process.Website
                 form.ProduceDeal = model.ProduceDeal;
                 form.ProduceDealNumber = model.ProduceDealNumber;
                 form.QEResult = model.QEResult;
-                form.StorehouseUserAccount = model.StorehouseUserAccount;
-                form.StorehouseUserName = model.StorehouseUserName;
                 form.SupplierDeal = model.SupplierDeal;
                 form.SupplierDealBillNumber = model.SupplierDealBillNumber;
 
@@ -321,8 +319,6 @@ namespace Johnson.Process.Website
                 form.ProduceDeal = model.ProduceDeal;
                 form.ProduceDealNumber = model.ProduceDealNumber;
                 form.QEResult = model.QEResult;
-                form.StorehouseUserAccount = model.StorehouseUserAccount;
-                form.StorehouseUserName = model.StorehouseUserName;
                 form.SupplierDeal = model.SupplierDeal;
                 form.SupplierDealBillNumber = model.SupplierDealBillNumber;
 

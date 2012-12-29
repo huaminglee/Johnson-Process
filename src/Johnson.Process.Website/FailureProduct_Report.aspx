@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConsultationAndQuotationReport.aspx.cs" Inherits="Johnson.Process.Website.ConsultationAndQuotationReport" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FailureProduct_Report.aspx.cs" Inherits="Johnson.Process.Website.FailureProduct_Report" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>技术咨询及报价流程报表</title>
+    <title>不合格品流程报表</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -20,7 +20,7 @@
     <link href="css/default.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div style="width: 230px; margin: auto;"><h2>技术咨询及报价流程报表</h2></div>
+    <div style="width: 200px; margin: auto;"><h2>不合格品流程报表</h2></div>
     <form id="searchForm" runat="server">
     <table class="formInfo">
         <tr>
@@ -28,43 +28,56 @@
                 发起人
             </td>
             <td style="width: 280px" class="textCol">
-                <input  name="applyUserName" type="text" class="textInput txtwidth " />
+                <input  name="startUserName" type="text" class="textInput txtwidth " />
             </td>
             <td style="width: 200px" class="labelCol">
-                申请日期
+                发起日期
             </td>
             <td style="width: 280px" class="textCol dateRange">
-                <input name="applyDateStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
-                <input name="applyTimeEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
+                <input name="startTimeStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
+                <input name="startTimeEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
             </td>
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                To市场部
+                不合格编号
             </td>
             <td style="width: 280px" class="textCol">
-                <input name="marketingEngineer" type="text" class="textInput txtwidth" />
+                <input name="No" type="text" class="textInput txtwidth" />
             </td>
             <td style="width: 200px" class="labelCol">
-                办事处
+                零件号
             </td>
             <td style="width: 280px" class="textCol">
-                <input name="applyUserDepartmentName" type="text" class="textInput txtwidth" />
+                <input name="ComponentCode" type="text" class="textInput txtwidth required" />
             </td>
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                项目名称
+                零件名称
             </td>
             <td style="width: 280px" class="textCol">
-                <input name="projectName" type="text" class="textInput txtwidth" />
+                <input name="ComponentName" type="text" class="textInput txtwidth" />
             </td>
             <td style="width: 200px" class="labelCol">
-                预计签合同日期
+                部件系列号
             </td>
-            <td style="width: 280px" class="textCol dateRange">
-                <input name="expectSignContactDateStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
-                <input name="expectSignContactDateEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
+            <td style="width: 280px" class="textCol">
+                <input name="BJXLH" type="text" class="textInput txtwidth required" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 200px" class="labelCol">
+                机组系列号
+            </td>
+            <td style="width: 280px" class="textCol">
+                <input name="JZXLH" type="text" class="textInput txtwidth" />
+            </td>
+            <td style="width: 200px" class="labelCol">
+                供应商名称
+            </td>
+            <td style="width: 280px" class="textCol">
+                <input name="GYSMC" type="text" class="textInput txtwidth required" />
             </td>
         </tr>
         <tr>
@@ -88,16 +101,19 @@
     </table>
 
     </form>
-    <table id="reportGrid" style="width:1100px;height:auto" title="技术咨询及报价信息">
+    <table id="reportGrid" style="width:1100px;height:auto" title="不合格信息">
 		<thead>
 			<tr>
-				<th field="applyUserName" resizable="false" width="90">发起人</th>
-				<th field="applyTime" resizable="false" width="120">发起时间</th>
-                <th field="marketingEngineer" resizable="false" width="80">To市场部</th>
-                <th field="applyUserDepartmentName" resizable="false" width="150">办事处</th>
-				<th field="projectName" resizable="false" width="100">项目名称</th>
-                <th field="succeedProbability" resizable="false" width="80">成功机会(%)</th>
-                <th field="expectSignContact" resizable="false" width="120">预计签合同日期</th>
+				<th field="startUserName" resizable="false" width="80">发起人</th>
+                <th field="startTime" resizable="false" width="80">发起日期</th>
+				<th field="No" resizable="false" width="100">不合格编号</th>
+                <th field="ComponentCode" resizable="false" width="100">零件号</th>
+                <th field="ComponentName" resizable="false" width="100">零件名称</th>
+                <th field="BJXLH" resizable="false" width="100">部件系列号</th>
+				<th field="JZXLH" resizable="false" width="100">机组系列号</th>
+                <th field="GYSMC" resizable="false" width="100">供应商名称</th>
+                <th field="ZRBM" resizable="false" width="100">责任部门</th>
+                <th field="Quantity" resizable="false" width="80">不合品数量</th>
                 <th field="taskId" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
@@ -107,7 +123,7 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
-        $.get("ConsultationAndQuotationReportController.aspx?action=get", { r: Math.random() }, function (data) {
+        $.get("FailureProduct_ReportController.aspx?action=get", { r: Math.random() }, function (data) {
              $('#reportGrid').datagrid('loadData', data);
         });
 
@@ -117,7 +133,7 @@
             var formValue = $("#searchForm").getFormValue();
             var formJson = $.toJSON(formValue);
 
-            $.post("ConsultationAndQuotationReportController.aspx?action=search", { formJson: formJson }, function (data) {
+            $.post("FailureProduct_ReportController.aspx?action=search", { formJson: formJson }, function (data) {
                 $('#reportGrid').datagrid('loadData', data);
             });
         });
@@ -133,8 +149,8 @@
     })
 
     function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName=" + encodeURIComponent("技术咨询及报价") + "&taskid=" + takId;
-        var detailsLink = "ConsultationAndQuotation_Completed2.aspx?taskId="+takId;
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("不合格处理")+"&taskid=" + takId;
+        var detailsLink = "FailureProduct_Completed.aspx?taskId="+takId;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }
 </script>

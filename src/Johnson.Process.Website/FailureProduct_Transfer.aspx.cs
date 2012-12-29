@@ -20,7 +20,7 @@ namespace Johnson.Process.Website
             {
                 throw new ArgumentNullException("objStepId");
             }
-            string[] stepIds = new string[]{"11", "21", "31", "41", "51", "61", "71", "81", "91", "101"};
+            string[] stepIds = new string[]{"11", "21", "31", "41", "51", "61", "71", "81", "91", "171"};
             List<string> stepIdList = new List<string>();
             stepIdList.AddRange(stepIds);
             if (!stepIdList.Contains(objStepId.ToString()))
@@ -96,7 +96,7 @@ namespace Johnson.Process.Website
                         Response.Redirect("FailureProduct_Rework.aspx?" + Request.QueryString.ToString());
                     }
                     break;
-                case "101":
+                case "171":
 
                     if (taskInfo.Status == 1)
                     {

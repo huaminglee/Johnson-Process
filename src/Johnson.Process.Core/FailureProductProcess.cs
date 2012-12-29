@@ -81,6 +81,11 @@ namespace Johnson.Process.Core
             return this.Get<FailureProductForm>(taskId);
         }
 
+        public List<ProcessForm<FailureProductForm>> Get()
+        {
+            return this.Get<FailureProductForm>();
+        }
+
         public FailureProductForm GetFromThirdDatabase(string id)
         {
             FailureProductForm form = this.GetFromIncoming(id);
@@ -222,9 +227,11 @@ namespace Johnson.Process.Core
             return "";
         }
 
-        public TaskSendResult Start(string startUserAccount, string taskId, FailureProductForm form)
+        public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, FailureProductForm form)
         {
             form.StartUserAccount = startUserAccount;
+            form.StartUserName = startUserName;
+            form.StartTime = DateTime.Now;
             if (string.IsNullOrEmpty(startUserAccount))
             {
                 throw new ArgumentNullException("startUserAccount");
@@ -257,13 +264,6 @@ namespace Johnson.Process.Core
             }
             switch (form.QEResult)
             {
-                case FailureResult.Return:
-                case FailureResult.Scrap:
-                    if (string.IsNullOrEmpty(form.StorehouseUserAccount))
-                    {
-                        throw new ArgumentNullException("form.StorehouseUserAccount");
-                    }
-                    break;
                 case FailureResult.Rework:
                     if (string.IsNullOrEmpty(form.FinUserAccount))
                     {
@@ -279,10 +279,6 @@ namespace Johnson.Process.Core
                     }
                     break;
                 case FailureResult.MRB:
-                    if (string.IsNullOrEmpty(form.StorehouseUserAccount))
-                    {
-                        throw new ArgumentNullException("form.StorehouseUserAccount");
-                    }
                     if (string.IsNullOrEmpty(form.EngUserAccount))
                     {
                         throw new ArgumentNullException("form.EngUserAccount");
@@ -313,7 +309,6 @@ namespace Johnson.Process.Core
                     new Variable{ strVariableName = PARAM_CSD_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.CsdUserAccount)} },
                     new Variable{ strVariableName = PARAM_REWORK_PMC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.PmcUserAccount)} },
                     new Variable{ strVariableName = PARAM_FIN_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.FinUserAccount)} },
-                    new Variable{ strVariableName = PARAM_STO_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.StorehouseUserAccount)} },
                     new Variable{ strVariableName = PARAM_QC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QCUserAccount)} },
                     new Variable{ strVariableName = PARAM_MRB_USERS, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QEUserAccount), this.GetUltimusUserAccount(form.CidUserAccount), this.GetUltimusUserAccount(form.CsdUserAccount),this.GetUltimusUserAccount(form.EngUserAccount)} },
                     new Variable{ strVariableName = PARAM_NEED_MRB, objVariableValue = new object[]{(form.QEResult == FailureResult.MRB).ToString().ToLower()} },

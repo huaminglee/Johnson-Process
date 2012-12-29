@@ -79,8 +79,8 @@
                     制程
                 </td>
                 <td class="textCol">                    
-                    <input name="ProduceDeal" type="radio" value="产品返工/返修单" /><label>产品返工/返修单</label>
-                    <input name="ProduceDeal" type="radio" value="8D报告" /><label>8D报告</label>
+                    <input name="SupplierDeal" type="radio" value="产品返工/返修单" /><label>产品返工/返修单</label>
+                    <input name="SupplierDeal" type="radio" value="8D报告" /><label>8D报告</label>
                     <label>单号</label><input name="ProduceDealNumber" type="text" class="textInput txtwidth " style="width:80px;"/>
                 </td>
             </tr>
@@ -95,6 +95,15 @@
         </table>
         
         <table class="formInfo">
+            <tr>
+                <td class="labelCol" style="width: 200px">
+                    邮件抄送给
+                </td>
+                <td class="textCol userEmailMultiSelect" >
+                    <input type="text" name="emailTo" class="textInput multiemail" style="width: 500px;"/>
+                    <input type="button" value="选择" class="btnCommon" />
+                </td>
+            </tr>
             <tr id="trFIN" style="display: none">
                 <td style="width: 200px" class="labelCol">
                     FIN<span style="color: Red" >*</span>
@@ -103,18 +112,6 @@
                     <div class="singleUserSelect">
                         <input type="text" name="FinUserAccount" class="userAccount"/>
                         <input type="text" name="FinUserName" class="textInput userName"/>
-                        <input type="button" value="选择" class="btnCommon" />
-                    </div>
-                </td>
-            </tr>
-            <tr id="trCQ">
-                <td style="width: 200px" class="labelCol">
-                    仓库<span style="color: Red" >*</span>
-                </td>
-                <td class="textCol">
-                    <div class="singleUserSelect">
-                        <input type="text" name="StorehouseUserAccount" class="userAccount"/>
-                        <input type="text" name="StorehouseUserName" class="textInput userName required"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>
@@ -145,7 +142,7 @@
             </tr>
             <tr id="trCSD" style="display: none">
                 <td style="width: 200px" class="labelCol">
-                    CSD<span style="color: Red" >*</span>
+                    CSD
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
@@ -238,7 +235,7 @@
             var value = $(this).val();
             setUserSelectors(value);
         });
-        
+        $(".userEmailMultiSelect").userEmailMultiSelect();
     })
     $("#btnReturn").button().click(function () {
             var valueObj = $("#qeForm, #remarkForm").getFormValue();
@@ -262,22 +259,25 @@
         switch(value){
             case "1":
             case "4":
-                $("#trCQ").show().find(".userName").addClass("required");
-                $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName").removeClass("required");
+                $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName");
+                $("#trFIN, #trENG, #trCID").removeClass("required");
                 break;
             case "3":
                 $("#trFIN, #trENG, #trCID").show().find(".userName").addClass("required");
-                $("#trCQ, #trCSD").hide().find(".userName").removeClass("required");
+                $("#trCSD").hide().find(".userName");
                 break;
             case "2":
             case "5":
-                $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").hide().find(".userName").removeClass("required");
+                $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName");
+                $("#trFIN, #trENG, #trCID").removeClass("required");
                 break;
             case "6":
-                $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").show().find(".userName").addClass("required");
+                $("#trFIN, #trENG, #trCID, #trCSD").show().find(".userName");
+                $("#trFIN, #trENG, #trCID").addClass("required");
                 break;
             case "7":
-                $("#trFIN, #trCQ, #trENG, #trCID, #trCSD").hide().find(".userName").removeClass("required");
+                $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName");
+                $("#trFIN, #trENG, #trCID").removeClass("required");
                 break;
         }
     }

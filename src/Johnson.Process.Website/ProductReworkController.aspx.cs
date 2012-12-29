@@ -103,7 +103,7 @@ namespace Johnson.Process.Website
                 form.Approves = new List<TaskApproveInfo>();
                 form.Approves.Add(new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.ProductReworkProcess.Start(currentUserName, taskId, form);
+                WebHelper.ProductReworkProcess.Start(currentUserName, WebHelper.CurrentUserInfo.UserRealName, taskId, form);
             }
             catch (Exception ex)
             {

@@ -44,7 +44,7 @@ namespace Johnson.Process.Core
             return "";
         }
 
-        public TaskSendResult Start(string startUserAccount, string taskId, ProductReworkForm form)
+        public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, ProductReworkForm form)
         {
             if (string.IsNullOrEmpty(startUserAccount))
             {
@@ -62,6 +62,9 @@ namespace Johnson.Process.Core
                     new Variable{ strVariableName = PARAM_DEAL_WAY, objVariableValue = new object[]{"Rework"}},
                     new Variable{ strVariableName = PARAM_QC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QCUserAccount)} } 
                 };
+            form.StartUserAccount = startUserAccount;
+            form.StartUserName = startUserName;
+            form.StartTime = DateTime.Now;
             return this.Start(startUserAccount, taskId, variable, "", this.GetSummary(form), form);
         }
 
@@ -122,6 +125,11 @@ namespace Johnson.Process.Core
         public ProductReworkForm Get(string taskId)
         {
             return this.Get<ProductReworkForm>(taskId);
+        }
+
+        public List<ProcessForm<ProductReworkForm>> Get()
+        {
+            return this.Get<ProductReworkForm>();
         }
     }
 }

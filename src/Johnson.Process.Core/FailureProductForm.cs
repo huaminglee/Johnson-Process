@@ -74,6 +74,10 @@ namespace Johnson.Process.Core
     {
         public string StartUserAccount { set; get; }
 
+        public string StartUserName { set; get; }
+
+        public DateTime StartTime { set; get; }
+
         public string StartDepartment { set; get; }
 
         public ProductType ProductType { set; get; }
@@ -97,8 +101,14 @@ namespace Johnson.Process.Core
         /// </summary>
         public string JZXLH { set; get; }
 
+        /// <summary>
+        /// 零件名称
+        /// </summary>
         public string ComponentName { set; get; }
 
+        /// <summary>
+        /// 订单号
+        /// </summary>
         public string OrderCode { set; get; }
 
         /// <summary>
@@ -157,10 +167,6 @@ namespace Johnson.Process.Core
         public string ReceiveQARemark { set; get; }
 
         public string QCValidateResult { set; get; }
-
-        public string StorehouseUserAccount { set; get; }
-
-        public string StorehouseUserName { set; get; }
 
         public string CidUserAccount { set; get; }
 

@@ -21,10 +21,6 @@ namespace Johnson.Process.Website.Models
 
         public string Analysis { set; get; }
 
-        public string StorehouseUserAccount { set; get; }
-
-        public string StorehouseUserName { set; get; }
-
         public string CidUserAccount { set; get; }
 
         public string CidUserName { set; get; }

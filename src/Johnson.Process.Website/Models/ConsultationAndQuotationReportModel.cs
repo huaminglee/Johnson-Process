@@ -26,10 +26,10 @@ namespace Johnson.Process.Website.Models
 #if DEBUG
             this.taskStatus = 1;
 #else
-            Task task = WebHelper.VocProcess.GetStartTask(processForm.IncidentNo);
+            Task task = WebHelper.ConsultationAndQuotationProcess.GetStartTask(processForm.IncidentNo);
             this.taskId = task.strTaskId;
             this.incidentNo = task.nIncidentNo;
-            this.taskStatus = WebHelper.VocProcess.GetIncidentStatus(task.nIncidentNo);
+            this.taskStatus = WebHelper.ConsultationAndQuotationProcess.GetIncidentStatus(task.nIncidentNo);
 #endif
         }
         public string applyUserName;

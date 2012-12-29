@@ -264,7 +264,7 @@ namespace Johnson.Process.Core
         public List<ProcessForm<T>> Get<T>()
         {
             List<ProcessForm<T>> list = new List<ProcessForm<T>>();
-            string sql = string.Format("select * from gz_johnson_process_form where processName = '{0}' order by id desc", this.Name);
+            string sql = string.Format("select * from gz_johnson_process_form where processType = '{0}' order by id desc", typeof(T).ToString());
             using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
             {
                 SqlDataReader reader = SqlHelper.ExecuteReader(conn, sql, System.Data.CommandType.Text, null);

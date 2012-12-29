@@ -164,7 +164,7 @@
     })
 
     function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName=VOC&taskid=" + takId;
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("货期管理")+"&taskid=" + takId;
         var detailsLink = "Delivery_Completed.aspx?taskId="+takId;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }

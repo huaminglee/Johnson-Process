@@ -42,6 +42,11 @@ namespace Johnson.Process.Core
         public ProductReworkForm()
         {
         }
+        public string StartUserAccount { set; get; }
+
+        public string StartUserName { set; get; }
+
+        public DateTime StartTime { set; get; }
 
         public ProductType ProductType { set; get; }
 

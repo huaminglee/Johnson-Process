@@ -85,6 +85,7 @@
     <Content Include="ConsultationAndQuotationReportController.aspx" />
     <Content Include="ConsultationAndQuotation_CID.aspx" />
     <Content Include="ConsultationAndQuotation_Completed.aspx" />
+    <Content Include="ConsultationAndQuotation_Completed2.aspx" />
     <Content Include="ConsultationAndQuotation_CSD.aspx" />
     <Content Include="ConsultationAndQuotation_CsdTrace.aspx" />
     <Content Include="ConsultationAndQuotation_CsdTrace2.aspx" />
@@ -120,6 +121,8 @@
     <Content Include="FailureProduct_QAOnReceive.aspx" />
     <Content Include="FailureProduct_QC.aspx" />
     <Content Include="FailureProduct_QE.aspx" />
+    <Content Include="FailureProduct_Report.aspx" />
+    <Content Include="FailureProduct_ReportController.aspx" />
     <Content Include="FailureProduct_Rework.aspx" />
     <Content Include="FailureProduct_Start.aspx" />
     <Content Include="FailureProduct_StarterQueren.aspx" />
@@ -388,6 +391,8 @@
     <Content Include="ProductRework_QC.aspx" />
     <Content Include="ProductRework_QC2.aspx" />
     <Content Include="ProductRework_QE.aspx" />
+    <Content Include="ProductRework_Report.aspx" />
+    <Content Include="ProductRework_ReportController.aspx" />
     <Content Include="ProductRework_Start.aspx" />
     <Content Include="ProductRework_Transfer.aspx" />
     <Content Include="Template\ConsultationAndQuotationToCsdMailTemplate.htm" />
@@ -474,6 +479,13 @@
     </Compile>
     <Compile Include="ConsultationAndQuotation_Completed.aspx.designer.cs">
       <DependentUpon>ConsultationAndQuotation_Completed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultationAndQuotation_Completed2.aspx.cs">
+      <DependentUpon>ConsultationAndQuotation_Completed2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultationAndQuotation_Completed2.aspx.designer.cs">
+      <DependentUpon>ConsultationAndQuotation_Completed2.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConsultationAndQuotation_CSD.aspx.cs">
       <DependentUpon>ConsultationAndQuotation_CSD.aspx</DependentUpon>
@@ -713,6 +725,20 @@
     <Compile Include="FailureProduct_QE.aspx.designer.cs">
       <DependentUpon>FailureProduct_QE.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FailureProduct_Report.aspx.cs">
+      <DependentUpon>FailureProduct_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FailureProduct_Report.aspx.designer.cs">
+      <DependentUpon>FailureProduct_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FailureProduct_ReportController.aspx.cs">
+      <DependentUpon>FailureProduct_ReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FailureProduct_ReportController.aspx.designer.cs">
+      <DependentUpon>FailureProduct_ReportController.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FailureProduct_Rework.aspx.cs">
       <DependentUpon>FailureProduct_Rework.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -770,6 +796,8 @@
     <Compile Include="Models\DeliveryModel.cs" />
     <Compile Include="Models\DeliveryReportModel.cs" />
     <Compile Include="Models\DeliveryReportSearchModel.cs" />
+    <Compile Include="Models\FailureProductReportModel.cs" />
+    <Compile Include="Models\FailureProductReportSearchModel.cs" />
     <Compile Include="Models\OrderPingEngFuZeRenSubmitModel.cs" />
     <Compile Include="Models\FailureProductMrbModel.cs" />
     <Compile Include="Models\FailureProductQAModel.cs" />
@@ -784,6 +812,7 @@
     <Compile Include="Models\ProductReworkModel.cs" />
     <Compile Include="Models\ProductReworkQC2Model.cs" />
     <Compile Include="Models\ProductReworkQcModel.cs" />
+    <Compile Include="Models\ProductReworkReportSearchModel.cs" />
     <Compile Include="Models\QadSubmitModel.cs" />
     <Compile Include="Models\RemarkModel.cs" />
     <Compile Include="Models\SheJiTiJiaoSubmitModel.cs" />
@@ -975,6 +1004,7 @@
     <Compile Include="ProductReworkController.aspx.designer.cs">
       <DependentUpon>ProductReworkController.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductReworkReportModel.cs" />
     <Compile Include="ProductRework_CID.aspx.cs">
       <DependentUpon>ProductRework_CID.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1030,6 +1060,20 @@
     </Compile>
     <Compile Include="ProductRework_QE.aspx.designer.cs">
       <DependentUpon>ProductRework_QE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductRework_Report.aspx.cs">
+      <DependentUpon>ProductRework_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductRework_Report.aspx.designer.cs">
+      <DependentUpon>ProductRework_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductRework_ReportController.aspx.cs">
+      <DependentUpon>ProductRework_ReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductRework_ReportController.aspx.designer.cs">
+      <DependentUpon>ProductRework_ReportController.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductRework_Start.aspx.cs">
       <DependentUpon>ProductRework_Start.aspx</DependentUpon>

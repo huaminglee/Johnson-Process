@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using Johnson.Process.Core;
+using Ultimus.WFServer;
+
+namespace Johnson.Process.Website.Models
+{
+    public class ProductReworkReportModel
+    {
+        public ProductReworkReportModel()
+        {
+
+        }
+
+        public ProductReworkReportModel(ProcessForm<ProductReworkForm> processForm)
+        {
+            ProductReworkForm form = processForm.Form;
+            this.startUserName = form.StartUserName;
+            this.startTime = form.StartTime.ToString("yyyy-MM-dd");
+            this.FailureNo = form.FailureNo;
+            this.ProductType = this.Map(form.ProductType);
+            this.XLH = form.XLH;
+            this.Name = form.Name;
+            this.SapNo = form.SapNo;
+            this.Quantity = form.Quantity;
+            this.OrderNumber = form.OrderNumber;
+            this.StartDepartment = form.StartDepartment;
+#if DEBUG
+            this.taskStatus = 1;
+#else
+            Task task = WebHelper.ProductReworkProcess.GetStartTask(processForm.IncidentNo);
+            this.taskId = task.strTaskId;
+            this.incidentNo = task.nIncidentNo;
+            this.taskStatus = WebHelper.ProductReworkProcess.GetIncidentStatus(task.nIncidentNo);
+#endif
+        }
+
+        private string Map(ProductType productType)
+        {
+            if (productType == Core.ProductType.CP)
+            {
+                return "产品";
+            }
+            else if (productType == Core.ProductType.LJ)
+            {
+                return "零部件";
+            }
+            return "";
+        }
+
+        public string startUserName;
+        public string startTime;
+        public string FailureNo;
+        public string ProductType;
+        public string XLH;
+        public string Name;
+        public string SapNo;
+        public string Quantity;
+        public string OrderNumber;
+        public string StartDepartment;
+        public string taskId;
+        public int taskStatus;
+        public int incidentNo;
+    }
+}
