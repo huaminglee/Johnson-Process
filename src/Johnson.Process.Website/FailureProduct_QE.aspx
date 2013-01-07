@@ -106,7 +106,7 @@
             </tr>
             <tr id="trFIN" style="display: none">
                 <td style="width: 200px" class="labelCol">
-                    FIN<span style="color: Red" >*</span>
+                    FIN
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
@@ -118,7 +118,7 @@
             </tr>
             <tr id="trENG" style="display: none">
                 <td style="width: 200px" class="labelCol">
-                    ENG<span style="color: Red" >*</span>
+                    ENG
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
@@ -130,7 +130,7 @@
             </tr>
             <tr id="trCID" style="display: none">
                 <td style="width: 200px" class="labelCol">
-                    CID<span style="color: Red" >*</span>
+                    CID
                 </td>
                 <td class="textCol">
                     <div class="singleUserSelect">
@@ -208,7 +208,10 @@
             }
 
             var valueObj = $("#qeForm, #remarkForm").getFormValue();
-            
+            if(valueObj.QEResult == 6 && !valueObj.FinUserAccount && !valueObj.CidUserAccount && !valueObj.CsdUserAccount && !valueObj.EngUserAccount){
+                alert("请选择MRB成员!");
+                return;
+            }
             var objJson = $.toJSON(valueObj);
             if (!confirm("您确实要提交吗？")) {
                 return;
@@ -260,7 +263,7 @@
             case "1":
             case "4":
                 $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName");
-                $("#trFIN, #trENG, #trCID").removeClass("required");
+                $("#trFIN, #trENG, #trCID").find(".userName").removeClass("required");
                 break;
             case "3":
                 $("#trFIN, #trENG, #trCID").show().find(".userName").addClass("required");
@@ -269,15 +272,15 @@
             case "2":
             case "5":
                 $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName");
-                $("#trFIN, #trENG, #trCID").removeClass("required");
+                $("#trFIN, #trENG, #trCID").find(".userName").removeClass("required");
                 break;
             case "6":
                 $("#trFIN, #trENG, #trCID, #trCSD").show().find(".userName");
-                $("#trFIN, #trENG, #trCID").addClass("required");
+                $("#trFIN, #trENG, #trCID").find(".userName").removeClass("required");
                 break;
             case "7":
                 $("#trFIN, #trENG, #trCID, #trCSD").hide().find(".userName");
-                $("#trFIN, #trENG, #trCID").removeClass("required");
+                $("#trFIN, #trENG, #trCID").find(".userName").removeClass("required");
                 break;
         }
     }

@@ -33,6 +33,12 @@ namespace Johnson.Process.Core
         /// </summary>
         private const string PARAM_CID_USER = "cidUser";
 
+        private const string PARAM_HAS_CID_USER = "hasCidUser";
+
+        private const string PARAM_HAS_ENG_USER = "hasEngUser";
+
+        private const string PARAM_HAS_FIN_USER = "hasFinUser";
+
         public ProductReworkProcess(string processName)
             :base(processName)
         {
@@ -60,7 +66,10 @@ namespace Johnson.Process.Core
             }
             Variable[] variable = new Variable[]{
                     new Variable{ strVariableName = PARAM_DEAL_WAY, objVariableValue = new object[]{"Rework"}},
-                    new Variable{ strVariableName = PARAM_QC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QCUserAccount)} } 
+                    new Variable{ strVariableName = PARAM_QC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QCUserAccount)}} ,
+                    new Variable{ strVariableName = PARAM_HAS_CID_USER, objVariableValue = new object[]{"true"} },
+                    new Variable{ strVariableName = PARAM_HAS_ENG_USER, objVariableValue = new object[]{"true"} },
+                    new Variable{ strVariableName = PARAM_HAS_FIN_USER, objVariableValue = new object[]{"true"} }
                 };
             form.StartUserAccount = startUserAccount;
             form.StartUserName = startUserName;

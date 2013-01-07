@@ -542,9 +542,7 @@ namespace Johnson.ProcessTest
             form.EngUserAccount = qiAccount;
             form.CidUserAccount = qiAccount;
             form.CsdUserAccount = qiAccount;
-            
             form.FinUserAccount = qiAccount;
-            
             form.QCUserAccount = qiAccount;
             form.QEResult = FailureResult.MRB;
             process.QESend(taskId, form, null);
@@ -595,6 +593,306 @@ namespace Johnson.ProcessTest
             Thread.Sleep(2000);
 
             //FIN确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+        }
+
+        /// <summary>
+        /// 返工返修，没有ENG
+        /// </summary>
+        [Test]
+        public void Test10_1()
+        {
+            string processName = "不合格品处理";
+            FailureProductForm form = new FailureProductForm { };
+
+            FailureProductProcess process = new FailureProductProcess(processName, "");
+            string qiAccount = "qi";
+            string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
+
+            //发起流程
+            string taskId = this.GetProcessStartTaskId(processName, qiUltimusAccount);
+            form.PmcUserAccount = qiAccount;
+            form.QEUserAccount = qiAccount;
+            TaskSendResult result = process.Start(qiAccount, "", taskId, form);
+            Assert.IsTrue(result.IncidentNo > 0);
+            Thread.Sleep(2000);
+
+            //PMC
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.CidUserAccount = qiAccount;
+            form.CsdUserAccount = qiAccount;
+            form.FinUserAccount = qiAccount;
+            form.QCUserAccount = qiAccount;
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
+
+            //MRB
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults = new List<MrbFailureResult>();
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+
+            //填写返工返修单
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //工艺方案
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //PMC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //FIN确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+        }
+        /// <summary>
+        /// 返工返修，没有Cid
+        /// </summary>
+        [Test]
+        public void Test10_2()
+        {
+            string processName = "不合格品处理";
+            FailureProductForm form = new FailureProductForm { };
+
+            FailureProductProcess process = new FailureProductProcess(processName, "");
+            string qiAccount = "qi";
+            string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
+
+            //发起流程
+            string taskId = this.GetProcessStartTaskId(processName, qiUltimusAccount);
+            form.PmcUserAccount = qiAccount;
+            form.QEUserAccount = qiAccount;
+            TaskSendResult result = process.Start(qiAccount, "", taskId, form);
+            Assert.IsTrue(result.IncidentNo > 0);
+            Thread.Sleep(2000);
+
+            //PMC
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.EngUserAccount = qiAccount;
+            form.CsdUserAccount = qiAccount;
+            form.FinUserAccount = qiAccount;
+
+            form.QCUserAccount = qiAccount;
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
+
+            //MRB
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults = new List<MrbFailureResult>();
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+
+            //填写返工返修单
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //Eng
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //PMC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //FIN确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+        }
+        /// <summary>
+        /// 返工返修，没有Cid,Eng
+        /// </summary>
+        [Test]
+        public void Test10_3()
+        {
+            string processName = "不合格品处理";
+            FailureProductForm form = new FailureProductForm { };
+
+            FailureProductProcess process = new FailureProductProcess(processName, "");
+            string qiAccount = "qi";
+            string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
+
+            //发起流程
+            string taskId = this.GetProcessStartTaskId(processName, qiUltimusAccount);
+            form.PmcUserAccount = qiAccount;
+            form.QEUserAccount = qiAccount;
+            TaskSendResult result = process.Start(qiAccount, "", taskId, form);
+            Assert.IsTrue(result.IncidentNo > 0);
+            Thread.Sleep(2000);
+
+            //PMC
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.CsdUserAccount = qiAccount;
+            form.FinUserAccount = qiAccount;
+            form.QCUserAccount = qiAccount;
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
+
+            //MRB
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults = new List<MrbFailureResult>();
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+
+            //填写返工返修单
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //PMC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //FIN确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QC确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+        }
+        /// <summary>
+        /// 返工返修，没有Fin
+        /// </summary>
+        [Test]
+        public void Test10_4()
+        {
+            string processName = "不合格品处理";
+            FailureProductForm form = new FailureProductForm { };
+
+            FailureProductProcess process = new FailureProductProcess(processName, "");
+            string qiAccount = "qi";
+            string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
+
+            //发起流程
+            string taskId = this.GetProcessStartTaskId(processName, qiUltimusAccount);
+            form.PmcUserAccount = qiAccount;
+            form.QEUserAccount = qiAccount;
+            TaskSendResult result = process.Start(qiAccount, "", taskId, form);
+            Assert.IsTrue(result.IncidentNo > 0);
+            Thread.Sleep(2000);
+
+            //PMC
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.CsdUserAccount = qiAccount;
+            form.QCUserAccount = qiAccount;
+            form.QEResult = FailureResult.MRB;
+            process.QESend(taskId, form, null);
+            Thread.Sleep(2000);
+
+            //MRB
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults = new List<MrbFailureResult>();
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            form.MrbResults.Add(new MrbFailureResult { Result = FailureResult.Rework });
+            process.MrbSend(taskId, form);
+            Thread.Sleep(2000);
+
+            //填写返工返修单
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //QE确认
+            taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
+            process.Send(taskId, form);
+            Thread.Sleep(2000);
+
+            //PMC确认
             taskId = this.GetIncidentTaskId(processName, qiUltimusAccount, result.IncidentNo);
             process.Send(taskId, form);
             Thread.Sleep(2000);

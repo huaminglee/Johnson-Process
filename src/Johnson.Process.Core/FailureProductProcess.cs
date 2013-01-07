@@ -74,6 +74,12 @@ namespace Johnson.Process.Core
         /// </summary>
         private const string PARAM_STO_USER = "stoUser";
 
+        private const string PARAM_HAS_CID_USER = "hasCidUser";
+
+        private const string PARAM_HAS_ENG_USER = "hasEngUser";
+
+        private const string PARAM_HAS_FIN_USER = "hasFinUser";
+
         public ProductReworkProcess ProductReworkProcess { private set; get; }
 
         public FailureProductForm Get(string taskId)
@@ -262,6 +268,12 @@ namespace Johnson.Process.Core
             {
                 throw new ArgumentNullException("form");
             }
+            
+            FailureResult result = FailureResult.None;
+            if (form.QEResult != FailureResult.MRB)
+            {
+                result = form.QEResult;
+            }
             switch (form.QEResult)
             {
                 case FailureResult.Rework:
@@ -279,30 +291,18 @@ namespace Johnson.Process.Core
                     }
                     break;
                 case FailureResult.MRB:
-                    if (string.IsNullOrEmpty(form.EngUserAccount))
+                    if (string.IsNullOrEmpty(form.EngUserAccount) && string.IsNullOrEmpty(form.CidUserAccount)
+                        && string.IsNullOrEmpty(form.CsdUserAccount) && string.IsNullOrEmpty(form.FinUserAccount))
                     {
-                        throw new ArgumentNullException("form.EngUserAccount");
-                    }
-                    if (string.IsNullOrEmpty(form.CidUserAccount))
-                    {
-                        throw new ArgumentNullException("form.CidUserAccount");
-                    }
-                    if (string.IsNullOrEmpty(form.CsdUserAccount))
-                    {
-                        throw new ArgumentNullException("form.CsdUserAccount");
-                    }
-                    if (string.IsNullOrEmpty(form.FinUserAccount))
-                    {
-                        throw new ArgumentNullException("form.FinUserAccount");
+                        throw new ArgumentException("没有mrb成员");
                     }
                     break;
             }
-            
-            FailureResult result = FailureResult.None;
-            if (form.QEResult != FailureResult.MRB)
-            {
-                result = form.QEResult;
-            }
+
+            string hasCidUser = string.IsNullOrEmpty(form.CidUserAccount) ? "false" : "true";
+            string hasEngUser = string.IsNullOrEmpty(form.EngUserAccount) ? "false" : "true";
+            string hasFinUser = string.IsNullOrEmpty(form.FinUserAccount) ? "false" : "true";
+
             Variable[] variable = new Variable[]{
                     new Variable{ strVariableName = PARAM_ENG_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.EngUserAccount)} },
                     new Variable{ strVariableName = PARAM_CID_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.CidUserAccount)} },
@@ -312,7 +312,10 @@ namespace Johnson.Process.Core
                     new Variable{ strVariableName = PARAM_QC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QCUserAccount)} },
                     new Variable{ strVariableName = PARAM_MRB_USERS, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QEUserAccount), this.GetUltimusUserAccount(form.CidUserAccount), this.GetUltimusUserAccount(form.CsdUserAccount),this.GetUltimusUserAccount(form.EngUserAccount)} },
                     new Variable{ strVariableName = PARAM_NEED_MRB, objVariableValue = new object[]{(form.QEResult == FailureResult.MRB).ToString().ToLower()} },
-                    new Variable{ strVariableName = PARAM_RESULT, objVariableValue = new object[]{result} }
+                    new Variable{ strVariableName = PARAM_RESULT, objVariableValue = new object[]{result} },
+                    new Variable{ strVariableName = PARAM_HAS_CID_USER, objVariableValue = new object[]{hasCidUser} },
+                    new Variable{ strVariableName = PARAM_HAS_ENG_USER, objVariableValue = new object[]{hasEngUser} },
+                    new Variable{ strVariableName = PARAM_HAS_FIN_USER, objVariableValue = new object[]{hasFinUser} }
                 };
             this.Send(taskId, variable, "", this.GetSummary(form), form);
             if (!string.IsNullOrEmpty(emailTo))
@@ -344,7 +347,7 @@ namespace Johnson.Process.Core
                     .Replace("${Level}", form.Level)
                     .Replace("${QEResult}", this.Map(form.QEResult))
                     .Replace("${Analysis}", form.Analysis);
-                ProcessEmailDataProvider.Current.Insert(emailTo, "不合品流程处理-判断结果", content);
+                ProcessEmailDataProvider.Current.Insert(emailTo, "不合品流程处理判断结果", content);
             }
         }
 
