@@ -25,8 +25,15 @@ namespace Johnson.Process.Website
             stepIdList.AddRange(stepIds);
             if (!stepIdList.Contains(objStepId.ToString()))
             {
-                //object dealWay = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "dealWay");
                 Response.Redirect("ProductRework_Transfer.aspx?" + Request.QueryString.ToString());
+            }
+            if (objStepId.ToString() == "11")
+            {
+                object dealWay = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "dealWay");
+                if (dealWay != null && dealWay.ToString().Equals("Rework", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Response.Redirect("ProductRework_Transfer.aspx?" + Request.QueryString.ToString());
+                }
             }
 
             switch (objStepId.ToString())

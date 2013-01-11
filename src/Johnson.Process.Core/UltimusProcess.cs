@@ -113,7 +113,7 @@ namespace Johnson.Process.Core
 #endif
 
             string json = JsonConvert.SerializeObject(taskForm);
-            Update(incidentNo, this.Name, json);
+            Update(incidentNo, this.Name, json, taskForm.ToString());
             TaskSendResult result = new TaskSendResult();
             result.IncidentNo = incidentNo;
             return result;
@@ -146,7 +146,7 @@ namespace Johnson.Process.Core
             incidentNo = task.nIncidentNo;
 #endif
             string json = JsonConvert.SerializeObject(taskForm);
-            Update(incidentNo, this.Name, json);
+            Update(incidentNo, this.Name, json, taskForm.ToString());
         }
 
         public TaskInfo GetTaskInfo(string taskId)
@@ -247,8 +247,8 @@ namespace Johnson.Process.Core
         public T Get<T>(int incidentNo)
         {
             string processFormJson = "";
-            string sql = string.Format("select processForm from gz_johnson_process_form where incident = {0} and processName = '{1}'",
-                incidentNo, this.Name);
+            string sql = string.Format("select processForm from gz_johnson_process_form where incident = {0} and processName = '{1}' and processType = '{2}'",
+                incidentNo, this.Name, typeof(T).FullName);
             using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
             {
                 object obj = SqlHelper.ExecuteScalar(conn, sql, System.Data.CommandType.Text, null);
@@ -264,7 +264,7 @@ namespace Johnson.Process.Core
         public List<ProcessForm<T>> Get<T>()
         {
             List<ProcessForm<T>> list = new List<ProcessForm<T>>();
-            string sql = string.Format("select * from gz_johnson_process_form where processName = '{0}' order by id desc", this.Name);
+            string sql = string.Format("select * from gz_johnson_process_form where processName = '{0}' and processType = '{1}' order by id desc", this.Name, typeof(T).FullName);
             using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
             {
                 SqlDataReader reader = SqlHelper.ExecuteReader(conn, sql, System.Data.CommandType.Text, null);
@@ -309,10 +309,10 @@ namespace Johnson.Process.Core
             }
         }
 
-        private void Update(int incident, string processName, string json)
+        private void Update(int incident, string processName, string json, string processType)
         {
-            string sql = string.Format("update gz_johnson_process_form  set  processForm = '{0}' where Incident = {1} and processName = '{2}'",
-                json, incident, processName);
+            string sql = string.Format("update gz_johnson_process_form  set  processForm = '{0}' where Incident = {1} and processName = '{2}' and processType = '{3}'",
+                json, incident, processName, processType);
             using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
             {
                 SqlHelper.ExecuteNonQuery(conn, sql, System.Data.CommandType.Text, null);
