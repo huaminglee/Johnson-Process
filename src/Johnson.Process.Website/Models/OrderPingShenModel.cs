@@ -21,7 +21,7 @@ namespace Johnson.Process.Website.Models
             this.chanPinLeiXing = form.ChanPinLeiXing;
             this.isStandard = form.IsStandard;
             this.JDSNO = form.JDSNO;
-            this.jiaoHuoRiQi = form.JiaoHuoRiQi;
+            this.jiaoHuoRiQi = form.JiaoHuoRiQi.ToString("yyyy-MM-dd");
             this.jiShuYaoQiu = form.JiShuYaoQiu;
             this.level = form.Level;
             this.pmcEngineerAccount = form.PmcEngineerAccount;
@@ -69,7 +69,9 @@ namespace Johnson.Process.Website.Models
             {
                 this.jiZuWanGongRiQi = form.JiZuWanGongRiQi.Value.ToString("yyyy-MM-dd");
             }
+            this.fafangWancheng = form.FafangWancheng.ToString().ToLower();
             this.files = form.Files;
+            this.items = form.Items;
             this.approves = form.Approves;
             this.hasXinWuLiao = form.HasXinWuLiao;
             this.jianChaEngineerAccount = form.JianChaEngineerAccount;
@@ -77,10 +79,17 @@ namespace Johnson.Process.Website.Models
             this.zhuGuanAccount = form.ZhuGuanAccount;
             this.zhuGuanName = form.ZhuGuanName;
             this.sheJiShuoMing = form.SheJiShuoMing;
-            this.ziLiaoWanZhengDu = form.ZiLiaoWanZhengDu;
             this.sheJiZiLiao = form.SheJiZiLiao;
             this.cidZiLiao = form.CidZiLiao;
             this.qadZiLiao = form.QadZiLiao; 
+            if(form.WenjianFafangForms != null)
+            {
+                this.wanjianFafangList = new List<OrderWenjianFafangReportModel>();
+                foreach (OrderWenjianFafangForm wenjianFafangForm in form.WenjianFafangForms)
+                {
+                    this.wanjianFafangList.Add(new OrderWenjianFafangReportModel(wenjianFafangForm));
+                }
+            }
         }
 
         public string startUserName;
@@ -120,6 +129,7 @@ namespace Johnson.Process.Website.Models
         public string zhengJiWanChengRiQi;
 
         public List<ProcessFile> files;
+        public List<OrderPingshenItemInfo> items;
 
         public bool hasXinWuLiao;
         public string jianChaEngineerAccount;
@@ -127,11 +137,12 @@ namespace Johnson.Process.Website.Models
         public string zhuGuanAccount;
         public string zhuGuanName;
         public string sheJiShuoMing;
-        public string ziLiaoWanZhengDu;
+        public string fafangWancheng;
         public List<ProcessFile> sheJiZiLiao;
         public List<ProcessFile> cidZiLiao;
         public List<ProcessFile> qadZiLiao;
 
+        public List<OrderWenjianFafangReportModel> wanjianFafangList { set; get; }
         public List<TaskApproveInfo> approves;
     }
 }

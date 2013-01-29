@@ -33,7 +33,18 @@ namespace Johnson.Process.EMail
             try
             {
                 recipientsAddress = recipientsAddress.Replace(";", ",");
-
+                recipientsAddress = recipientsAddress.Replace("；", ",");
+                recipientsAddress = recipientsAddress.Replace("，", ",");
+                string[] addresses = recipientsAddress.Split(',');
+                recipientsAddress = "";
+                foreach (string address in addresses)
+                {
+                    if (!string.IsNullOrEmpty(address) && !string.IsNullOrEmpty(address.Trim()))
+                    {
+                        recipientsAddress += address + ",";
+                    }
+                }
+                recipientsAddress = recipientsAddress.TrimEnd(',');
 #if DEBUG
                 EDoc2.Mail.CommonMailSender mailSender = new EDoc2.Mail.CommonMailSender(1);
                 mailSender.Server = "smtp.vip.163.com";

@@ -5,7 +5,7 @@ using Ultimus.WFServer;
 
 namespace Johnson.Process.Core
 {
-    public class VocProcess : UltimusProcess
+    public class VocProcess : UltimusFormProcess<VocForm>
     {
         private const string PARAM_RESPONSIBLE_USER = "responsibleUser";
         private const string PARAM_RESPONSIBLE_USER_PREVIOUS = "responsibleUserPrevious";
@@ -22,21 +22,6 @@ namespace Johnson.Process.Core
         private string GetSummary(VocForm form)
         {
             return string.Format("项目:{0},型号:{1},故障:{2}", form.ProjectName, form.MachineModel, form.FaultCategory);
-        }
-
-        public VocForm Get(string taskId)
-        {
-            return this.Get<VocForm>(taskId);
-        }
-
-        public VocForm Get(int incidentNo)
-        {
-            return this.Get<VocForm>(incidentNo);
-        }
-
-        public List<ProcessForm<VocForm>> Get()
-        {
-            return this.Get<VocForm>();
         }
 
         public TaskSendResult Start(string startUserAccount, string taskId, VocForm form)

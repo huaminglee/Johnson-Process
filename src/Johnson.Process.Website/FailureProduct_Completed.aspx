@@ -143,6 +143,7 @@
     $(function () {
         $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
+            $("#basicInfoForm input[name='QEResult']:checked + label").after().css("color", "red");
             if(data.MrbResults){
                 $("#mrbMemberResults").show();
                 $("#mrbMemberResults").datagrid("loadData", data.MrbResults);

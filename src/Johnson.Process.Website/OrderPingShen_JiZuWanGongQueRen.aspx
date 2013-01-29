@@ -54,9 +54,10 @@
                     资料完整性
                 </td>
                 <td colspan="3" class="textCol">
-                    <select name="ziLiaoWanZhengDu">
-                        <option>全部完成</option>
-                        <option>部分完成</option>
+                    <select name="fafangWancheng" class="required">
+                        <option></option>
+                        <option value="true">全部完成</option>
+                        <option value="false">部分完成</option>
                     </select>
                 </td>
             </tr>
@@ -116,6 +117,9 @@
             if(data.files){
                 $("#attachments").datagrid('loadData', data.files);
             }
+            if(data.items){
+                $("#items").datagrid('loadData', data.items);
+            }
             if(data.sheJiZiLiao){
                 $("#sheJiZiLiao").datagrid('loadData', data.sheJiZiLiao);
             }
@@ -139,7 +143,7 @@
                 }
             });
         });
-        $("#attachments, #remarks, #sheJiZiLiao").datagrid();
+        $("#attachments, #remarks, #sheJiZiLiao, #items").datagrid();
     })
 </script>
 

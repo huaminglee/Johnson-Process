@@ -5,7 +5,7 @@ using Ultimus.WFServer;
 
 namespace Johnson.Process.Core
 {
-    public class ProductReworkProcess : UltimusProcess
+    public class ProductReworkProcess : UltimusFormProcess<ProductReworkForm>
     {
         private const string PARAM_DEAL_WAY = "dealWay";
         /// <summary>
@@ -129,16 +129,6 @@ namespace Johnson.Process.Core
                 throw new ArgumentNullException("form");
             }
             this.Send(taskId, null, "", this.GetSummary(form), form);
-        }
-
-        public ProductReworkForm Get(string taskId)
-        {
-            return this.Get<ProductReworkForm>(taskId);
-        }
-
-        public List<ProcessForm<ProductReworkForm>> Get()
-        {
-            return this.Get<ProductReworkForm>();
         }
     }
 }

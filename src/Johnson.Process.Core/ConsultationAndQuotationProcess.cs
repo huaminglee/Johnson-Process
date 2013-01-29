@@ -5,7 +5,7 @@ using Ultimus.WFServer;
 
 namespace Johnson.Process.Core
 {
-    public class ConsultationAndQuotationProcess : UltimusProcess
+    public class ConsultationAndQuotationProcess : UltimusFormProcess<ConsultationAndQuotationForm>
     {
 
         /// <summary>
@@ -97,16 +97,6 @@ namespace Johnson.Process.Core
         {
             this._toCsdEmailContentTemplate = toCsdEmailContentTemplate;
             this._tracerMailTemplate = tracerMailTemplate;
-        }
-
-        public ConsultationAndQuotationForm Get(string taskId)
-        {
-            return this.Get<ConsultationAndQuotationForm>(taskId);
-        }
-
-        public List<ProcessForm<ConsultationAndQuotationForm>> Get()
-        {
-            return this.Get<ConsultationAndQuotationForm>();
         }
 
         private string GetSummary(ConsultationAndQuotationForm form)

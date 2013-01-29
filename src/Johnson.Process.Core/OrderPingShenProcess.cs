@@ -5,13 +5,8 @@ using Ultimus.WFServer;
 
 namespace Johnson.Process.Core
 {
-    public class OrderPingShenProcess : UltimusProcess
+    public class OrderPingShenProcess : UltimusFormProcess<OrderPingShenForm>
     {
-        public OrderPingShenProcess(string processName)
-            :base(processName)
-        {
-            
-        }
 
         private const string PARAM_NEED_DEPT_PINGSHEN = "是否需要组织审批";
         private const string PARAM_DIANQI_ENGINEER = "电气工程师";
@@ -31,10 +26,12 @@ namespace Johnson.Process.Core
         private const string PARAM_PMC_ENGINEER = "PMC工程师";
         private const string PARAM_SCM_ENGINEER = "SCM工程师";
         private const string PARAM_SHEJI_ENGINEER_ZHUGUAN = "设计工程师主管";
+        private const string PARAM_SYSTEM_USER = "流程系统用户";
 
-        public OrderPingShenForm Get(string taskId)
+        public OrderPingShenProcess(string processName)
+            :base(processName)
         {
-            return this.Get<OrderPingShenForm>(taskId);
+            
         }
 
         private string GetSummary(OrderPingShenForm form)
@@ -76,9 +73,11 @@ namespace Johnson.Process.Core
                 new Variable{ strVariableName = PARAM_QAD_QUEREN_REN, objVariableValue = this.GetUltimusUserAccounts(startInfo.QadPingShenRenAccounts) },
                 new Variable{ strVariableName = PARAM_IS_STANDARD_ORDER, objVariableValue = new object[]{startInfo.IsStandard ? "是" : "否"} },
                 new Variable{ strVariableName = PARAM_PMC_ENGINEER, objVariableValue = new object[]{this.GetUltimusUserAccount(startInfo.PmcEngineerAccount) }},
-                new Variable{ strVariableName = PARAM_SHEJI_FUZEREN, objVariableValue = new object[]{this.GetUltimusUserAccount(startInfo.SheJiFuZeRenAccount) }}
+                new Variable{ strVariableName = PARAM_SHEJI_FUZEREN, objVariableValue = new object[]{this.GetUltimusUserAccount(startInfo.SheJiFuZeRenAccount) }},
+                new Variable{ strVariableName = PARAM_SYSTEM_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(SYSTEM_ACCOUNT) }}
             };
             OrderPingShenForm form = new OrderPingShenForm();
+            form.StartTime = DateTime.Now;
             form.StartUserAccount = startInfo.StartUserAccount;
             form.BanShiChu = startInfo.BanShiChu;
             form.BanShiChuLianXiRen = startInfo.BanShiChuLianXiRen;
@@ -103,6 +102,7 @@ namespace Johnson.Process.Core
             form.TuZiQueRen = startInfo.TuZiQueRen;
             form.XiangMingCheng = startInfo.XiangMingCheng;
             form.Files = startInfo.Files;
+            form.Items = startInfo.Items;
             form.Approves = new List<TaskApproveInfo>();
             form.Approves.Add(startInfo.ApproveInfo);
 
@@ -144,12 +144,32 @@ namespace Johnson.Process.Core
                     throw new ArgumentNullException("info.EngEngineerAccount");
                 }
             }
-            Variable[] variable = new Variable[]{
-                    new Variable{ strVariableName = PARAM_IS_STANDARD_ORDER, objVariableValue = new object[]{info.IsStandard ? "是" : "否"} },
-                    new Variable{ strVariableName = PARAM_ENG_ENGINEER, objVariableValue = new object[]{this.GetUltimusUserAccount(info.EngEngineerAccount)} },
-                    new Variable{ strVariableName = PARAM_DIANQI_ENGINEER, objVariableValue = new object[]{this.GetUltimusUserAccount(info.DianQiEngineerAccount)} },
-                    new Variable{ strVariableName = PARAM_NEED_ENG_ENGINEER_PINGSHEN, objVariableValue = new object[]{needEngineerPingShen ? "是" : "否"} }
-                };
+            List<Variable> variables = new List<Variable>();
+            variables.Add(new Variable { strVariableName = PARAM_IS_STANDARD_ORDER, objVariableValue = new object[] { info.IsStandard ? "是" : "否" } });
+            variables.Add(new Variable{ strVariableName = PARAM_ENG_ENGINEER, objVariableValue = new object[]{this.GetUltimusUserAccount(info.EngEngineerAccount)} });
+            variables.Add(new Variable { strVariableName = PARAM_DIANQI_ENGINEER, objVariableValue = new object[] { this.GetUltimusUserAccount(info.DianQiEngineerAccount) } });
+            variables.Add(new Variable { strVariableName = PARAM_NEED_ENG_ENGINEER_PINGSHEN, objVariableValue = new object[] { needEngineerPingShen ? "是" : "否" } });
+
+            if (!string.IsNullOrEmpty(info.PingShenRenAccounts))
+            {
+                variables.Add(new Variable { strVariableName = PARAM_NEED_DEPT_PINGSHEN, objVariableValue = new object[] { "是" } });
+            }
+            else
+            {
+                variables.Add(new Variable { strVariableName = PARAM_NEED_DEPT_PINGSHEN, objVariableValue = new object[] { "否" } });
+            }
+            if (!string.IsNullOrEmpty(info.CidPingShenRenAccounts))
+            {
+                variables.Add(new Variable { strVariableName = PARAM_NEED_CID_PINGSHEN, objVariableValue = new object[] { "是" } });
+                variables.Add(new Variable { strVariableName = PARAM_CID_QUEREN_REN, objVariableValue = this.GetUltimusUserAccounts(info.CidPingShenRenAccounts) });
+            }
+            if (!string.IsNullOrEmpty(info.QadPingShenRenAccounts))
+            {
+                variables.Add(new Variable { strVariableName = PARAM_NEED_QAD_PINGSHEN, objVariableValue = new object[] { "是" } });
+                variables.Add(new Variable { strVariableName = PARAM_QAD_QUEREN_REN, objVariableValue = this.GetUltimusUserAccounts(info.QadPingShenRenAccounts) });
+            }
+            Variable[] variable = variables.ToArray();
+
             OrderPingShenForm form = this.Get(info.TaskId);
             form.EngEngineerAccount = info.EngEngineerAccount;
             form.EngEngineerName = info.EngEngineerName;
@@ -159,7 +179,7 @@ namespace Johnson.Process.Core
             form.SheJiWanChengRiQi = info.SheJiWanChengRiQi;
             form.IsStandard = info.IsStandard;
 
-            form.Approves.Add(info.ApproveInfo);
+            form.Approves.Insert(0, info.ApproveInfo);
 
             return this.Send(info.TaskId, variable, "", this.GetSummary(form), form);
         }
@@ -239,7 +259,7 @@ namespace Johnson.Process.Core
             return this.Send(taskId, null, "", this.GetSummary(form), form);
         }
 
-        public TaskSendResult PmcPingShen(string taskId, TaskApproveInfo approveInfo, string scmEngineerAccount)
+        public TaskSendResult PmcPingShen(string taskId, TaskApproveInfo approveInfo, string scmEngineerAccount, DateTime? jiZuWanGongRiQi)
         {
             if (string.IsNullOrEmpty(taskId))
             {
@@ -254,6 +274,8 @@ namespace Johnson.Process.Core
                 new Variable{ strVariableName = PARAM_SCM_ENGINEER, objVariableValue = new object[]{this.GetUltimusUserAccount(scmEngineerAccount)} }
             };
             OrderPingShenForm form = this.Get(taskId);
+            form.ScmEngineerAccount = scmEngineerAccount;
+            form.JiZuWanGongRiQi = jiZuWanGongRiQi;
             form.Approves.Insert(0, approveInfo);
 
             return this.Send(taskId, variable, "", this.GetSummary(form), form);
@@ -295,6 +317,24 @@ namespace Johnson.Process.Core
             return this.Send(taskId, null, "", this.GetSummary(form), form);
         }
 
+        public TaskSendResult FaqirenQueren(string taskId, TaskApproveInfo approveInfo)
+        {
+            if (string.IsNullOrEmpty(taskId))
+            {
+                throw new ArgumentNullException("taskId");
+            }
+            if (approveInfo == null)
+            {
+                throw new ArgumentNullException("approveInfo");
+            }
+
+            OrderPingShenForm form = this.Get(taskId);
+            form.PingshenWancheng = true;
+            form.Approves.Insert(0, approveInfo);
+
+            return this.Send(taskId, null, "", this.GetSummary(form), form);
+        }
+
         public TaskSendResult CidQueRen(string taskId, TaskApproveInfo approveInfo, List<ProcessFile> cidZiLiao)
         {
             if (string.IsNullOrEmpty(taskId))
@@ -331,127 +371,50 @@ namespace Johnson.Process.Core
             return this.Send(taskId, null, "", this.GetSummary(form), form);
         }
 
-        public TaskSendResult SheJiTiJiao(string taskId, TaskApproveInfo approveInfo, bool hasXinWuLiao, string jianChaEngineerAccount, string jianChaEngineerName,
-            string zhuGuanAccount, string zhuGuanName, string sheJiShuoMing, string ziLiaoWanZhengDu, List<ProcessFile> sheJiZiLiao)
+        public TaskSendResult WenJianFaFang(List<ProcessFile> shejiZiliao, int instanceNo)
         {
+            string taskId = this.GetIncidentTaskId(SYSTEM_ACCOUNT, instanceNo);
             if (string.IsNullOrEmpty(taskId))
             {
                 throw new ArgumentNullException("taskId");
             }
-            if (string.IsNullOrEmpty(jianChaEngineerAccount))
-            {
-                throw new ArgumentNullException("jiShuJianChaGongChengShi");
-            }
-            if (string.IsNullOrEmpty(zhuGuanAccount))
-            {
-                throw new ArgumentNullException("zhuGuanAccount");
-            }
-            if (approveInfo == null)
-            {
-                throw new ArgumentNullException("approveInfo");
-            }
-            Variable[] variable = new Variable[]{
-                new Variable{ strVariableName = PARAM_HAS_NEW_WULIAO, objVariableValue = new object[]{hasXinWuLiao ? "是" : "否"} },
-                new Variable{ strVariableName = PARAM_ENG_JIANCHA_ENGINEER, objVariableValue = new object[]{this.GetUltimusUserAccount(jianChaEngineerAccount)} },
-                new Variable{ strVariableName = PARAM_SHEJI_ENGINEER_ZHUGUAN, objVariableValue = new object[]{this.GetUltimusUserAccount(zhuGuanAccount)} }
-            };
-            OrderPingShenForm form = this.Get(taskId);
-            form.HasXinWuLiao = hasXinWuLiao;
-            form.JianChaEngineerAccount = jianChaEngineerAccount;
-            form.JianChaEngineerName = jianChaEngineerName;
-            form.ZhuGuanAccount = zhuGuanAccount;
-            form.ZhuGuanName = zhuGuanName;
-            form.SheJiShuoMing = sheJiShuoMing;
-            form.ZiLiaoWanZhengDu = ziLiaoWanZhengDu;
-            form.SheJiZiLiao = sheJiZiLiao;
-            form.Approves.Insert(0, approveInfo);
-
-            return this.Send(taskId, variable, "", this.GetSummary(form), form);
-        }
-
-        public TaskSendResult JiShuChaJian(string taskId, TaskApproveInfo approveInfo)
-        {
-            if (string.IsNullOrEmpty(taskId))
-            {
-                throw new ArgumentNullException("taskId");
-            }
-            if (approveInfo == null)
-            {
-                throw new ArgumentNullException("approveInfo");
-            }
 
             OrderPingShenForm form = this.Get(taskId);
-            form.Approves.Insert(0, approveInfo);
-
+            form.FafangWancheng = true;
+            if (form.SheJiZiLiao == null)
+            {
+                form.SheJiZiLiao = new List<ProcessFile>();
+            }
+            form.SheJiZiLiao.AddRange(shejiZiliao);
             return this.Send(taskId, null, "", this.GetSummary(form), form);
         }
 
-        public TaskSendResult JiShuZhuGuanShenPi(string taskId, TaskApproveInfo approveInfo)
+        public void SaveWenJianFaFang(List<ProcessFile> shejiZiliao, int instanceNo)
         {
+            string taskId = this.GetIncidentTaskId("system_gz_process", instanceNo);
             if (string.IsNullOrEmpty(taskId))
             {
                 throw new ArgumentNullException("taskId");
             }
-            if (approveInfo == null)
-            {
-                throw new ArgumentNullException("approveInfo");
-            }
 
             OrderPingShenForm form = this.Get(taskId);
-            form.Approves.Insert(0, approveInfo);
-
-            return this.Send(taskId, null, "", this.GetSummary(form), form);
+            if (form.SheJiZiLiao == null)
+            {
+                form.SheJiZiLiao = new List<ProcessFile>();
+            }
+            form.SheJiZiLiao.AddRange(shejiZiliao);
+            this.Save(taskId, form);
         }
 
-        public TaskSendResult WenJianFaFang(string taskId, TaskApproveInfo approveInfo)
+        public void AddWenJianFaFangLiucheng(OrderWenjianFafangForm wenjianFafangForm, int instanceNo)
         {
-            if (string.IsNullOrEmpty(taskId))
+            OrderPingShenForm form = this.Get(instanceNo);
+            if (form.WenjianFafangForms == null)
             {
-                throw new ArgumentNullException("taskId");
+                form.WenjianFafangForms = new List<OrderWenjianFafangForm>();
             }
-            if (approveInfo == null)
-            {
-                throw new ArgumentNullException("approveInfo");
-            }
-
-            OrderPingShenForm form = this.Get(taskId);
-            form.Approves.Insert(0, approveInfo);
-
-            return this.Send(taskId, null, "", this.GetSummary(form), form);
-        }
-
-        public TaskSendResult BomLuRu(string taskId, TaskApproveInfo approveInfo)
-        {
-            if (string.IsNullOrEmpty(taskId))
-            {
-                throw new ArgumentNullException("taskId");
-            }
-            if (approveInfo == null)
-            {
-                throw new ArgumentNullException("approveInfo");
-            }
-
-            OrderPingShenForm form = this.Get(taskId);
-            form.Approves.Insert(0, approveInfo);
-
-            return this.Send(taskId, null, "", this.GetSummary(form), form);
-        }
-
-        public TaskSendResult XinWuLiaoXinXiWeiHu(string taskId, TaskApproveInfo approveInfo)
-        {
-            if (string.IsNullOrEmpty(taskId))
-            {
-                throw new ArgumentNullException("taskId");
-            }
-            if (approveInfo == null)
-            {
-                throw new ArgumentNullException("approveInfo");
-            }
-
-            OrderPingShenForm form = this.Get(taskId);
-            form.Approves.Insert(0, approveInfo);
-
-            return this.Send(taskId, null, "", this.GetSummary(form), form);
+            form.WenjianFafangForms.Add(wenjianFafangForm);
+            this.Save(instanceNo, form);
         }
 
         public TaskSendResult JiZuWanChengQueRen(string taskId, TaskApproveInfo approveInfo)

@@ -70,13 +70,21 @@
         </table>
     </form>
     
-    <form id="pingShenForm" style="display: none">
+    <form id="pingShenForm">
         <table class="formInfo">
             <tr>
                 <td class="labelCol" style="width: 200px">
+                    机组完工日期
+                </td>
+                <td class="textCol">
+                    <input  name="jiZuWanGongRiQi" type="text" class="textInput txtwidth dateISO" />
+                </td>
+            </tr>
+            <tr id="trScmEngineer" style="display: none;">
+                <td class="labelCol" style="width: 200px">
                     物料计划员<span style="color: Red" >*</span>
                 </td>
-                <td colspan="3" class="textCol">
+                <td class="textCol">
                     <div class="singleUserSelect">
                         <input type="text" name="scmEngineerAccount" class="userAccount"/>
                         <input type="text" name="scmEngineerName" class="textInput userName required"/>
@@ -139,6 +147,9 @@
             if(data.files){
                 $("#attachments").datagrid('loadData', data.files);
             }
+            if(data.items){
+                $("#items").datagrid('loadData', data.items);
+            }
             $("#remarks").datagrid("loadData", data.approves);
         });
 
@@ -156,7 +167,12 @@
                 return;
             }
             $(this).attr("disabled", "disabled");
-            $.post("OrderPingShenController.aspx?action=PMCPingShenSubmit", { taskId: taskId, submitRemark: valueObj.submitRemark, scmEngineerAccount: scmEngineerAccount}, function (data) {
+            $.post("OrderPingShenController.aspx?action=PMCPingShenSubmit", { 
+                taskId: taskId, 
+                submitRemark: valueObj.submitRemark, 
+                scmEngineerAccount: scmEngineerAccount,
+                jiZuWanGongRiQi: valueObj.jiZuWanGongRiQi
+            }, function (data) {
                 if (data.result != 0) {
                     alert(data.message);
                 }
@@ -168,15 +184,15 @@
         });
         $("#basicInfoForm input[name='needWuLiaoPingShen']").click(function(){
             if($(this).attr("checked")){
-                $("#pingShenForm").show();
+                $("#trScmEngineer").show();
             }
             else{
-                $("#pingShenForm").hide();
+                $("#trScmEngineer").hide();
             }
         });
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#pingShenForm").validate();
-        $("#attachments, #remarks").datagrid();
+        $("#attachments, #remarks, #items").datagrid();
     })
 </script>

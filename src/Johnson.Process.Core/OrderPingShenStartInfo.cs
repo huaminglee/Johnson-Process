@@ -12,7 +12,7 @@ namespace Johnson.Process.Core
 
         public string Level { set; get; }
 
-        public string JiaoHuoRiQi { set; get; }
+        public DateTime JiaoHuoRiQi { set; get; }
 
         public string SONO { set; get; }
 
@@ -98,6 +98,8 @@ namespace Johnson.Process.Core
         }
 
         public List<ProcessFile> Files { set; get; }
+
+        public List<OrderPingshenItemInfo> Items { set; get; }
 
         public TaskApproveInfo ApproveInfo { set; get; }
     }

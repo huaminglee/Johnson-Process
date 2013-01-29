@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>订单评审-机组完工</title>
+    <title>订单评审</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -23,7 +23,7 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="订单评审-机组完工" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="订单评审" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
@@ -101,15 +101,19 @@
 <script language="javascript" type="text/javascript">
     var edoc2BaseUrl = "<%= Johnson.Process.Website.WebHelper.EDoc2BaseUrl %>";
     var taskId = "<%= this.TaskId %>";
+    var incNo = '<%= Request["incNo"] %>';
 
     $(function () {
-        $.get("OrderPingShenController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
+        $.get("OrderPingShenController.aspx?action=get", { incNo: incNo, taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
             if(data.files){
                 $("#attachments").datagrid('loadData', data.files);
             }
+            if(data.items){
+                $("#items").datagrid('loadData', data.items);
+            }
             $("#remarks").datagrid("loadData", data.approves);
         });
-        $("#attachments, #remarks").datagrid();
+        $("#attachments, #remarks, #items").datagrid();
     })
 </script>

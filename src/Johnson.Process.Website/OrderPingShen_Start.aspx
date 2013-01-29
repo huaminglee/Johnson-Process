@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OrderPingShen_Start.aspx.cs" Inherits="Johnson.Process.Website.OrderPingShen_Start" %>
 <%@ Register Src="UserControls/Header.ascx" TagName="Header" TagPrefix="johnson" %>
 <%@ Register Src="UserControls/OrderDetails.ascx" TagName="OrderDetails" TagPrefix="johnson" %>
+<%@ Register Src="UserControls/OrderPingshenItemDetails.ascx" TagName="OrderPingshenItemDetails" TagPrefix="johnson" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,6 +26,27 @@
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="订单评审-开始" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+
+    <div id="addItemDialog" title="添加Item">
+        <form>
+            <johnson:OrderPingshenItemDetails runat="server" ID="orderItem"></johnson:OrderPingshenItemDetails>
+            <div style="margin-top:1em" class="buttons">
+                <input type="submit" value="确定并继续"/>
+                <input type="button" value="确定"/>
+                <input type="button" value="关闭"/>
+            </div>
+        </form>
+    </div>
+
+    <div id="editItemDialog" title="编辑Item">
+        <form>
+            <johnson:OrderPingshenItemDetails runat="server" ID="orderItem1"></johnson:OrderPingshenItemDetails>
+            <div style="margin-top:1em" class="buttons">
+                <input type="submit" value="确定"/>
+                <input type="button" value="关闭"/>
+            </div>
+        </form>
+    </div>
 
     <form id="basicInfoForm">
         <johnson:OrderDetails runat="server" ID="orderDetails"></johnson:OrderDetails>
@@ -215,7 +237,6 @@
         $.get("OrderPingShenController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data);
         });
-
         $("#btnSubmit").button().click(function () {
             if (!$("#basicInfoForm").validAndFocus()) {
                 return;
@@ -226,13 +247,15 @@
             }
             var valueObj;
             if(needPingShen){
-                valueObj = $.getFormValue("#basicInfoForm,#remarkForm");
-            }
-            else{
                 valueObj = $.getFormValue("#basicInfoForm, #remarkForm, #pingShenYaoQingForm");
             }
+            else{
+                valueObj = $.getFormValue("#basicInfoForm,#remarkForm");
+            }
             var attachments = $('#attachments').datagrid('getData');
+            var items = $('#items').datagrid('getData');
             valueObj.files = attachments.rows;
+            valueObj.items = items.rows;
             valueObj.taskId = taskId;
             if (!confirm("您确实要提交吗？")) {
                 return;
@@ -259,9 +282,12 @@
         });
         $("#basicInfoForm input[name='isStandard']").click(function(){
             if(!$(this).attr("checked")){
+                $("#basicInfoForm input[name='needPingShen']").removeAttr("disabled");
                 $("#basicInfoForm input[name='sheJiFuZeRenName']").addClass("required");
             }
             else{
+                $("#basicInfoForm input[name='needPingShen']").removeAttr("checked").attr("disabled", "disabled");
+                $("#pingShenYaoQingForm").hide();
                 $("#basicInfoForm input[name='sheJiFuZeRenName']").removeClass("required");
             }
         });
@@ -269,6 +295,9 @@
         $(".multiSelectUser").multiSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#basicInfoForm,#pingShenYaoQingForm").validate();
+        var addItemDialog = $("#addItemDialog").dialog({ autoOpen: false, modal: true, width: 500 });
+        var editItemDialog = $("#editItemDialog").dialog({ autoOpen: false, modal: true, width: 500 });
+        $("#items").eidtableGrid(addItemDialog, editItemDialog);
         $("#attachments").attachmentsGrid1();
     })
 </script>

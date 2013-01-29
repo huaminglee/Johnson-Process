@@ -26,6 +26,7 @@ namespace Johnson.Process.Website.Models
             this.GYSMC = form.GYSMC;
             this.ZRBM = form.ZRBM;
             this.Quantity = form.Quantity;
+            this.qeResult = FailureResultHelper.MapName(form.QEResult);
 #if DEBUG
             this.taskStatus = 1;
 #else
@@ -49,5 +50,6 @@ namespace Johnson.Process.Website.Models
         public string GYSMC;
         public string ZRBM;
         public string Quantity;
+        public string qeResult;
     }
 }

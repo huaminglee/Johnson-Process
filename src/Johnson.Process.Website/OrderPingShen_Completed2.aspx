@@ -39,35 +39,25 @@
 		    </thead>
 	    </table>
     </div>
-    <form id="pingShenForm" style="margin-top: 1em;">
-        <table class="formInfo">
-            <tr>
-                <td class="labelCol" style="width: 200px">
-                    设计说明
-                </td>
-                <td colspan="3" class="textCol">
-                    <input type="text" name="sheJiShuoMing" class="textInput userName"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="labelCol" style="width: 200px">
-                    资料完整性
-                </td>
-                <td colspan="3" class="textCol">
-                    <select name="ziLiaoWanZhengDu">
-                        <option>全部完成</option>
-                        <option>部分完成</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </form>
     <div style="margin-top: 1em;">
         <table id="sheJiZiLiao" style="width:900px;height:auto" title="设计资料">
 		    <thead>
 			    <tr> 
 				    <th field="FileName" resizable="false" width="200">文件名称</th>
                     <th field="FileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			    </tr>
+		    </thead>
+	    </table>
+    </div>
+    <div style="margin-top: 1em;">
+        <table id="fafangLiuchengGrid" style="width:900px;height:auto" title="文件发放流程">
+		    <thead>
+			    <tr> 
+				    <th field="startUserName" resizable="false" width="80">发起人</th>
+                    <th field="startTime" resizable="false" width="80">发起日期</th>
+                    <th field="fafangWancheng" resizable="false" width="80">资料完整度</th>
+                    <th field="sheJiShuoMing" resizable="false" width="180">设计说明</th>
+                    <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			    </tr>
 		    </thead>
 	    </table>
@@ -93,16 +83,27 @@
     $(function () {
         $.get("OrderPingShenController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
-            $("#pingShenForm").setFormValue(data).setFormReadOnly();
             if(data.files){
                 $("#attachments").datagrid('loadData', data.files);
+            }
+            if(data.items){
+                $("#items").datagrid('loadData', data.items);
+            }
+            if(data.wanjianFafangList){
+                $("#fafangLiuchengGrid").datagrid('loadData', data.wanjianFafangList);
             }
             if(data.sheJiZiLiao){
                 $("#sheJiZiLiao").datagrid('loadData', data.sheJiZiLiao);
             }
             $("#remarks").datagrid("loadData", data.approves);
         });
-        $("#attachments, #remarks, #sheJiZiLiao").datagrid();
+        $("#attachments, #remarks, #sheJiZiLiao, #items, #fafangLiuchengGrid").datagrid();
     })
+
+    function actionRender(incidentNo, row){
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("广州订单文件发放");
+        var detailsLink = "OrderWenjianFafang_Completed.aspx?incNo="+incidentNo;
+        return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
+    }
 </script>
 

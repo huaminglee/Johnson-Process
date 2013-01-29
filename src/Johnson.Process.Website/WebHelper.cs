@@ -32,6 +32,7 @@ namespace Johnson.Process.Website
             FailureProductProcess = new FailureProductProcess("不合格品处理", failureProductResultMailTemplate);
             ProductReworkProcess = FailureProductProcess.ProductReworkProcess;
             OrderPingShenProcess = new OrderPingShenProcess("广州订单评审");
+            OrderWenjianFafangProcess = new OrderWenjianFafangProcess("广州订单文件发放");
         }
 
         public static EDoc2UserInfo CurrentUserInfo
@@ -68,6 +69,8 @@ namespace Johnson.Process.Website
         public static ProductReworkProcess ProductReworkProcess { private set; get; }
 
         public static OrderPingShenProcess OrderPingShenProcess { private set; get; }
+
+        public static OrderWenjianFafangProcess OrderWenjianFafangProcess { private set; get; }
 
         public static VocProcess VocProcess { private set; get; }
 

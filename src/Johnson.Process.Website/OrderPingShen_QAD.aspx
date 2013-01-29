@@ -94,6 +94,9 @@
             if(data.files){
                 $("#attachments").datagrid('loadData', data.files);
             }
+            if(data.items){
+                $("#items").datagrid('loadData', data.items);
+            }
             $("#remarks").datagrid("loadData", data.approves);
         });
 
@@ -119,7 +122,7 @@
         });
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#pingShenForm").validate();
-        $("#attachments, #remarks").datagrid();
+        $("#attachments, #remarks, #items").datagrid();
         $("#qadZiLiao").attachmentsGrid1();
     })
 </script>

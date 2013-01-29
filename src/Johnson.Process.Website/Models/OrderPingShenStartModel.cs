@@ -35,13 +35,14 @@ namespace Johnson.Process.Website.Models
             this.tuZiQueRen = form.TuZiQueRen;
             this.xiangMingCheng = form.XiangMingCheng;
             this.files = form.Files;
+            this.items = form.Items;
         }
 
         public string taskId;
 
         public string startUserName;
         public string level;
-        public string jiaoHuoRiQi;
+        public DateTime jiaoHuoRiQi;
         public string SONO;
         public string JDSNO;
         public string tuZiQueRen;
@@ -85,6 +86,8 @@ namespace Johnson.Process.Website.Models
         public string pingShenContent;
 
         public List<ProcessFile> files;
+
+        public List<OrderPingshenItemInfo> items;
 
         public string submitRemark;
     }

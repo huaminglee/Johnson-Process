@@ -10,11 +10,13 @@ namespace Johnson.Process.Core
 
         public string StartUserAccount { set; get; }
 
+        public DateTime StartTime { set; get; }
+
         public string DeptPingShenResult { set; get; }
 
         public string Level { set; get; }
 
-        public string JiaoHuoRiQi { set; get; }
+        public DateTime JiaoHuoRiQi { set; get; }
 
         public string SONO { set; get; }
 
@@ -60,6 +62,8 @@ namespace Johnson.Process.Core
 
         public string DianQiEngineerName { set; get; }
 
+        public string ScmEngineerAccount { set; get; }
+
         public DateTime? WaiGouWanChengRiQi { set; get; }
 
         public DateTime? SheJiWanChengRiQi { set; get; }
@@ -74,9 +78,13 @@ namespace Johnson.Process.Core
 
         public DateTime? JiZuWanGongRiQi { set; get; }
 
+        public List<OrderPingshenItemInfo> Items { set; get; }
+
         public List<ProcessFile> Files { set; get; }
 
         public List<TaskApproveInfo> Approves { set; get; }
+
+        public bool PingshenWancheng { set; get; }
 
         public bool HasXinWuLiao { set; get; }
 
@@ -90,12 +98,14 @@ namespace Johnson.Process.Core
 
         public string SheJiShuoMing{set;get;}
 
-        public string ZiLiaoWanZhengDu { set; get; }
+        public bool FafangWancheng { set; get; }
 
         public List<ProcessFile> SheJiZiLiao { set; get; }
 
         public List<ProcessFile> CidZiLiao { set; get; }
 
-        public List<ProcessFile> QadZiLiao { set; get; } 
+        public List<ProcessFile> QadZiLiao { set; get; }
+
+        public List<OrderWenjianFafangForm> WenjianFafangForms { set; get; }
     }
 }

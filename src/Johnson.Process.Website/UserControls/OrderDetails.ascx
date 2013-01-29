@@ -120,44 +120,23 @@
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            ITEM<span style="color: Red" >*</span>
-        </td>
-        <td style="width: 280px" class="textCol">
-            <input  name="sapItem" type="text" class="textInput txtwidth required" />
-        </td>
-        <td style="width: 200px" class="labelCol">
-            MATERIAL<span style="color: Red" >*</span>
-        </td>
-        <td class="textCol">
-            <input name="sapMaterial" type="text" class="textInput txtwidth required" />
-        </td>
-    </tr>
-    <tr>
-        <td style="width: 200px" class="labelCol">
-            数量<span style="color: Red" >*</span>
-        </td>
-        <td class="textCol">
-            <input name="shuLiang" type="text" class="textInput txtwidth digits required" />
-        </td>
-        <td style="width: 200px" class="labelCol">
-            技术要求
-        </td>
-        <td class="textCol">
-            <input name="jiShuYaoQiu" type="text" class="textInput txtwidth" />
-        </td>
-    </tr>
-    <tr>
-        <td style="width: 200px" class="labelCol">
-            备注
-        </td>
-        <td class="textCol">
-            <input name="beiZhu" type="text" class="textInput txtwidth" />
-        </td>
-        <td style="width: 200px" class="labelCol">
             其它要求说明
         </td>
-        <td class="textCol">
+        <td colspan="3" class="textCol">
             <input name="qiTaYaoQiuShuoMing" type="text" class="textInput txtwidth" />
         </td>
     </tr>
 </table>
+<div style="margin: 1em 0;">
+    <table id="items" style="width:900px;height:auto" title="ITEM">
+		<thead>
+			<tr> 
+				<th field="item" resizable="false" width="100">ITEM</th>
+                <th field="material" resizable="false" width="100">MATERIAL</th>
+                <th field="shuliang" resizable="false" width="80">数量</th>
+                <th field="jishuYaoqiu" resizable="false" width="150">技术要求</th>
+                <th field="beizhu" resizable="false" width="300">备注</th>
+			</tr>
+		</thead>
+	</table>
+</div>

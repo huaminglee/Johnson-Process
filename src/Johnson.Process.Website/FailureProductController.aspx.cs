@@ -170,7 +170,7 @@ namespace Johnson.Process.Website
                 FailureProductForm form = new FailureProductForm();
                 form.StartDepartment = WebHelper.CurrentUserInfo.DepartmentName;
                 this.SetFormProperty(form, model);
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves = new List<TaskApproveInfo>();
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
@@ -202,7 +202,7 @@ namespace Johnson.Process.Website
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
                 form.StartDepartment = WebHelper.CurrentUserInfo.DepartmentName;
                 this.SetFormProperty(form, model);
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Send(taskId, form);
@@ -230,7 +230,7 @@ namespace Johnson.Process.Website
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
                 form.PmcOpinion = Request["PmcOpinion"];
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = Request["submitRemark"], StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Send(taskId, form);
@@ -276,7 +276,7 @@ namespace Johnson.Process.Website
                 form.SupplierDeal = model.SupplierDeal;
                 form.SupplierDealBillNumber = model.SupplierDealBillNumber;
 
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.QESend(taskId, form, model.emailTo);
@@ -322,7 +322,7 @@ namespace Johnson.Process.Website
                 form.SupplierDeal = model.SupplierDeal;
                 form.SupplierDealBillNumber = model.SupplierDealBillNumber;
 
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Return(taskId, form);
@@ -362,7 +362,7 @@ namespace Johnson.Process.Website
                     UserName = currentUserName
                 };
                 form.MrbResults.Add(mrbResult);
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.MrbSend(taskId, form);
@@ -393,7 +393,7 @@ namespace Johnson.Process.Website
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
                 form.QAResult = model.QAResult;
                 form.ReceiveQARemark = model.ReceiveQARemark;
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.QASend(taskId, form);
@@ -424,7 +424,7 @@ namespace Johnson.Process.Website
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
                 form.ReceiveQARemark = ReceiveQARemark;
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Send(taskId, form);
@@ -455,7 +455,7 @@ namespace Johnson.Process.Website
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
                 form.ReceiveQARemark = ReceiveQARemark;
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Return(taskId, form);
@@ -486,7 +486,7 @@ namespace Johnson.Process.Website
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
                 form.QCValidateResult = QCValidateResult;
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Send(taskId, form);
@@ -515,7 +515,7 @@ namespace Johnson.Process.Website
 
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Send(taskId, form);
@@ -544,7 +544,7 @@ namespace Johnson.Process.Website
 
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
                 FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.FailureProductProcess.Send(taskId, form);
@@ -575,7 +575,7 @@ namespace Johnson.Process.Website
                 ProductReworkForm form = JsonConvert.DeserializeObject<ProductReworkForm>(formJson);
 
                 string currentUserName = WebHelper.CurrentUserInfo.UserLoginName;
-                TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
+                TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves = failureProductForm.Approves;
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 

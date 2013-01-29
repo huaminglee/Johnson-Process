@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Johnson.Process.Core
 {
-    public class FailureProductProcess : UltimusProcess
+    public class FailureProductProcess : UltimusFormProcess<FailureProductForm>
     {
         private string _resultEmailContentTemplate;
 
@@ -81,16 +81,6 @@ namespace Johnson.Process.Core
         private const string PARAM_HAS_FIN_USER = "hasFinUser";
 
         public ProductReworkProcess ProductReworkProcess { private set; get; }
-
-        public FailureProductForm Get(string taskId)
-        {
-            return this.Get<FailureProductForm>(taskId);
-        }
-
-        public List<ProcessForm<FailureProductForm>> Get()
-        {
-            return this.Get<FailureProductForm>();
-        }
 
         public FailureProductForm GetFromThirdDatabase(string id)
         {
@@ -230,7 +220,7 @@ namespace Johnson.Process.Core
 
         private string GetSummary(FailureProductForm form)
         {
-            return "";
+            return form.ComponentName + "," + form.Remark;
         }
 
         public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, FailureProductForm form)

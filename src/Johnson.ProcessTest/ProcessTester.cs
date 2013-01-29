@@ -13,7 +13,7 @@ namespace Johnson.ProcessTest
         public void Test()
         {
             DeliveryProcessForm form = new DeliveryProcessForm { BookDate = DateTime.Now, ProjectName = "ssd" };
-            UltimusProcess process = new UltimusProcess("MyTest");
+            UltimusFormProcess<DeliveryProcessForm> process = new UltimusFormProcess<DeliveryProcessForm>("MyTest");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount("qi");
             string taskId = this.GetProcessStartTaskId("MyTest", qiUltimusAccount);

@@ -5,22 +5,12 @@ using Ultimus.WFServer;
 
 namespace Johnson.Process.Core
 {
-    public class DeliveryProcess: UltimusProcess
+    public class DeliveryProcess : UltimusFormProcess<DeliveryProcessForm>
     {
         public DeliveryProcess(string processName)
             :base(processName)
         {
             
-        }
-
-        public DeliveryProcessForm Get(string taskId)
-        {
-            return this.Get<DeliveryProcessForm>(taskId);
-        }
-
-        public List<ProcessForm<DeliveryProcessForm>> Get()
-        {
-            return this.Get<DeliveryProcessForm>();
         }
 
         /// <summary>

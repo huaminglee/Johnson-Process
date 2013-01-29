@@ -112,8 +112,8 @@
                 <th field="BJXLH" resizable="false" width="100">部件系列号</th>
 				<th field="JZXLH" resizable="false" width="100">机组系列号</th>
                 <th field="GYSMC" resizable="false" width="100">供应商名称</th>
-                <th field="ZRBM" resizable="false" width="100">责任部门</th>
-                <th field="Quantity" resizable="false" width="80">不合品数量</th>
+                <th field="ZRBM" resizable="false" width="80">责任部门</th>
+                <th field="qeResult" resizable="false" width="80">QE判定结果</th>
                 <th field="taskId" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
@@ -149,7 +149,7 @@
     })
 
     function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("不合格处理")+"&taskid=" + takId;
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("不合格品处理")+"&taskid=" + takId;
         var detailsLink = "FailureProduct_Completed.aspx?taskId="+takId;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }

@@ -65,29 +65,9 @@ namespace Johnson.Process.Website
             {
                 this.JiZuWanGongPingShenSubmit();
             }
-            else if (action.Equals("SheJiTiJiaoSubmit", StringComparison.InvariantCultureIgnoreCase))
+            else if (action.Equals("FaqirenQuerenSubmit", StringComparison.InvariantCultureIgnoreCase))
             {
-                this.SheJiTiJiaoSubmit();
-            }
-            else if (action.Equals("JiShuJianChaSubmit", StringComparison.InvariantCultureIgnoreCase))
-            {
-                this.JiShuJianChaSubmit();
-            }
-            else if (action.Equals("JiShuZhuGuanShenPiSubmit", StringComparison.InvariantCultureIgnoreCase))
-            {
-                this.JiShuZhuGuanShenPiSubmit();
-            }
-            else if (action.Equals("BomLuRuSubmit", StringComparison.InvariantCultureIgnoreCase))
-            {
-                this.BomLuRuSubmit();
-            }
-            else if (action.Equals("FilePublishSubmit", StringComparison.InvariantCultureIgnoreCase))
-            {
-                this.FilePublishSubmit();
-            }
-            else if (action.Equals("XinWuLiaoXinXiWeiHuSubmit", StringComparison.InvariantCultureIgnoreCase))
-            {
-                this.XinWuLiaoXinXiWeiHuSubmit();
+                this.FaqirenQuerenSubmit();
             }
             else if (action.Equals("CidSubmit", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -107,14 +87,18 @@ namespace Johnson.Process.Website
         {
             try
             {
-                string taskId = Request["taskid"];
-                if (string.IsNullOrEmpty(taskId))
-                {
-                    throw new ArgumentNullException("taskId");
-                }
-                taskId = taskId.Trim();
                 OrderPingShenModel model = null;
-                OrderPingShenForm form = WebHelper.OrderPingShenProcess.Get(taskId);
+                OrderPingShenForm form = null;
+                string taskId = Request["taskid"];
+                string strIncNo = Request["incNo"];
+                if (!string.IsNullOrEmpty(taskId))
+                {
+                    form = WebHelper.OrderPingShenProcess.Get(taskId.Trim());
+                }
+                else
+                {
+                    form = WebHelper.OrderPingShenProcess.Get(int.Parse(strIncNo));
+                }
                 if (form == null)
                 {
                     model = new OrderPingShenModel();
@@ -142,9 +126,15 @@ namespace Johnson.Process.Website
                 TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(model.taskId);
                 OrderPingShenStartInfo startInfo = new OrderPingShenStartInfo() ;
                 startInfo.ApproveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName };
-                startInfo.CidPingShenRenAccounts = model.cidPingShenRenAccounts;
-                startInfo.CsdPingShenRenAccounts = model.csdPingShenRenAccounts;
-                startInfo.EngPingShenRenAccounts = model.engPingShenRenAccounts;
+                if (model.needPingShen)
+                {
+                    startInfo.CidPingShenRenAccounts = model.cidPingShenRenAccounts;
+                    startInfo.CsdPingShenRenAccounts = model.csdPingShenRenAccounts;
+                    startInfo.EngPingShenRenAccounts = model.engPingShenRenAccounts;
+                    startInfo.PmcPingShenRenAccounts = model.pmcPingShenRenAccounts;
+                    startInfo.ScmPingShenRenAccounts = model.scmPingShenRenAccounts;
+                    startInfo.QadPingShenRenAccounts = model.qadPingShenRenAccounts;
+                }
                 startInfo.IsStandard = model.isStandard;
                 startInfo.PmcEngineerAccount = model.pmcEngineerAccount;
                 startInfo.PmcEngineerName = model.pmcEngineerName;
@@ -172,6 +162,7 @@ namespace Johnson.Process.Website
                 startInfo.TuZiQueRen = model.tuZiQueRen;
                 startInfo.XiangMingCheng = model.xiangMingCheng;
                 startInfo.Files = model.files;
+                startInfo.Items = model.items;
                 WebHelper.OrderPingShenProcess.Start(startInfo);
             }
             catch (Exception ex)
@@ -218,9 +209,23 @@ namespace Johnson.Process.Website
             {
                 string formJson = Request["formJson"];
                 OrderPingEngFuZeRenSubmitModel model = JsonConvert.DeserializeObject<OrderPingEngFuZeRenSubmitModel>(formJson);
+                if (!model.needEngineerPingShen)
+                {
+                    model.dianQiEngineerAccount = model.dianQiEngineerName = "";
+                }
+
                 TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(model.taskId);
                 OrderEngFuZeRenPingShenInfo pingShenInfo = new OrderEngFuZeRenPingShenInfo();
                 pingShenInfo.ApproveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName };
+                if (model.needPingShen)
+                {
+                    pingShenInfo.CidPingShenRenAccounts = model.cidPingShenRenAccounts;
+                    pingShenInfo.CsdPingShenRenAccounts = model.csdPingShenRenAccounts;
+                    pingShenInfo.EngPingShenRenAccounts = model.engPingShenRenAccounts;
+                    pingShenInfo.PmcPingShenRenAccounts = model.pmcPingShenRenAccounts;
+                    pingShenInfo.ScmPingShenRenAccounts = model.scmPingShenRenAccounts;
+                    pingShenInfo.QadPingShenRenAccounts = model.qadPingShenRenAccounts;
+                }
                 pingShenInfo.DianQiEngineerAccount = model.dianQiEngineerAccount;
                 pingShenInfo.DianQiEngineerName = model.dianQiEngineerName;
                 pingShenInfo.EngEngineerAccount = model.engEngineerAccount;
@@ -382,12 +387,17 @@ namespace Johnson.Process.Website
                 }
                 taskId = taskId.Trim();
                 string submitRemark = Request["submitRemark"];
+                DateTime? jiZuWanGongRiQi = null;
+                if (!string.IsNullOrEmpty(Request["jiZuWanGongRiQi"]))
+                {
+                    jiZuWanGongRiQi = DateTime.Parse(Request["jiZuWanGongRiQi"]);
+                }
                 string scmEngineerAccount = Request["scmEngineerAccount"];
 
                 TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(taskId);
                 TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName };
 
-                WebHelper.OrderPingShenProcess.PmcPingShen(taskId, approveInfo, scmEngineerAccount);
+                WebHelper.OrderPingShenProcess.PmcPingShen(taskId, approveInfo, scmEngineerAccount, jiZuWanGongRiQi);
             }
             catch (Exception ex)
             {
@@ -459,147 +469,23 @@ namespace Johnson.Process.Website
             Response.Write(JsonConvert.SerializeObject(resultModel));
         }
 
-        private void SheJiTiJiaoSubmit()
+        private void FaqirenQuerenSubmit()
         {
             ActionResultModel resultModel = new ActionResultModel();
             try
             {
-                string formJson = Request["formJson"];
-                SheJiTiJiaoSubmitModel model = JsonConvert.DeserializeObject<SheJiTiJiaoSubmitModel>(formJson);
-                if (string.IsNullOrEmpty(model.taskId))
-                {
-                    throw new ArgumentNullException("taskId");
-                }
-                TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(model.taskId);
-                TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName };
-
-                WebHelper.OrderPingShenProcess.SheJiTiJiao(model.taskId, approveInfo, model.hasXinWuLiao, model.jianChaEngineerAccount,
-                    model.jianChaEngineerName, model.zhuGuanAccount, model.zhuGuanName, model.sheJiShuoMing, model.ziLiaoWanZhengDu, model.sheJiZiLiao);
-            }
-            catch (Exception ex)
-            {
-                resultModel.result = ActionResult.Error;
-                resultModel.message = ex.Message;
-                WebHelper.Logger.Error(ex.Message, ex);
-            }
-            Response.Write(JsonConvert.SerializeObject(resultModel));
-        }
-
-        private void JiShuJianChaSubmit()
-        {
-            ActionResultModel resultModel = new ActionResultModel();
-            try
-            {
-                string taskId = Request["taskId"];
-                string submitRemark = Request["submitRemark"];
+                string taskId = Request["taskid"];
                 if (string.IsNullOrEmpty(taskId))
                 {
                     throw new ArgumentNullException("taskId");
                 }
-                TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(taskId);
-                TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName };
-
-                WebHelper.OrderPingShenProcess.JiShuChaJian(taskId, approveInfo);
-            }
-            catch (Exception ex)
-            {
-                resultModel.result = ActionResult.Error;
-                resultModel.message = ex.Message;
-                WebHelper.Logger.Error(ex.Message, ex);
-            }
-            Response.Write(JsonConvert.SerializeObject(resultModel));
-        }
-
-        private void JiShuZhuGuanShenPiSubmit()
-        {
-            ActionResultModel resultModel = new ActionResultModel();
-            try
-            {
-                string taskId = Request["taskId"];
+                taskId = taskId.Trim();
                 string submitRemark = Request["submitRemark"];
-                if (string.IsNullOrEmpty(taskId))
-                {
-                    throw new ArgumentNullException("taskId");
-                }
+
                 TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(taskId);
                 TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName };
 
-                WebHelper.OrderPingShenProcess.JiShuZhuGuanShenPi(taskId, approveInfo);
-            }
-            catch (Exception ex)
-            {
-                resultModel.result = ActionResult.Error;
-                resultModel.message = ex.Message;
-                WebHelper.Logger.Error(ex.Message, ex);
-            }
-            Response.Write(JsonConvert.SerializeObject(resultModel));
-        }
-
-        private void BomLuRuSubmit()
-        {
-            ActionResultModel resultModel = new ActionResultModel();
-            try
-            {
-                string taskId = Request["taskId"];
-                string submitRemark = Request["submitRemark"];
-                if (string.IsNullOrEmpty(taskId))
-                {
-                    throw new ArgumentNullException("taskId");
-                }
-                TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(taskId);
-                TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName };
-
-                WebHelper.OrderPingShenProcess.BomLuRu(taskId, approveInfo);
-            }
-            catch (Exception ex)
-            {
-                resultModel.result = ActionResult.Error;
-                resultModel.message = ex.Message;
-                WebHelper.Logger.Error(ex.Message, ex);
-            }
-            Response.Write(JsonConvert.SerializeObject(resultModel));
-        }
-
-        private void FilePublishSubmit()
-        {
-            ActionResultModel resultModel = new ActionResultModel();
-            try
-            {
-                string taskId = Request["taskId"];
-                string submitRemark = Request["submitRemark"];
-                if (string.IsNullOrEmpty(taskId))
-                {
-                    throw new ArgumentNullException("taskId");
-                }
-                TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(taskId);
-                TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName };
-
-                WebHelper.OrderPingShenProcess.WenJianFaFang(taskId, approveInfo);
-            }
-            catch (Exception ex)
-            {
-                resultModel.result = ActionResult.Error;
-                resultModel.message = ex.Message;
-                WebHelper.Logger.Error(ex.Message, ex);
-            }
-            Response.Write(JsonConvert.SerializeObject(resultModel));
-        }
-
-        private void XinWuLiaoXinXiWeiHuSubmit()
-        {
-            ActionResultModel resultModel = new ActionResultModel();
-            try
-            {
-                string taskId = Request["taskId"];
-                string submitRemark = Request["submitRemark"];
-                if (string.IsNullOrEmpty(taskId))
-                {
-                    throw new ArgumentNullException("taskId");
-                }
-                TaskInfo taskInfo = WebHelper.OrderPingShenProcess.GetTaskInfo(taskId);
-                TaskApproveInfo approveInfo = new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName };
-
-                WebHelper.OrderPingShenProcess.XinWuLiaoXinXiWeiHu(taskId, approveInfo);
+                WebHelper.OrderPingShenProcess.FaqirenQueren(taskId, approveInfo);
             }
             catch (Exception ex)
             {

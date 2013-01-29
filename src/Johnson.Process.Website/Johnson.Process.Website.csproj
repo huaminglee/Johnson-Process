@@ -364,24 +364,34 @@
     <Content Include="OrderPingShen_CID.aspx" />
     <Content Include="OrderPingShen_Completed1.aspx" />
     <Content Include="OrderPingShen_Completed2.aspx" />
+    <Content Include="OrderPingShen_DaiFafang.aspx" />
+    <Content Include="OrderPingshen_DaiFafangController.aspx" />
     <Content Include="OrderPingShen_Dept.aspx" />
     <Content Include="OrderPingShen_DianQiEngineer.aspx" />
-    <Content Include="OrderPingShen_FilePublish.aspx" />
-    <Content Include="OrderPingShen_JiShuJianCha.aspx" />
-    <Content Include="OrderPingShen_JiShuZuGuanShenPi.aspx" />
+    <Content Include="OrderPingShen_Faqiren.aspx" />
     <Content Include="OrderPingShen_JiZuWanGong.aspx" />
     <Content Include="OrderPingShen_JiZuWanGongQueRen.aspx" />
     <Content Include="OrderPingShen_PMC.aspx" />
     <Content Include="OrderPingShen_QAD.aspx" />
-    <Content Include="OrderPingShen_SapBom.aspx" />
+    <Content Include="OrderPingShen_Report.aspx" />
+    <Content Include="OrderPingShen_ReportController.aspx" />
     <Content Include="OrderPingShen_SCM.aspx" />
     <Content Include="OrderPingShen_SheJiEngineer.aspx" />
     <Content Include="OrderPingShen_SheJiFuZeRen.aspx" />
     <Content Include="OrderPingShen_SheJiFuZeRen2.aspx" />
-    <Content Include="OrderPingShen_SheJiTiJiao.aspx" />
     <Content Include="OrderPingShen_Start.aspx" />
     <Content Include="OrderPingShen_Transfer.aspx" />
-    <Content Include="OrderPingShen_XinWuLiaoXinXiWeiHu.aspx" />
+    <Content Include="OrderWenjianFafang_BOM.aspx" />
+    <Content Include="OrderWenjianFafang_Completed.aspx" />
+    <Content Include="OrderWenjianFafang_Controller.aspx" />
+    <Content Include="OrderWenjianFafang_Fafang.aspx" />
+    <Content Include="OrderWenjianFafang_Jiancha.aspx" />
+    <Content Include="OrderWenjianFafang_Report.aspx" />
+    <Content Include="OrderWenjianFafang_ReportController.aspx" />
+    <Content Include="OrderWenjianFafang_Start.aspx" />
+    <Content Include="OrderWenjianFafang_Transfer.aspx" />
+    <Content Include="OrderWenjianFafang_WuliaoWeihu.aspx" />
+    <Content Include="OrderWenjianFafang_Zhuguan.aspx" />
     <Content Include="ProductReworkController.aspx" />
     <Content Include="ProductRework_CID.aspx" />
     <Content Include="ProductRework_Completed.aspx" />
@@ -409,6 +419,7 @@
     <Content Include="UserControls\Header.ascx" />
     <Content Include="UserControls\MaterialDetails.ascx" />
     <Content Include="UserControls\OrderDetails.ascx" />
+    <Content Include="UserControls\OrderPingshenItemDetails.ascx" />
     <Content Include="UserControls\ProductReworkCidDetails.ascx" />
     <Content Include="UserControls\ProductReworkDetails.ascx" />
     <Content Include="UserControls\ProductReworkMaterialsDetails.ascx" />
@@ -793,6 +804,7 @@
     <Compile Include="Models\ConsultationAndQuotationReportModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationReportSearchModel.cs" />
     <Compile Include="Models\ConsultationAndQuotationScmModel.cs" />
+    <Compile Include="Models\DaiFafangWenjianOrderModel.cs" />
     <Compile Include="Models\DeliveryModel.cs" />
     <Compile Include="Models\DeliveryReportModel.cs" />
     <Compile Include="Models\DeliveryReportSearchModel.cs" />
@@ -805,7 +817,11 @@
     <Compile Include="Models\FailureStartModel.cs" />
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\OrderPingShenModel.cs" />
+    <Compile Include="Models\OrderPingShenReportModel.cs" />
+    <Compile Include="Models\OrderPingShenReportSearchModel.cs" />
     <Compile Include="Models\OrderPingShenStartModel.cs" />
+    <Compile Include="Models\OrderWenjianFafangReportModel.cs" />
+    <Compile Include="Models\OrderWenjianFafangModel.cs" />
     <Compile Include="Models\ProductReworkCidModel.cs" />
     <Compile Include="Models\ProductReworkEngModel.cs" />
     <Compile Include="Models\ProductReworkFinModel.cs" />
@@ -865,6 +881,20 @@
     <Compile Include="OrderPingShen_Completed2.aspx.designer.cs">
       <DependentUpon>OrderPingShen_Completed2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OrderPingShen_DaiFafang.aspx.cs">
+      <DependentUpon>OrderPingShen_DaiFafang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_DaiFafang.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_DaiFafang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingshen_DaiFafangController.aspx.cs">
+      <DependentUpon>OrderPingshen_DaiFafangController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingshen_DaiFafangController.aspx.designer.cs">
+      <DependentUpon>OrderPingshen_DaiFafangController.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OrderPingShen_Dept.aspx.cs">
       <DependentUpon>OrderPingShen_Dept.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -879,26 +909,12 @@
     <Compile Include="OrderPingShen_DianQiEngineer.aspx.designer.cs">
       <DependentUpon>OrderPingShen_DianQiEngineer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OrderPingShen_FilePublish.aspx.cs">
-      <DependentUpon>OrderPingShen_FilePublish.aspx</DependentUpon>
+    <Compile Include="OrderPingShen_Faqiren.aspx.cs">
+      <DependentUpon>OrderPingShen_Faqiren.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OrderPingShen_FilePublish.aspx.designer.cs">
-      <DependentUpon>OrderPingShen_FilePublish.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OrderPingShen_JiShuJianCha.aspx.cs">
-      <DependentUpon>OrderPingShen_JiShuJianCha.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OrderPingShen_JiShuJianCha.aspx.designer.cs">
-      <DependentUpon>OrderPingShen_JiShuJianCha.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OrderPingShen_JiShuZuGuanShenPi.aspx.cs">
-      <DependentUpon>OrderPingShen_JiShuZuGuanShenPi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OrderPingShen_JiShuZuGuanShenPi.aspx.designer.cs">
-      <DependentUpon>OrderPingShen_JiShuZuGuanShenPi.aspx</DependentUpon>
+    <Compile Include="OrderPingShen_Faqiren.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Faqiren.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrderPingShen_JiZuWanGong.aspx.cs">
       <DependentUpon>OrderPingShen_JiZuWanGong.aspx</DependentUpon>
@@ -928,12 +944,19 @@
     <Compile Include="OrderPingShen_QAD.aspx.designer.cs">
       <DependentUpon>OrderPingShen_QAD.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OrderPingShen_SapBom.aspx.cs">
-      <DependentUpon>OrderPingShen_SapBom.aspx</DependentUpon>
+    <Compile Include="OrderPingShen_Report.aspx.cs">
+      <DependentUpon>OrderPingShen_Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OrderPingShen_SapBom.aspx.designer.cs">
-      <DependentUpon>OrderPingShen_SapBom.aspx</DependentUpon>
+    <Compile Include="OrderPingShen_Report.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPingShen_ReportController.aspx.cs">
+      <DependentUpon>OrderPingShen_ReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPingShen_ReportController.aspx.designer.cs">
+      <DependentUpon>OrderPingShen_ReportController.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrderPingShen_SCM.aspx.cs">
       <DependentUpon>OrderPingShen_SCM.aspx</DependentUpon>
@@ -963,13 +986,6 @@
     <Compile Include="OrderPingShen_SheJiFuZeRen2.aspx.designer.cs">
       <DependentUpon>OrderPingShen_SheJiFuZeRen2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OrderPingShen_SheJiTiJiao.aspx.cs">
-      <DependentUpon>OrderPingShen_SheJiTiJiao.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OrderPingShen_SheJiTiJiao.aspx.designer.cs">
-      <DependentUpon>OrderPingShen_SheJiTiJiao.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OrderPingShen_Start.aspx.cs">
       <DependentUpon>OrderPingShen_Start.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -984,12 +1000,82 @@
     <Compile Include="OrderPingShen_Transfer.aspx.designer.cs">
       <DependentUpon>OrderPingShen_Transfer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OrderPingShen_XinWuLiaoXinXiWeiHu.aspx.cs">
-      <DependentUpon>OrderPingShen_XinWuLiaoXinXiWeiHu.aspx</DependentUpon>
+    <Compile Include="OrderWenjianFafang_BOM.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_BOM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OrderPingShen_XinWuLiaoXinXiWeiHu.aspx.designer.cs">
-      <DependentUpon>OrderPingShen_XinWuLiaoXinXiWeiHu.aspx</DependentUpon>
+    <Compile Include="OrderWenjianFafang_BOM.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_BOM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Completed.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Completed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Completed.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Completed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Controller.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Controller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Controller.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Controller.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Fafang.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Fafang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Fafang.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Fafang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Jiancha.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Jiancha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Jiancha.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Jiancha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Report.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Report.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_ReportController.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_ReportController.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_ReportController.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_ReportController.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Start.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Start.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Start.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Transfer.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Transfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Transfer.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Transfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_WuliaoWeihu.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_WuliaoWeihu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_WuliaoWeihu.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_WuliaoWeihu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Zhuguan.aspx.cs">
+      <DependentUpon>OrderWenjianFafang_Zhuguan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderWenjianFafang_Zhuguan.aspx.designer.cs">
+      <DependentUpon>OrderWenjianFafang_Zhuguan.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProcessPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -1166,6 +1252,13 @@
     </Compile>
     <Compile Include="UserControls\OrderDetails.ascx.designer.cs">
       <DependentUpon>OrderDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderPingshenItemDetails.ascx.cs">
+      <DependentUpon>OrderPingshenItemDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\OrderPingshenItemDetails.ascx.designer.cs">
+      <DependentUpon>OrderPingshenItemDetails.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ProductReworkCidDetails.ascx.cs">
       <DependentUpon>ProductReworkCidDetails.ascx</DependentUpon>

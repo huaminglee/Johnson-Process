@@ -12,8 +12,8 @@ namespace Johnson.Process.Website
     {
         protected override void Transfer()
         {
-            TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(TaskId);
-            object objStepId = WebHelper.VocProcess.GetVariableValue(TaskId, "stepId");
+            TaskInfo taskInfo = WebHelper.ConsultationAndQuotationProcess.GetTaskInfo(TaskId);
+            object objStepId = WebHelper.ConsultationAndQuotationProcess.GetVariableValue(TaskId, "stepId");
             if (objStepId == null || string.IsNullOrEmpty(objStepId.ToString()))
             {
                 throw new ArgumentNullException("objStepId");

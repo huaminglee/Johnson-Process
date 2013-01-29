@@ -48,6 +48,10 @@ namespace Johnson.Process.WindowsService
                 consultationAndQuotationProcess.TaskTransferAddress = edoc2BaseUrl + "/JohnsonProcess/ConsultationAndQuotation_Transfer.aspx";
                 TaskEmailNotifySerivce consultationAndQuotationService = new TaskEmailNotifySerivce(consultationAndQuotationProcess, logger);
 
+                FailureProductProcess failureProductProcess = new FailureProductProcess("不合格品处理", "");
+                failureProductProcess.TaskTransferAddress = edoc2BaseUrl + "/JohnsonProcess/FailureProduct_Transfer.aspx";
+                TaskEmailNotifySerivce failureProductProcessService = new TaskEmailNotifySerivce(failureProductProcess, logger);
+
                 ProcessMailService processMailService = new ProcessMailService(logger);
 
                 while (true)
@@ -58,6 +62,7 @@ namespace Johnson.Process.WindowsService
                         deliveryService.Start();
                         consultationAndQuotationService.Start();
                         processMailService.Start();
+                        failureProductProcessService.Start();
 
                         Thread.Sleep(15000);
                     }
