@@ -142,7 +142,7 @@
     var edoc2BaseUrl = "<%= Johnson.Process.Website.WebHelper.EDoc2BaseUrl %>";
     var taskId = "<%= this.TaskId %>";
     var tempFolderId = "<%= this.ProcessFolderId %>";
-    var pingshenIncNo = <%= Request["incNo"] %>;
+    var pingshenIncNo = '<%= Request["incNo"] %>';
     if(!pingshenIncNo){
         alert("该流程只能从待发放文件订单中发起")
         $("#btnSubmit").hide();

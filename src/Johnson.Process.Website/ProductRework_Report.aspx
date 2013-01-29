@@ -96,19 +96,16 @@
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                流程状态
+                
             </td>
             <td style="width: 280px" class="textCol">
-                <select name="taskStatus">
-                    <option value="1">处理中</option>
-                    <option value="2">已完成</option>
-                </select>
+                
             </td>
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
                 <input type="reset" name="btnReset" value="重置"/>
             </td>
-            <td style="width: 280px" >
+            <td >
                 
             </td>
         </tr>
@@ -128,7 +125,7 @@
                 <th field="Quantity" resizable="false" width="100">数量</th>
                 <th field="OrderNumber" resizable="false" width="100">订单号</th>
                 <th field="StartDepartment" resizable="false" width="80">发出部门</th>
-                <th field="taskId" formatter="actionRender" resizable="false" width="120">操作</th>
+                <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -162,9 +159,9 @@
         });
     })
 
-    function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("返工返修")+"&taskid=" + takId;
-        var detailsLink = "ProductRework_Completed.aspx?taskId="+takId;
+    function actionRender(incidentNo, row){
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("返工返修");
+        var detailsLink = "ProductRework_Completed.aspx?incNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }
 </script>

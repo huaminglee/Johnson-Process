@@ -139,9 +139,10 @@
 <script language="javascript" type="text/javascript">
     var edoc2BaseUrl = "<%= Johnson.Process.Website.WebHelper.EDoc2BaseUrl %>";
     var taskId = "<%= this.TaskId %>";
+    var incNo = '<%= Request["incNo"] %>';
 
     $(function () {
-        $.get("FailureProductController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
+        $.get("FailureProductController.aspx?action=get", { taskId: taskId, incNo: incNo, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
             $("#basicInfoForm input[name='QEResult']:checked + label").after().css("color", "red");
             if(data.MrbResults){

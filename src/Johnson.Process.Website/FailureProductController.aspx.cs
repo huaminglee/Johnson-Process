@@ -91,13 +91,17 @@ namespace Johnson.Process.Website
         {
             try
             {
+                FailureProductForm form = null;
                 string taskId = Request["taskid"];
                 if (string.IsNullOrEmpty(taskId))
                 {
-                    throw new ArgumentNullException("taskId");
+                    form = WebHelper.FailureProductProcess.Get(int.Parse(Request["incNo"]));
                 }
-                taskId = taskId.Trim();
-                FailureProductForm form = WebHelper.FailureProductProcess.Get(taskId);
+                else
+                {
+                    taskId = taskId.Trim();
+                    form = WebHelper.FailureProductProcess.Get(taskId);
+                }
                 if (form == null)
                 {
                     form = new FailureProductForm();

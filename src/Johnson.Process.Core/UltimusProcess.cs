@@ -36,6 +36,9 @@ namespace Johnson.Process.Core
 
         public int GetIncidentStatus(int incidentNo)
         {
+#if DEBUG
+            return 1;
+#endif
             Incident incident = new Incident();
             if (!incident.LoadIncident(this.Name, incidentNo))
             {

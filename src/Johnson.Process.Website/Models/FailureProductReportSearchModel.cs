@@ -15,6 +15,5 @@ namespace Johnson.Process.Website.Models
         public string BJXLH;
         public string JZXLH;
         public string GYSMC;
-        public int taskStatus;
     }
 }

@@ -26,22 +26,13 @@ namespace Johnson.Process.Website.Models
             this.GYSMC = form.GYSMC;
             this.ZRBM = form.ZRBM;
             this.Quantity = form.Quantity;
-            this.qeResult = FailureResultHelper.MapName(form.QEResult);
-#if DEBUG
-            this.taskStatus = 1;
-#else
-            Task task = WebHelper.FailureProductProcess.GetStartTask(processForm.IncidentNo);
-            this.taskId = task.strTaskId;
-            this.incidentNo = task.nIncidentNo;
-            this.taskStatus = WebHelper.FailureProductProcess.GetIncidentStatus(task.nIncidentNo);
-#endif
+            this.qeResult = FailureResultHelper.MapName(form.QEResult); 
+            this.incidentNo = processForm.IncidentNo;
         }
 
         public string startUserName;
         public string startTime;
-        public string taskId;
         public int incidentNo;
-        public int taskStatus;
         public string No;
         public string ComponentCode;
         public string ComponentName;

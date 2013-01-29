@@ -12,6 +12,8 @@ namespace Johnson.Process.Core
 
         public int IncidentNo { set; get; }
 
+        public int Status { set; get; }
+
         public T Form { set; get; }
 
         public string ProcessType { set; get; }

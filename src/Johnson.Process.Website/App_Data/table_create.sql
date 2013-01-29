@@ -79,4 +79,6 @@ CREATE TABLE [dbo].[wf_myToDoTaskMail](
 
 GO
 
-
+alter table gz_johnson_process_form 
+add status int
+update gz_johnson_process_form set status = 2

@@ -163,6 +163,11 @@ namespace Johnson.Process.Core
             return result;
         }
 
+        public void Close()
+        {
+
+        }
+
         public void Return(string taskId, Variable[] listVars, string strMemo, string strSummary, object taskForm)
         {
             if (string.IsNullOrEmpty(taskId))
@@ -227,38 +232,48 @@ namespace Johnson.Process.Core
                 SqlDataReader reader = SqlHelper.ExecuteReader(conn, sql, System.Data.CommandType.Text, null);
                 if (reader.Read())
                 {
-                    try
-                    {
-                        processForm = new ProcessForm<TForm>();
-
-                        if (reader["id"] != DBNull.Value)
-                        {
-                            processForm.ID = int.Parse(reader["id"].ToString());
-                        }
-                        if (reader["processName"] != DBNull.Value)
-                        {
-                            processForm.ProcessName = reader["processName"].ToString();
-                        }
-                        if (reader["incident"] != DBNull.Value)
-                        {
-                            processForm.IncidentNo = int.Parse(reader["incident"].ToString());
-                        }
-                        if (reader["processType"] != DBNull.Value)
-                        {
-                            processForm.ProcessType = reader["processType"].ToString();
-                        }
-                        if (reader["processForm"] != DBNull.Value)
-                        {
-                            processForm.Form = JsonConvert.DeserializeObject<TForm>(reader["processForm"].ToString());
-                        }
-                    }
-                    catch
-                    {
-
-                    }
+                    processForm = this.Map(reader);
                 }
             }
 
+            return processForm;
+        }
+
+        private ProcessForm<TForm> Map(SqlDataReader reader)
+        {
+            ProcessForm<TForm> processForm = new ProcessForm<TForm>();
+
+            try
+            {
+                if (reader["id"] != DBNull.Value)
+                {
+                    processForm.ID = int.Parse(reader["id"].ToString());
+                }
+                if (reader["processName"] != DBNull.Value)
+                {
+                    processForm.ProcessName = reader["processName"].ToString();
+                }
+                if (reader["incident"] != DBNull.Value)
+                {
+                    processForm.IncidentNo = int.Parse(reader["incident"].ToString());
+                }
+                if (reader["processType"] != DBNull.Value)
+                {
+                    processForm.ProcessType = reader["processType"].ToString();
+                }
+                if (reader["processForm"] != DBNull.Value)
+                {
+                    processForm.Form = JsonConvert.DeserializeObject<TForm>(reader["processForm"].ToString());
+                }
+                if (reader["status"] != DBNull.Value)
+                {
+                    processForm.Status = int.Parse(reader["status"].ToString());
+                }
+            }
+            catch
+            {
+                processForm = null;
+            }
             return processForm;
         }
 
@@ -271,35 +286,10 @@ namespace Johnson.Process.Core
                 SqlDataReader reader = SqlHelper.ExecuteReader(conn, sql, System.Data.CommandType.Text, null);
                 while (reader.Read())
                 {
-                    try
+                    ProcessForm<TForm> processForm = this.Map(reader);
+                    if (processForm != null)
                     {
-                        ProcessForm<TForm> processForm = new ProcessForm<TForm>();
-
-                        if (reader["id"] != DBNull.Value)
-                        {
-                            processForm.ID = int.Parse(reader["id"].ToString());
-                        }
-                        if (reader["processName"] != DBNull.Value)
-                        {
-                            processForm.ProcessName = reader["processName"].ToString();
-                        }
-                        if (reader["incident"] != DBNull.Value)
-                        {
-                            processForm.IncidentNo = int.Parse(reader["incident"].ToString());
-                        }
-                        if (reader["processType"] != DBNull.Value)
-                        {
-                            processForm.ProcessType = reader["processType"].ToString();
-                        }
-                        if (reader["processForm"] != DBNull.Value)
-                        {
-                            processForm.Form = JsonConvert.DeserializeObject<TForm>(reader["processForm"].ToString());
-                        }
                         list.Add(processForm);
-                    }
-                    catch
-                    {
-
                     }
                 }
             }
@@ -309,7 +299,7 @@ namespace Johnson.Process.Core
 
         private void Insert(string processType, string json, int incident, string processName)
         {
-            string sql = string.Format("insert gz_johnson_process_form  values('{0}', {1}, '{2}', '{3}')",
+            string sql = string.Format("insert gz_johnson_process_form(processName, Incident, processForm, processType, status)  values('{0}', {1}, '{2}', '{3}', 1)",
                 processName, incident, json, processType);
             using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
             {
@@ -319,8 +309,18 @@ namespace Johnson.Process.Core
 
         protected void Update(int incident, string processName, string json, string processType)
         {
-            string sql = string.Format("update gz_johnson_process_form  set  processForm = '{0}' where Incident = {1} and processName = '{2}' and processType = '{3}'",
+            string sql = string.Format("update gz_johnson_process_form set processForm = '{0}' where Incident = {1} and processName = '{2}' and processType = '{3}'",
                 json, incident, processName, processType);
+            using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
+            {
+                SqlHelper.ExecuteNonQuery(conn, sql, System.Data.CommandType.Text, null);
+            }
+        }
+
+        protected void Update(int incident, string processName, string json, string processType, int status)
+        {
+            string sql = string.Format("update gz_johnson_process_form set processForm = '{0}', status = {4} where Incident = {1} and processName = '{2}' and processType = '{3}'",
+                json, incident, processName, processType, status);
             using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectString))
             {
                 SqlHelper.ExecuteNonQuery(conn, sql, System.Data.CommandType.Text, null);

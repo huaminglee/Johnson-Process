@@ -18,6 +18,5 @@ namespace Johnson.Process.Website.Models
         public string Quantity;
         public string OrderNumber;
         public string StartDepartment;
-        public int taskStatus;
     }
 }

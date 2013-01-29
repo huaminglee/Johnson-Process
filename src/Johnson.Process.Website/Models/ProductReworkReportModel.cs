@@ -26,14 +26,7 @@ namespace Johnson.Process.Website.Models
             this.Quantity = form.Quantity;
             this.OrderNumber = form.OrderNumber;
             this.StartDepartment = form.StartDepartment;
-#if DEBUG
-            this.taskStatus = 1;
-#else
-            Task task = WebHelper.ProductReworkProcess.GetStartTask(processForm.IncidentNo);
-            this.taskId = task.strTaskId;
-            this.incidentNo = task.nIncidentNo;
-            this.taskStatus = WebHelper.ProductReworkProcess.GetIncidentStatus(task.nIncidentNo);
-#endif
+            this.incidentNo = processForm.IncidentNo;
         }
 
         private string Map(ProductType productType)
@@ -60,7 +53,6 @@ namespace Johnson.Process.Website.Models
         public string OrderNumber;
         public string StartDepartment;
         public string taskId;
-        public int taskStatus;
         public int incidentNo;
     }
 }

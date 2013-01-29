@@ -64,13 +64,17 @@ namespace Johnson.Process.Website
         {
             try
             {
+                ProductReworkForm form = null;
                 string taskId = Request["taskid"];
                 if (string.IsNullOrEmpty(taskId))
                 {
-                    throw new ArgumentNullException("taskId");
+                    form = WebHelper.ProductReworkProcess.Get(int.Parse(Request["incNo"]));
                 }
-                taskId = taskId.Trim();
-                ProductReworkForm form = WebHelper.ProductReworkProcess.Get(taskId);
+                else
+                {
+                    taskId = taskId.Trim();
+                    form = WebHelper.ProductReworkProcess.Get(taskId);
+                }
                 if (form == null)
                 {
                     form = new ProductReworkForm();

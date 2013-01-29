@@ -46,10 +46,6 @@ namespace Johnson.Process.Website
                             continue;
                         }
                         ProductReworkReportModel model = new ProductReworkReportModel(form);
-                        if (model.taskStatus != 1)
-                        {
-                            continue;
-                        }
                         models.Add(model);
                     }
                     catch (Exception ex)
@@ -97,11 +93,6 @@ namespace Johnson.Process.Website
                             {
                                 continue;
                             }
-                        }
-
-                        if (model.taskStatus != searchModel.taskStatus)
-                        {
-                            continue;
                         }
 
                         if (!string.IsNullOrEmpty(searchModel.FailureNo))

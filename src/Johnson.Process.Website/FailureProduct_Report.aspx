@@ -82,19 +82,16 @@
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                流程状态
+                
             </td>
             <td style="width: 280px" class="textCol">
-                <select name="taskStatus">
-                    <option value="1">处理中</option>
-                    <option value="2">已完成</option>
-                </select>
+                
             </td>
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
                 <input type="reset" name="btnReset" value="重置"/>
             </td>
-            <td style="width: 280px" >
+            <td >
                 
             </td>
         </tr>
@@ -114,7 +111,7 @@
                 <th field="GYSMC" resizable="false" width="100">供应商名称</th>
                 <th field="ZRBM" resizable="false" width="80">责任部门</th>
                 <th field="qeResult" resizable="false" width="80">QE判定结果</th>
-                <th field="taskId" formatter="actionRender" resizable="false" width="120">操作</th>
+                <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -148,9 +145,9 @@
         });
     })
 
-    function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("不合格品处理")+"&taskid=" + takId;
-        var detailsLink = "FailureProduct_Completed.aspx?taskId="+takId;
+    function actionRender(incidentNo, row){
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("不合格品处理");
+        var detailsLink = "FailureProduct_Completed.aspx?incNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }
 </script>
