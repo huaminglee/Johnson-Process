@@ -34,8 +34,8 @@
                 发起日期
             </td>
             <td style="width: 280px" class="textCol dateRange">
-                <input name="startTimeStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
-                <input name="startTimeEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
+                <input name="startTimeStart" type="text" style="width: 85px" value="<%=DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />到
+                <input name="startTimeEnd" type="text" style="width: 85px" value="<%=DateTime.Now.ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />
             </td>
         </tr>
         <tr>
@@ -120,7 +120,9 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
-        $.get("FailureProduct_ReportController.aspx?action=get", { r: Math.random() }, function (data) {
+        var formValue = $("#searchForm").getFormValue();
+        var formJson = $.toJSON(formValue);
+        $.get("FailureProduct_ReportController.aspx?action=search", {formJson: formJson, r: Math.random() }, function (data) {
              $('#reportGrid').datagrid('loadData', data);
         });
 
@@ -130,7 +132,7 @@
             var formValue = $("#searchForm").getFormValue();
             var formJson = $.toJSON(formValue);
 
-            $.post("FailureProduct_ReportController.aspx?action=search", { formJson: formJson }, function (data) {
+            $.post("FailureProduct_ReportController.aspx?action=search", { formJson: formJson, r: Math.random() }, function (data) {
                 $('#reportGrid').datagrid('loadData', data);
             });
         });

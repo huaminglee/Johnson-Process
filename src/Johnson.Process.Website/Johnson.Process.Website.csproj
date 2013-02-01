@@ -808,6 +808,7 @@
     <Compile Include="Models\DeliveryModel.cs" />
     <Compile Include="Models\DeliveryReportModel.cs" />
     <Compile Include="Models\DeliveryReportSearchModel.cs" />
+    <Compile Include="Models\EasyGridModel.cs" />
     <Compile Include="Models\FailureProductReportModel.cs" />
     <Compile Include="Models\FailureProductReportSearchModel.cs" />
     <Compile Include="Models\OrderPingEngFuZeRenSubmitModel.cs" />

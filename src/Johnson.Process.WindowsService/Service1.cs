@@ -40,11 +40,11 @@ namespace Johnson.Process.WindowsService
                 vocProcess.TaskTransferAddress = edoc2BaseUrl + "/JohnsonProcess/Voc_Transfer.aspx";
                 TaskEmailNotifySerivce vocService = new TaskEmailNotifySerivce(vocProcess, logger);
 
-                VocProcess deliveryProcess = new VocProcess("货期管理");
+                DeliveryProcess deliveryProcess = new DeliveryProcess("货期管理");
                 deliveryProcess.TaskTransferAddress = edoc2BaseUrl + "/JohnsonProcess/Delivery_Transfer.aspx";
                 TaskEmailNotifySerivce deliveryService = new TaskEmailNotifySerivce(deliveryProcess, logger);
 
-                VocProcess consultationAndQuotationProcess = new VocProcess("技术咨询及报价");
+                ConsultationAndQuotationProcess consultationAndQuotationProcess = new ConsultationAndQuotationProcess("技术咨询及报价", "", "");
                 consultationAndQuotationProcess.TaskTransferAddress = edoc2BaseUrl + "/JohnsonProcess/ConsultationAndQuotation_Transfer.aspx";
                 TaskEmailNotifySerivce consultationAndQuotationService = new TaskEmailNotifySerivce(consultationAndQuotationProcess, logger);
 
@@ -58,10 +58,11 @@ namespace Johnson.Process.WindowsService
                 {
                     try
                     {
+                        processMailService.Start();
+
                         vocService.Start();
                         deliveryService.Start();
                         consultationAndQuotationService.Start();
-                        processMailService.Start();
                         failureProductProcessService.Start();
 
                         Thread.Sleep(15000);
