@@ -14,7 +14,7 @@ namespace Johnson.Process.EMail
     public class TaskEmailNotifySerivce
     {
         UltimusProcess _process;
-        private const string SUBJECT_TEMPLATE = "收到${initiateDate}由${initiator}发起了${processName}流程待办任务,${summary}";
+        private const string SUBJECT_TEMPLATE = "收到${initiateDate}由${initiator}发起了${processName}流程待办任务";
         private const string CONTENT_TEMPLATE = "您好：收到${initiateDate}由${initiator}发起了${processName}流程待办任务。</br>流程摘要:${summary}。<a href='${taskLink}' target='_blank'>查看详细信息</a>";
 
         ILog _logger;
@@ -70,6 +70,7 @@ namespace Johnson.Process.EMail
                         {
                             this._logger.Error(ex.Message, ex);
                         }
+                        Thread.Sleep(1000 * 30);
                     }
                 }
             }
