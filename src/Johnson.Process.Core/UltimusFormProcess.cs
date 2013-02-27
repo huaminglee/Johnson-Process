@@ -83,16 +83,21 @@ namespace Johnson.Process.Core
             }
 #endif
 
+            this.AddForm(taskForm, incidentNo);
+
+            TaskSendResult result = new TaskSendResult();
+            result.IncidentNo = incidentNo;
+            return result;
+        }
+
+        protected void AddForm(TForm taskForm, int incidentNo)
+        {
             string json = JsonConvert.SerializeObject(taskForm);
             Insert(taskForm.ToString(), json, incidentNo, this.Name);
 
             ProcessForm<TForm> processForm = this.Load(incidentNo);
             this._formList.Insert(0, processForm);
             this._formListDictionaryByIncNo.Add(processForm.IncidentNo, processForm);
-
-            TaskSendResult result = new TaskSendResult();
-            result.IncidentNo = incidentNo;
-            return result;
         }
 
         protected void Save(string taskId, object taskForm)
@@ -297,7 +302,7 @@ namespace Johnson.Process.Core
             return list;
         }
 
-        private void Insert(string processType, string json, int incident, string processName)
+        protected void Insert(string processType, string json, int incident, string processName)
         {
             string sql = string.Format("insert gz_johnson_process_form(processName, Incident, processForm, processType, status)  values('{0}', {1}, '{2}', '{3}', 1)",
                 processName, incident, json, processType);

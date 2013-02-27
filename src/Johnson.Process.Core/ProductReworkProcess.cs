@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Ultimus.WFServer;
+using Newtonsoft.Json;
 
 namespace Johnson.Process.Core
 {
@@ -119,6 +120,9 @@ namespace Johnson.Process.Core
             Variable[] variable = new Variable[]{
                     new Variable{ strVariableName = PARAM_DEAL_WAY, objVariableValue = new object[]{"Rework"}}
                 };
+
+            this.AddForm(form, this.GetIncidentNo(taskId));
+
             this.Send(taskId, variable, "", this.GetSummary(form), form);
         }
 
