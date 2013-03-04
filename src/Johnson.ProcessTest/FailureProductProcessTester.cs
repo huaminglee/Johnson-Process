@@ -19,7 +19,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -62,7 +62,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -104,7 +104,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -148,7 +148,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -191,7 +191,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -268,7 +268,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -331,7 +331,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -394,7 +394,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -457,7 +457,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -520,7 +520,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -612,7 +612,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -693,7 +693,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -775,7 +775,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -846,7 +846,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -914,7 +914,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -984,7 +984,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -1049,7 +1049,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -1119,7 +1119,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -1189,7 +1189,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             FailureProductForm form = new FailureProductForm { };
 
-            FailureProductProcess process = new FailureProductProcess(processName, "");
+            FailureProductProcess process = new FailureProductProcess(processName, "", "");
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 
@@ -1293,7 +1293,7 @@ namespace Johnson.ProcessTest
             string processName = "不合格品处理";
             ProductReworkForm form = new ProductReworkForm { };
 
-            ProductReworkProcess process = new FailureProductProcess(processName, "").ProductReworkProcess;
+            ProductReworkProcess process = new FailureProductProcess(processName, "", "").ProductReworkProcess;
             string qiAccount = "qi";
             string qiUltimusAccount = process.GetUltimusUserAccount(qiAccount);
 

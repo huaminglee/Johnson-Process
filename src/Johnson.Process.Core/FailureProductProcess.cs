@@ -10,11 +10,11 @@ namespace Johnson.Process.Core
     {
         private string _resultEmailContentTemplate;
 
-        public FailureProductProcess(string processName, string resultEmailContentTemplate)
+        public FailureProductProcess(string processName, string resultEmailContentTemplate, string productReworkChaosongMailTemplate)
             :base(processName)
         {
             this._resultEmailContentTemplate = resultEmailContentTemplate;
-            this.ProductReworkProcess = new ProductReworkProcess(processName);
+            this.ProductReworkProcess = new ProductReworkProcess(processName, productReworkChaosongMailTemplate);
         }
 
         /// <summary>

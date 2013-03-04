@@ -275,7 +275,7 @@ namespace Johnson.Process.Website
                 form.SCJHAP = SCJHAP;
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.ProductReworkProcess.Send(taskId, form);
+                WebHelper.ProductReworkProcess.PmcSend(taskId, form, Request["emailTo"]);
             }
             catch (Exception ex)
             {
@@ -308,7 +308,7 @@ namespace Johnson.Process.Website
                 form.XGCLDH = model.XGCLDH;
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.ProductReworkProcess.Send(taskId, form);
+                WebHelper.ProductReworkProcess.QC2Send(taskId, form, model.emailTo);
             }
             catch (Exception ex)
             {

@@ -40,10 +40,12 @@ namespace Johnson.Process.Core
 
         private const string PARAM_HAS_FIN_USER = "hasFinUser";
 
-        public ProductReworkProcess(string processName)
+        private string _chaosongEmailTemplate;
+
+        public ProductReworkProcess(string processName, string chaosongEmailTemplate)
             :base(processName)
         {
-
+            this._chaosongEmailTemplate = chaosongEmailTemplate;
         }
 
         private string GetSummary(ProductReworkForm form)
@@ -126,6 +128,24 @@ namespace Johnson.Process.Core
             this.Send(taskId, variable, "", this.GetSummary(form), form);
         }
 
+        public void PmcSend(string taskId, ProductReworkForm form, string emailTo)
+        {
+            if (!string.IsNullOrEmpty(emailTo))
+            {
+                this.SendResultEmail(form, emailTo);
+            }
+            this.Send(taskId, form);
+        }
+
+        public void QC2Send(string taskId, ProductReworkForm form, string emailTo)
+        {
+            if (!string.IsNullOrEmpty(emailTo))
+            {
+                this.SendResultEmail(form, emailTo);
+            }
+            this.Send(taskId, form);
+        }
+
         public void Send(string taskId, ProductReworkForm form)
         {
             if (form == null)
@@ -133,6 +153,84 @@ namespace Johnson.Process.Core
                 throw new ArgumentNullException("form");
             }
             this.Send(taskId, null, "", this.GetSummary(form), form);
+        }
+
+        private void SendResultEmail(ProductReworkForm form, string emailTo)
+        {
+            string content = this._chaosongEmailTemplate;
+            if (!string.IsNullOrEmpty(content))
+            {
+                content = content.Replace("${ProductType}", this.Map(form.ProductType))
+                    .Replace("${XLH}", form.XLH)
+                    .Replace("${Name}", form.Name)
+                    .Replace("${SapNo}", form.SapNo)
+                    .Replace("${Quantity}", form.Quantity)
+                    .Replace("${OrderNumber}", form.OrderNumber)
+                    .Replace("${StartDepartment}", form.StartDepartment)
+                    .Replace("${ProductArea}", form.ProductArea)
+                    .Replace("${CompletedTime}", form.CompletedTime.ToString("yyyy-MM-dd"))
+                    .Replace("${Source}", this.MapSouce(form.Source))
+                    .Replace("${FYCD}", this.MapFYCD(form.FYCD))
+                    .Replace("${FYCDZ}", form.FYCDZ)
+                    .Replace("${SPDH}", form.SPDH)
+                    .Replace("${FYQRR}", form.FYQRR)
+                    .Replace("${YYMS}", form.YYMS)
+                    .Replace("${WLJHAP}", form.WLJHAP)
+                    .Replace("${SCJHAP}", form.SCJHAP)
+                    .Replace("${FGJG}", this.MapFGJG(form.FGJG))
+                    .Replace("${XGCLDH}", form.XGCLDH);
+                ProcessEmailDataProvider.Current.Insert(emailTo, "返工返修抄送邮件", content);
+            }
+        }
+
+        public string Map(ProductType productType)
+        {
+            switch(productType)
+            {
+                case ProductType.LJ: return "零部件";
+                case ProductType.CP: return "产品";
+            }
+            return productType.ToString();
+        }
+
+        public string MapSouce(string souce)
+        {
+            switch (souce)
+            {
+                case "0": return "客户退货";
+                case "1": return "合同更改";
+                case "2": return "样机/小批机";
+                case "3": return "在线不合格";
+                case "4": return "库存不合格";
+                case "5": return "来料检验不合格";
+                case "6": return "其它";
+            }
+            return souce;
+        }
+
+        public string MapFYCD(string FYCD)
+        {
+            switch (FYCD)
+            {
+                case "0": return "客户";
+                case "1": return "办事处";
+                case "2": return "保险公司";
+                case "3": return "供方";
+                case "4": return "工厂内部";
+                case "5": return "无费用承担";
+            }
+            return FYCD;
+        }
+
+        public string MapFGJG(string FGJG)
+        {
+            switch (FGJG)
+            {
+                case "1": return "合格";
+                case "2": return "不合格";
+                case "3": return "其它";
+            }
+            return FGJG;
         }
     }
 }

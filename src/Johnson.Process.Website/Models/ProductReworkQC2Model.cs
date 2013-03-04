@@ -22,6 +22,8 @@ namespace Johnson.Process.Website.Models
         /// </summary>
         public string XGCLDH { set; get; }
 
+        public string emailTo { set; get; }
+
         public string submitRemark { set; get; }
     }
 }

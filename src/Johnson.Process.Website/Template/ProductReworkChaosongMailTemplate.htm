@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        table{border-collapse: collapse;}
+	    table th, table td{border: solid 1px; }
+    </style>
+</head>
+<body>
+    <h3>基本信息</h3>
+    <table>
+        <tr>
+            <td style="width:200px">产品类型</td>
+            <td style="width:200px">${ProductType}</td>
+            <td style="width:200px">系列号</td>
+            <td style="width:200px">${XLH}</td>
+        </tr>
+        <tr>
+            <td>名称</td>
+            <td>${Name}</td>
+            <td>SAP号</td>
+            <td>${SapNo}</td>
+        </tr>
+        <tr>
+            <td>数量</td>
+            <td>${Quantity}</td>
+            <td>订单号</td>
+            <td>${OrderNumber}</td>
+        </tr>
+        <tr>
+            <td>发出部门</td>
+            <td>${StartDepartment}</td>
+            <td>产品所在地</td>
+            <td>${ProductArea}</td>
+        </tr>
+        <tr>
+            <td>要求完成时间</td>
+            <td>${CompletedTime}</td>
+            <td>返工品来源</td>
+            <td>${Source}</td>
+        </tr>
+        <tr>
+            <td>费用承担(如无需计算费用,则费用承担亦为空白)</td>
+            <td>${FYCD}</td>
+            <td>承担者</td>
+            <td>${FYCDZ}</td>
+        </tr>
+        <tr>
+            <td>索赔单号</td>
+            <td>${SPDH}</td>
+            <td>确认人</td>
+            <td>${FYQRR}</td>
+        </tr>
+        <tr>
+            <td>原因描述</td>
+            <td colspan="3">${YYMS}</td>
+        </tr>
+        <tr>
+            <td>物料计划安排</td>
+            <td>${WLJHAP}</td>
+            <td>生产计划安排</td>
+            <td>${SCJHAP}</td>
+        </tr>
+        <tr>
+            <td>返工结果</td>
+            <td>${FGJG}</td>
+            <td>相关处理单号</td>
+            <td>${XGCLDH}</td>
+        </tr>
+    </table>
+</body>
+</html>

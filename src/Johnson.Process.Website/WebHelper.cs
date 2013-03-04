@@ -29,7 +29,8 @@ namespace Johnson.Process.Website
             VocProcess = new VocProcess("VOC");
 
             string failureProductResultMailTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["JohnsonProcessPath"] + "/Template/FailureProductResultMailTemplate.htm"));
-            FailureProductProcess = new FailureProductProcess("不合格品处理", failureProductResultMailTemplate);
+            string productReworkChaosongMailTemplate = File.ReadAllText(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["JohnsonProcessPath"] + "/Template/ProductReworkChaosongMailTemplate.htm"));
+            FailureProductProcess = new FailureProductProcess("不合格品处理", failureProductResultMailTemplate, productReworkChaosongMailTemplate);
             ProductReworkProcess = FailureProductProcess.ProductReworkProcess;
             OrderPingShenProcess = new OrderPingShenProcess("广州订单评审");
             OrderWenjianFafangProcess = new OrderWenjianFafangProcess("广州订单文件发放");

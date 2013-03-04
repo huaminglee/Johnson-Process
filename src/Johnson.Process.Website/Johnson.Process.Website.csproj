@@ -408,6 +408,7 @@
     <Content Include="Template\ConsultationAndQuotationToCsdMailTemplate.htm" />
     <Content Include="Template\ConsultationAndQuotation_TracerMailTemplate.htm" />
     <Content Include="Template\FailureProductResultMailTemplate.htm" />
+    <Content Include="Template\ProductReworkChaosongMailTemplate.htm" />
     <Content Include="UserControls\ConsultationAndQuotationDetails.ascx" />
     <Content Include="UserControls\ConsultationAndQuotationProductCsdFiceTPDetails.ascx" />
     <Content Include="UserControls\ConsultationAndQuotationProductCsdSalesTPDetails.ascx" />
@@ -1457,7 +1458,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>40954</DevelopmentServerPort>
+          <DevelopmentServerPort>3368</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

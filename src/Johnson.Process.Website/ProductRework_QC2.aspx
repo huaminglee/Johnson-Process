@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>返工返修单-QE</title>
+    <title>返工返修单-QC</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -23,7 +23,7 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="返工返修单-QE" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="返工返修单-QC" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
@@ -159,6 +159,15 @@
     <br />
     <form id="qcForm">
         <table class="formInfo">
+            <tr>
+                <td class="labelCol" style="width: 200px">
+                    邮件抄送给
+                </td>
+                <td class="textCol userEmailMultiSelect" colspan="3">
+                    <input type="text" name="emailTo" class="textInput multiemail" style="width: 500px;"/>
+                    <input type="button" value="选择" class="btnCommon" />
+                </td>
+            </tr>
             <tr>
                 <td style="width: 200px" class="labelCol">
                     返工结果<span style="color: Red" >*</span>
