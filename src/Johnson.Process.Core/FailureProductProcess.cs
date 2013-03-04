@@ -108,6 +108,10 @@ namespace Johnson.Process.Core
                 {
                     form = new FailureProductForm();
                     form.ProductType = ProductType.CP;
+                    if (reader[1] != DBNull.Value)
+                    {
+                        form.ComponentCode = reader.GetString(1);
+                    }
                     if (reader[2] != DBNull.Value)
                     {
                         form.ComponentName = reader.GetString(2);
