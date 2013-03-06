@@ -397,6 +397,7 @@
     <Content Include="ProductRework_Completed.aspx" />
     <Content Include="ProductRework_Eng.aspx" />
     <Content Include="ProductRework_Fin.aspx" />
+    <Content Include="ProductRework_F_QC.aspx" />
     <Content Include="ProductRework_PMC.aspx" />
     <Content Include="ProductRework_QC.aspx" />
     <Content Include="ProductRework_QC2.aspx" />
@@ -404,6 +405,7 @@
     <Content Include="ProductRework_Report.aspx" />
     <Content Include="ProductRework_ReportController.aspx" />
     <Content Include="ProductRework_Start.aspx" />
+    <Content Include="ProductRework_Start_Return.aspx" />
     <Content Include="ProductRework_Transfer.aspx" />
     <Content Include="Template\ConsultationAndQuotationToCsdMailTemplate.htm" />
     <Content Include="Template\ConsultationAndQuotation_TracerMailTemplate.htm" />
@@ -1121,6 +1123,13 @@
     <Compile Include="ProductRework_Fin.aspx.designer.cs">
       <DependentUpon>ProductRework_Fin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProductRework_F_QC.aspx.cs">
+      <DependentUpon>ProductRework_F_QC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductRework_F_QC.aspx.designer.cs">
+      <DependentUpon>ProductRework_F_QC.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProductRework_PMC.aspx.cs">
       <DependentUpon>ProductRework_PMC.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1169,6 +1178,13 @@
     </Compile>
     <Compile Include="ProductRework_Start.aspx.designer.cs">
       <DependentUpon>ProductRework_Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductRework_Start_Return.aspx.cs">
+      <DependentUpon>ProductRework_Start_Return.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductRework_Start_Return.aspx.designer.cs">
+      <DependentUpon>ProductRework_Start_Return.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductRework_Transfer.aspx.cs">
       <DependentUpon>ProductRework_Transfer.aspx</DependentUpon>

@@ -5,7 +5,7 @@
             不合格编号
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="FailureNo" type="text" readonly="readonly" class="textInput txtwidth " />
+            <input  name="FailureNo" type="text" class="textInput txtwidth " />
         </td>
         <td style="width: 200px" >
             

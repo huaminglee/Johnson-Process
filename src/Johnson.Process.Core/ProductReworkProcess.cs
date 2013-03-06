@@ -155,6 +155,15 @@ namespace Johnson.Process.Core
             this.Send(taskId, null, "", this.GetSummary(form), form);
         }
 
+        public void Return(string taskId, ProductReworkForm form)
+        {
+            if (form == null)
+            {
+                throw new ArgumentNullException("form");
+            }
+            this.Return(taskId, null, "", this.GetSummary(form), form);
+        }
+
         private void SendResultEmail(ProductReworkForm form, string emailTo)
         {
             string content = this._chaosongEmailTemplate;

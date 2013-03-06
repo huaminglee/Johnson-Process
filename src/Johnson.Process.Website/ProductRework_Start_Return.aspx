@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductRework_Start.aspx.cs" Inherits="Johnson.Process.Website.ProductRework_Start" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductRework_Start_Return.aspx.cs" Inherits="Johnson.Process.Website.ProductRework_Start_Return" %>
 <%@ Register Src="UserControls/Header.ascx" TagName="Header" TagPrefix="johnson" %>
 <%@ Register Src="UserControls/ProductReworkDetails.ascx" TagName="ProductReworkDetails" TagPrefix="johnson" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>返工返修单-开始</title>
+    <title>返工返修单-退回单</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -22,41 +22,11 @@
 </head>
 <body>
     <%--head --%>
-    
-    <table class="header">
-        <tr>
-            <td rowspan="2" style="width: 143px;">
-                <div style="float: left; margin-left: 10px;">
-                    <img alt="" src="images/logo.gif" />
-                </div>
-            </td>
-            <td style="padding-left:270px; width:350px; vertical-align: bottom; font-weight: bold; font-size:1.5em;">
-                    返工返修单-开始
-            </td>
-            <td style="padding-left:100px;">
-                <a href="FailureProduct_Start.aspx?taskId=<%= Request["taskId"] %>">不合格品处理</a>
-            </td>
-            <td >
-            
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: left; font-weight: bold;">
-                GZF ORDER FORM
-            </td>
-            <td >
-            
-            </td>
-            <td >
-            
-            </td>
-        </tr>
-    </table>
+    <johnson:Header runat="server" HeaderTitle="返工返修单-退回单" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
         <johnson:ProductReworkDetails runat="server" ID="productReworkDetails"></johnson:ProductReworkDetails>
-        
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
@@ -72,6 +42,19 @@
             </tr>
         </table>
     </form>
+
+    <div style="margin-top: 1em;">
+        <table id="remarks" style="width:900px;height:auto" title="提交信息">
+		    <thead>
+			    <tr> 
+				    <th field="StepName" resizable="false" width="200">流程步骤</th>
+                    <th field="ApproveUserName" resizable="false" width="100">提交人</th>
+                    <th field="ApproveTime" resizable="false" width="130">提交日期</th>
+                    <th field="Remark" resizable="false" width="300">备注</th>
+			    </tr>
+		    </thead>
+	    </table>
+    </div>
     
     <div class="panel-header" style="margin-top: 2em;"><div class="panel-title">备注</div></div>
     <form id="remarkForm">
@@ -102,6 +85,10 @@
     $(function () {
         $.get("ProductReworkController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data);
+            if(data.Files){
+                $('#attachments').datagrid('loadData', data.Files);
+            }
+            $("#remarks").datagrid("loadData", data.Approves);
         });
         
         $(".trNo").hide();
@@ -118,7 +105,7 @@
                 return;
             }
             $(this).attr("disabled", "disabled");
-            $.post("ProductReworkController.aspx?action=start", { taskId: taskId, formJson: objJson, submitRemark: objJson.submitRemark }, function (data) {
+            $.post("ProductReworkController.aspx?action=StartReturnSubmit", { taskId: taskId, formJson: objJson, submitRemark: objJson.submitRemark }, function (data) {
                 if (data.result != 0) {
                     alert(data.message);
                 }
@@ -132,5 +119,8 @@
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#basicInfoForm").validate();
         $("#attachments").attachmentsGrid1();
+        $("#remarks").datagrid({
+            rownumbers: true
+        });
     })
 </script>

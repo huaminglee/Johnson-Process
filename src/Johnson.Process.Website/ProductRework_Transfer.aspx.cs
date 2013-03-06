@@ -21,6 +21,18 @@ namespace Johnson.Process.Website
 
             switch (objStepId.ToString())
             {
+                case "11":
+                    if (taskInfo.IncidentNo > 0 && taskInfo.Status == 1)
+                    {
+                        Response.Redirect("ProductRework_Start_Return.aspx?" + Request.QueryString.ToString());
+                    }
+                    break;
+                case "91":
+                    if (taskInfo.Status == 1)
+                    {
+                        Response.Redirect("ProductRework_F_QC.aspx?" + Request.QueryString.ToString());
+                    }
+                    break;
                 case "101":
                     if (taskInfo.Status == 1)
                     {

@@ -27,7 +27,7 @@ namespace Johnson.Process.Website
             {
                 Response.Redirect("ProductRework_Transfer.aspx?" + Request.QueryString.ToString());
             }
-            if (objStepId.ToString() == "11")
+            if (objStepId.ToString() == "11" || objStepId.ToString() == "91")
             {
                 object dealWay = WebHelper.FailureProductProcess.GetVariableValue(TaskId, "dealWay");
                 if (dealWay != null && dealWay.ToString().Equals("Rework", StringComparison.InvariantCultureIgnoreCase))

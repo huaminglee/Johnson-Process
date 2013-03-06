@@ -9,3 +9,4 @@ form{margin: 0; padding:0;}
 .formInfo td{padding: 0.1em;}
 .btnCommon { border: 1px solid #81B7B7; background: url('../Images/button.gif') repeat-x center center; padding: 0.1em; color: #000; cursor: pointer; line-height: 20px; }
 label.error {color: Red;}
+.datagrid-body .datagrid-cell, .datagrid-footer .datagrid-cell {white-space: normal;word-wrap: break-word;}

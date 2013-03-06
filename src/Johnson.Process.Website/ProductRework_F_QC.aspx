@@ -1,12 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductRework_QE.aspx.cs" Inherits="Johnson.Process.Website.ProductRework_QE" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductRework_F_QC.aspx.cs" Inherits="Johnson.Process.Website.ProductRework_F_QC" %>
 <%@ Register Src="UserControls/Header.ascx" TagName="Header" TagPrefix="johnson" %>
 <%@ Register Src="UserControls/ProductReworkDetails.ascx" TagName="ProductReworkDetails" TagPrefix="johnson" %>
-<%@ Register Src="UserControls/ProductReworkCidDetails.ascx" TagName="ProductReworkCidDetails" TagPrefix="johnson" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>返工返修单-QE</title>
+    <title>返工返修单-QC</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -23,12 +22,14 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="返工返修单-QE" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="返工返修单-QC" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">
         <johnson:ProductReworkDetails runat="server" ID="productReworkDetails"></johnson:ProductReworkDetails>
-        <br />
+    </form>
+    <br />
+    <form id="qcForm">
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
@@ -39,72 +40,66 @@
                 </td>
             </tr>
         </table>
-
-        <div style="margin-top: 1em;">
-            <table id="engRequireGrid" style="width:900px;height:auto" title="技术要求">
-		        <thead>
-			        <tr>
-				        <th field="Name" resizable="false" width="300">所需物料名称</th>
-                        <th field="PN" resizable="false" width="100">P.N</th>
-                        <th field="Quantity" resizable="false" width="100">数量</th>
-			        </tr>
-		        </thead>
-	        </table>
-        </div>
-    
-        <div style="margin-top: 1em;">
-            <table id="engAttachments" style="width:900px;height:auto" title="技术要求附件信息">
-		        <thead>
-			        <tr> 
-				        <th field="FileName" resizable="false" width="200">附件名称</th>
-                        <th field="FileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			        </tr>
-		        </thead>
-	        </table>
-        </div>
-        
-        <div style="margin-top: 1em;">
-            <table id="cidGrid" style="width:900px;height:auto" title="返工方案">
-		        <thead>
-			        <tr>
-                        <th field="FanAn" resizable="false" width="500">返工方案</th>
-			        </tr>
-		        </thead>
-	        </table>
-        </div>
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    工时类型<span style="color: Red" >*</span>
+                    PMC<span style="color: Red" >*</span>
                 </td>
-                <td style="width: 280px" class="textCol">
-                    <select name="GSLX" class="textInput txtwidth required">
-                        <option value="Coil">Coil</option>
-                        <option value="钣金">钣金</option>
-                        <option value="装配线">装配线</option>
-                        <option value="其它">其它</option>
-                    </select>
+                <td class="textCol" style="width: 280px" >
+                    <div class="singleUserSelect">
+                        <input type="text" name="PmcUserAccount" class="userAccount"/>
+                        <input type="text" name="PmcUserName" class="textInput userName required"/>
+                        <input type="button" value="选择" class="btnCommon" />
+                    </div>
                 </td>
                 <td style="width: 200px" class="labelCol">
-                    工时<span style="color: Red" >*</span>
+                    FIN<span style="color: Red" >*</span>
                 </td>
-                <td style="width: 280px" class="textCol">
-                    <input name="GS" type="text" class="textInput txtwidth required" />
+                <td class="textCol">
+                    <div class="singleUserSelect">
+                        <input type="text" name="FinUserAccount" class="userAccount"/>
+                        <input type="text" name="FinUserName" class="textInput userName required"/>
+                        <input type="button" value="选择" class="btnCommon" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px" class="labelCol">
+                    ENG<span style="color: Red" >*</span>
+                </td>
+                <td class="textCol" style="width: 280px" >
+                    <div class="singleUserSelect">
+                        <input type="text" name="EngUserAccount" class="userAccount"/>
+                        <input type="text" name="EngUserName" class="textInput userName required"/>
+                        <input type="button" value="选择" class="btnCommon" />
+                    </div>
+                </td>
+                <td style="width: 200px" class="labelCol">
+                    QE<span style="color: Red" >*</span>
+                </td>
+                <td class="textCol">
+                    <div class="singleUserSelect">
+                        <input type="text" name="QEUserAccount" class="userAccount"/>
+                        <input type="text" name="QEUserName" class="textInput userName required"/>
+                        <input type="button" value="选择" class="btnCommon" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px" class="labelCol">
+                    工艺方案<span style="color: Red" >*</span>
+                </td>
+                <td class="textCol" colspan="3" >
+                    <div class="singleUserSelect">
+                        <input type="text" name="CidUserAccount" class="userAccount"/>
+                        <input type="text" name="CidUserName" class="textInput userName required"/>
+                        <input type="button" value="选择" class="btnCommon" />
+                    </div>
                 </td>
             </tr>
         </table>
-        <div style="margin-top: 1em;">
-            <table id="cidFiles" style="width:900px;height:auto" title="工艺附件信息">
-		        <thead>
-			        <tr> 
-				        <th field="FileName" resizable="false" width="200">附件名称</th>
-                        <th field="FileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			        </tr>
-		        </thead>
-	        </table>
-        </div>
     </form>
-    <br />
+
     <div style="margin-top: 1em;">
         <table id="remarks" style="width:900px;height:auto" title="提交信息">
 		    <thead>
@@ -136,7 +131,6 @@
 
     <div style="padding: 2em 0 0 30em;">
         <input type="button" id="btnSubmit" value="提交" />
-        <input type="button" id="btnReturn" value="退回" />
     </div>
 </body>
 </html>
@@ -147,19 +141,7 @@
     $(function () {
         $.get("ProductReworkController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
-            $("#qeForm").setFormValue(data);
-            if(data.Materials){
-                $('#engRequireGrid').datagrid('loadData', data.Materials);
-            }
-            if(data.EngFiles){
-                $('#engAttachments').datagrid('loadData', data.EngFiles);
-            }
-            if(data.GYFA){
-                $('#cidGrid').datagrid('loadData', data.GYFA);
-            }
-            if(data.CidFiles){
-                $('#cidFiles').datagrid('loadData', data.CidFiles);
-            }
+            $("#qcForm").setFormValue(data);
             if(data.Files){
                 $('#attachments').datagrid('loadData', data.Files);
             }
@@ -167,16 +149,16 @@
         });
 
         $("#btnSubmit").button().click(function () {
-            if(!$("#qeForm").validAndFocus()){
+            if (!$("#qcForm").validAndFocus()) {
                 return;
             }
-            var valueObj = $("#remarkForm, #qeForm").getFormValue();
-
+            var valueObj = $("#qcForm,#remarkForm").getFormValue();
+            var objJson = $.toJSON(valueObj);
             if (!confirm("您确实要提交吗？")) {
                 return;
             }
             $(this).attr("disabled", "disabled");
-            $.post("ProductReworkController.aspx?action=QESubmit", { taskId: taskId, submitRemark: valueObj.submitRemark}, function (data) {
+            $.post("ProductReworkController.aspx?action=QCSubmit", { taskId: taskId, formJson: objJson }, function (data) {
                 if (data.result != 0) {
                     alert(data.message);
                 }
@@ -186,23 +168,9 @@
                 }
             });
         });
-        $("#btnReturn").button().click(function () {
-            if (!confirm("您确实要退回吗？")) {
-                return;
-            }
-            var valueObj = $("#remarkForm, #qeForm").getFormValue();
-            $(this).attr("disabled", "disabled");
-            $.post("ProductReworkController.aspx?action=QEReturn", { taskId: taskId, submitRemark: valueObj.submitRemark }, function (data) {
-                if (data.result != 0) {
-                    alert(data.message);
-                }
-                else {
-                    alert("退回成功");
-                    closeWindow();
-                }
-            });
-        });
-        $("#attachments, #remarks, #engRequireGrid, #engAttachments, #cidGrid, #cidFiles").datagrid();
-        $("#qeForm").validate();
+        $(".singleUserSelect").singleSelectUser();
+        $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
+        $("#qcForm").validate();
+        $("#attachments, #remarks").datagrid();
     })
 </script>

@@ -131,6 +131,7 @@
 
     <div style="padding: 2em 0 0 30em;">
         <input type="button" id="btnSubmit" value="提交" />
+        <input type="button" id="btnReturn" value="退回" />
     </div>
 </body>
 </html>
@@ -141,18 +142,25 @@
     $(function () {
         $.get("ProductReworkController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
+            $("#basicInfoForm input[name='FailureNo']").removeAttr("readonly");
             $("#qcForm").setFormValue(data);
             if(data.Files){
                 $('#attachments').datagrid('loadData', data.Files);
             }
             $("#remarks").datagrid("loadData", data.Approves);
         });
+        
 
         $("#btnSubmit").button().click(function () {
             if (!$("#qcForm").validAndFocus()) {
                 return;
             }
             var valueObj = $("#qcForm,#remarkForm").getFormValue();
+            valueObj.FailureNo = $("#basicInfoForm").getFormValue().FailureNo;
+            if(!valueObj.FailureNo){
+                alert("请填写不合格品编号！");
+                return ;
+            }
             var objJson = $.toJSON(valueObj);
             if (!confirm("您确实要提交吗？")) {
                 return;
@@ -164,6 +172,23 @@
                 }
                 else {
                     alert("提交成功");
+                    closeWindow();
+                }
+            });
+        });
+        $("#btnReturn").button().click(function () {
+            if (!confirm("您确实要退回吗？")) {
+                return;
+            }
+            var valueObj = $("#qcForm,#remarkForm").getFormValue();
+            var objJson = $.toJSON(valueObj);
+            $(this).attr("disabled", "disabled");
+            $.post("ProductReworkController.aspx?action=QCReturn", { taskId: taskId, formJson: objJson }, function (data) {
+                if (data.result != 0) {
+                    alert(data.message);
+                }
+                else {
+                    alert("退回成功");
                     closeWindow();
                 }
             });

@@ -115,6 +115,7 @@
 
     <div style="padding: 2em 0 0 30em;">
         <input type="button" id="btnSubmit" value="提交" />
+        <input type="button" id="btnReturn" value="退回" />
     </div>
 </body>
 </html>
@@ -156,6 +157,28 @@
                 }
                 else {
                     alert("提交成功");
+                    closeWindow();
+                }
+            });
+        });
+        $("#btnReturn").button().click(function () {
+            if (!confirm("您确实要退回吗？")) {
+                return;
+            }
+            var engRequireData = $('#engRequireGrid').datagrid('getData');
+
+            var valueObj = $("#remarkForm").getFormValue();
+            valueObj.Materials = engRequireData.rows;
+            var engFiles = $('#engAttachments').datagrid('getData');
+            valueObj.EngFiles = engFiles.rows;
+            var objJson = $.toJSON(valueObj);
+            $(this).attr("disabled", "disabled");
+            $.post("ProductReworkController.aspx?action=EngReturn", { taskId: taskId, formJson: objJson }, function (data) {
+                if (data.result != 0) {
+                    alert(data.message);
+                }
+                else {
+                    alert("退回成功");
                     closeWindow();
                 }
             });

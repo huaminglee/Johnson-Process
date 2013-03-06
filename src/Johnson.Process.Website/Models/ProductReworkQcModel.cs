@@ -6,6 +6,8 @@ namespace Johnson.Process.Website.Models
 {
     public class ProductReworkQcModel
     {
+        public string FailureNo { set; get; }
+
         public string EngUserAccount { set; get; }
 
         public string EngUserName { set; get; }
