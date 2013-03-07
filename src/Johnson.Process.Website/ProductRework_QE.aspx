@@ -147,7 +147,6 @@
     $(function () {
         $.get("ProductReworkController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
             $("#basicInfoForm").setFormValue(data).setFormReadOnly();
-            $("#qeForm").setFormValue(data);
             if(data.Materials){
                 $('#engRequireGrid').datagrid('loadData', data.Materials);
             }
@@ -167,10 +166,7 @@
         });
 
         $("#btnSubmit").button().click(function () {
-            if(!$("#qeForm").validAndFocus()){
-                return;
-            }
-            var valueObj = $("#remarkForm, #qeForm").getFormValue();
+            var valueObj = $("#remarkForm").getFormValue();
 
             if (!confirm("您确实要提交吗？")) {
                 return;
@@ -190,7 +186,7 @@
             if (!confirm("您确实要退回吗？")) {
                 return;
             }
-            var valueObj = $("#remarkForm, #qeForm").getFormValue();
+            var valueObj = $("#remarkForm").getFormValue();
             $(this).attr("disabled", "disabled");
             $.post("ProductReworkController.aspx?action=QEReturn", { taskId: taskId, submitRemark: valueObj.submitRemark }, function (data) {
                 if (data.result != 0) {
@@ -203,6 +199,5 @@
             });
         });
         $("#attachments, #remarks, #engRequireGrid, #engAttachments, #cidGrid, #cidFiles").datagrid();
-        $("#qeForm").validate();
     })
 </script>

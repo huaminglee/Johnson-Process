@@ -107,17 +107,6 @@
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    QAD方案确认<span style="color: Red" >*</span>
-                </td>
-                <td style="width: 280px" class="textCol">
-                    <input name="QADFAQR" value="OK" type="radio" checked="checked"/><label>OK</label>
-                    <input name="QADFAQR" value="NG" type="radio"/><label>NG</label>
-                </td>
-            </tr>
-        </table>
-        <table class="formInfo">
-            <tr>
-                <td style="width: 200px" class="labelCol">
                     物料计划安排<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 280px" class="textCol">
