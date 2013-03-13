@@ -221,6 +221,7 @@
                 return;
             }
             var valueObj = $("#remarkForm, #cidForm").getFormValue();
+            var cidGridData = $('#cidGrid').datagrid('getData');
             valueObj.GYFA = cidGridData.rows;
             var cidFiles = $('#cidFiles').datagrid('getData');
             valueObj.CidFiles = cidFiles.rows;
