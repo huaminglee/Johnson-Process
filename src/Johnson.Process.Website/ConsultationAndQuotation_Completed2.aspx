@@ -171,9 +171,9 @@
 </html>
 <script language="javascript" type="text/javascript">
     var edoc2BaseUrl = "<%= Johnson.Process.Website.WebHelper.EDoc2BaseUrl %>";
-    var taskId = "<%= this.TaskId %>";
+    var incidentNo = '<%= Request["incidentNo"] %>';
     $(function () {
-        $.get("ConsultationAndQuotationController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
+        $.get("ConsultationAndQuotationController.aspx?action=get", { incidentNo: incidentNo, r: Math.random() }, function (data) {
             $("#basicInfoForm, #marketingForm, #otherReplyForm, #tracerForm, #productLeadTimeForm").setFormValue(data);
             var products = { "total": data.products.length, "rows": data.products, "footer": [{ "productModel": "合计", "quantity": 0, "marketingTotalSalesTP": 0}] };
             $('#gridProductSalesTp').datagrid('loadData', products);

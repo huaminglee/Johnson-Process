@@ -39,17 +39,17 @@ namespace Johnson.Process.Website
 
                 foreach (ProcessForm<ConsultationAndQuotationForm> form in forms)
                 {
-                    if (form.Form == null)
-                    {
-                        continue;
-                    }
                     try
                     {
-                        ConsultationAndQuotationReportModel model = new ConsultationAndQuotationReportModel(form);
-                        if (model.taskStatus != 1)
+                        if (form.Form == null)
                         {
                             continue;
                         }
+                        if (!WebHelper.InDateRange(form.Form.ApplyTime, DateTime.Now.AddDays(-20), DateTime.Now))
+                        {
+                            continue;
+                        }
+                        ConsultationAndQuotationReportModel model = new ConsultationAndQuotationReportModel(form);
                         models.Add(model);
                     }
                     catch (Exception ex)
@@ -97,11 +97,6 @@ namespace Johnson.Process.Website
                             {
                                 continue;
                             }
-                        }
-
-                        if (model.taskStatus != searchModel.taskStatus)
-                        {
-                            continue;
                         }
 
                         if (!string.IsNullOrEmpty(searchModel.applyUserDepartmentName))

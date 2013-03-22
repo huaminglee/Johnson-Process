@@ -103,12 +103,15 @@
 
     <div id="pnlProductsSalesTP">
         <div style="margin-top: 1em;">
-            <table id="gridProductSalesTp" style="width:900px;height:auto" title="(第一部分) 非标报价">
+            <table id="gridProductSalesTp" style="width:auto;height:auto" title="(第一部分) 非标报价">
 		        <thead>
 			        <tr>
 				        <th field="productModel" resizable="false" width="150">产品型号</th>
                         <th field="quantity" resizable="false" width="50">数量</th>
-                        <th field="remark" resizable="false" width="200">SQ描述</th>
+                        <th field="remark" resizable="false" width="100">SQ描述</th>
+                        <th field="csdWithoutSalesTP" resizable="false" width="155" formatter="priceFormatter">FICE TP/(Without VAT)</th>
+                        <th field="csdWithSalesTP" resizable="false" width="140" formatter="priceFormatter">FICE TP/(With VAT)</th>
+                        <th field="csdTotalSalesTP" resizable="false" width="100" formatter="priceFormatter">FICE TP/总和</th>
                         <th field="marketingWithoutSalesTP" resizable="false" width="155" formatter="priceFormatter">Sales TP/(Without VAT)</th>
                         <th field="marketingWithSalesTP" resizable="false" width="140" formatter="priceFormatter">Sales TP/(With VAT)</th>
                         <th field="marketingTotalSalesTP" resizable="false" width="120" formatter="priceFormatter">Sales TP/总和</th>

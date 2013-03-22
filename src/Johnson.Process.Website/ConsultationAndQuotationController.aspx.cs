@@ -720,13 +720,21 @@ namespace Johnson.Process.Website
         {
             try
             {
-                string taskId = Request["taskid"];
-                if (string.IsNullOrEmpty(taskId))
+                ConsultationAndQuotationForm form = null;
+                if (Request["incidentNo"] != null)
                 {
-                    throw new ArgumentNullException("taskId");
+                    form = WebHelper.ConsultationAndQuotationProcess.Get(int.Parse(Request["incidentNo"]));
                 }
-                taskId = taskId.Trim();
-                ConsultationAndQuotationForm form = WebHelper.ConsultationAndQuotationProcess.Get(taskId);
+                else
+                {
+                    string taskId = Request["taskid"];
+                    if (string.IsNullOrEmpty(taskId))
+                    {
+                        throw new ArgumentNullException("taskId");
+                    }
+                    taskId = taskId.Trim();
+                    form = WebHelper.ConsultationAndQuotationProcess.Get(taskId);
+                }
                 ConsultationAndQuotationModel model = null;
                 if (form != null)
                 {

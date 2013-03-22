@@ -46,6 +46,10 @@ namespace Johnson.Process.Website
                         {
                             continue;
                         }
+                        if (!WebHelper.InDateRange(form.Form.StartTime, DateTime.Now.AddDays(-20), DateTime.Now))
+                        {
+                            continue;
+                        }
                         FailureProductReportModel model = new FailureProductReportModel(form);
                         models.Add(model);
                     }

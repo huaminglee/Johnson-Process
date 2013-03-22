@@ -23,21 +23,13 @@ namespace Johnson.Process.Website.Models
             this.projectName = form.ProjectName;
             this.succeedProbability = form.SucceedProbability;
             this.marketingEngineer = form.MarketingEngineer;
-#if DEBUG
-            this.taskStatus = 1;
-#else
-            Task task = WebHelper.ConsultationAndQuotationProcess.GetStartTask(processForm.IncidentNo);
-            this.taskId = task.strTaskId;
-            this.incidentNo = task.nIncidentNo;
-            this.taskStatus = WebHelper.ConsultationAndQuotationProcess.GetIncidentStatus(task.nIncidentNo);
-#endif
+
+            this.incidentNo = processForm.IncidentNo;
         }
         public string applyUserName;
         public string applyTime;
         public string applyUserDepartmentName;
-        public string taskId;
         public int incidentNo;
-        public int taskStatus;
         public string projectName;
         public string succeedProbability;
         public string expectSignContact;

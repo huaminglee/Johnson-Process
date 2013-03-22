@@ -34,8 +34,8 @@
                 申请日期
             </td>
             <td style="width: 280px" class="textCol dateRange">
-                <input name="applyDateStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
-                <input name="applyTimeEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
+                <input name="applyTimeStart" type="text" style="width: 85px" value="<%=DateTime.Now.AddDays(-20).ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />到
+                <input name="applyTimeEnd" type="text" style="width: 85px" value="<%=DateTime.Now.ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />
             </td>
         </tr>
         <tr>
@@ -69,13 +69,10 @@
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                流程状态
+                
             </td>
             <td style="width: 280px" class="textCol">
-                <select name="taskStatus">
-                    <option value="1">处理中</option>
-                    <option value="2">已完成</option>
-                </select>
+                
             </td>
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
@@ -98,7 +95,7 @@
 				<th field="projectName" resizable="false" width="100">项目名称</th>
                 <th field="succeedProbability" resizable="false" width="80">成功机会(%)</th>
                 <th field="expectSignContact" resizable="false" width="120">预计签合同日期</th>
-                <th field="taskId" formatter="actionRender" resizable="false" width="120">操作</th>
+                <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -132,9 +129,9 @@
         });
     })
 
-    function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName=" + encodeURIComponent("技术咨询及报价") + "&taskid=" + takId;
-        var detailsLink = "ConsultationAndQuotation_Completed2.aspx?taskId="+takId;
+    function actionRender(incidentNo, row){
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+incidentNo+"&pProcessName=" + encodeURIComponent("技术咨询及报价");
+        var detailsLink = "ConsultationAndQuotation_Completed2.aspx?incidentNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }
 </script>
