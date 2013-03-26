@@ -75,6 +75,15 @@
     <form id="usersForm">
         <table class="formInfo">
             <tr>
+                <td class="labelCol" style="width: 200px">
+                    邮件抄送给
+                </td>
+                <td class="textCol userEmailMultiSelect" >
+                    <input type="text" name="emailTo" class="textInput multiemail" style="width: 500px;"/>
+                    <input type="button" value="选择" class="btnCommon" />
+                </td>
+            </tr>
+            <tr>
                 <td style="width: 200px" class="labelCol">
                     PMC<span style="color: Red" >*</span>
                 </td>
@@ -164,14 +173,7 @@
                     if (!$("#usersForm").validAndFocus()) {
                         return;
                     }
-                    var valueObj = $("#basicInfoForm").getFormValue();
-                    var remarkObj = $.getFormValue("#remarkForm");
-                    valueObj.submitRemark = remarkObj.submitRemark;
-                    var users = $("#usersForm").getFormValue();
-                    valueObj.PmcUserAccount = users.pmcUserAccount;
-                    valueObj.PmcUserName = users.pmcUserName;
-                    valueObj.QEUserAccount = users.qeUserAccount;
-                    valueObj.QEUserName = users.qeUserName;
+                    var valueObj = $("#basicInfoForm,#usersForm,#remarkForm").getFormValue();
                     var objJson = $.toJSON(valueObj);
                     if (!confirm("您确实要提交吗？")) {
                         return;
@@ -189,6 +191,7 @@
                 }
             });
         });
+        $(".userEmailMultiSelect").userEmailMultiSelect();
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#basicInfoForm, #searchForm").validate();

@@ -28,22 +28,10 @@ namespace Johnson.Process.Website.Models
             this.needCompleteDate = form.NeedCompleteDate.ToString("yyyy-MM-dd");
             this.projectName = form.ProjectName;
             this.tempMeasure = form.TempMeasure;
-
-#if DEBUG
-            this.taskStatus = 1;
-#else
-            Task task = WebHelper.VocProcess.GetStartTask(processForm.IncidentNo);
-            this.taskId = task.strTaskId;
-            this.incidentNo = task.nIncidentNo;
-            this.taskStatus = WebHelper.VocProcess.GetIncidentStatus(task.nIncidentNo);
-#endif
+            this.incidentNo = processForm.IncidentNo;
         }
 
-        public string taskId { set; get; }
-
         public int incidentNo { set; get; }
-
-        public int taskStatus { set; get; }
 
         public string applyUserName { set; get; }
 

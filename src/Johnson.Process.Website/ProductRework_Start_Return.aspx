@@ -29,10 +29,19 @@
         <johnson:ProductReworkDetails runat="server" ID="productReworkDetails"></johnson:ProductReworkDetails>
         <table class="formInfo">
             <tr>
+                <td class="labelCol" style="width: 200px">
+                    邮件抄送给
+                </td>
+                <td class="textCol userEmailMultiSelect" >
+                    <input type="text" name="emailTo" class="textInput multiemail" style="width: 500px;"/>
+                    <input type="button" value="选择" class="btnCommon" />
+                </td>
+            </tr>
+            <tr>
                 <td style="width: 200px" class="labelCol">
                     QC<span style="color: Red" >*</span>
                 </td>
-                <td class="textCol" style="width: 280px" >
+                <td class="textCol" >
                     <div class="singleUserSelect">
                         <input type="text" name="QCUserAccount" class="userAccount"/>
                         <input type="text" name="QCUserName" class="textInput userName required"/>
@@ -105,7 +114,7 @@
                 return;
             }
             $(this).attr("disabled", "disabled");
-            $.post("ProductReworkController.aspx?action=StartReturnSubmit", { taskId: taskId, formJson: objJson, submitRemark: objJson.submitRemark }, function (data) {
+            $.post("ProductReworkController.aspx?action=StartReturnSubmit", { taskId: taskId, formJson: objJson, submitRemark: objJson.submitRemark, emailTo: valueObj.emailTo }, function (data) {
                 if (data.result != 0) {
                     alert(data.message);
                 }
@@ -115,6 +124,7 @@
                 }
             });
         });
+        $(".userEmailMultiSelect").userEmailMultiSelect();
         $(".singleUserSelect").singleSelectUser();
         $(".dateISO").datepicker({ changeMonth: true, changeYear: true });
         $("#basicInfoForm").validate();

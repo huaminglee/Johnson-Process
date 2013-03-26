@@ -52,7 +52,7 @@ namespace Johnson.Process.WindowsService
                 failureProductProcess.TaskTransferAddress = edoc2BaseUrl + "/JohnsonProcess/FailureProduct_Transfer.aspx";
                 TaskEmailNotifySerivce failureProductProcessService = new TaskEmailNotifySerivce(failureProductProcess, logger);
 
-                ProcessMailService processMailService = new ProcessMailService(logger);
+                ProcessMailService processMailService = new ProcessMailService(logger, edoc2BaseUrl);
 
                 while (true)
                 {

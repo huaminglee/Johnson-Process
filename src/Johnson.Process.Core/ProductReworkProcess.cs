@@ -53,7 +53,7 @@ namespace Johnson.Process.Core
             return "";
         }
 
-        public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, ProductReworkForm form)
+        public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, ProductReworkForm form, string emailTo)
         {
             if (string.IsNullOrEmpty(startUserAccount))
             {
@@ -77,7 +77,21 @@ namespace Johnson.Process.Core
             form.StartUserAccount = startUserAccount;
             form.StartUserName = startUserName;
             form.StartTime = DateTime.Now;
-            return this.Start(startUserAccount, taskId, variable, "", this.GetSummary(form), form);
+            TaskSendResult result = this.Start(startUserAccount, taskId, variable, "", this.GetSummary(form), form);
+            if (!string.IsNullOrEmpty(emailTo))
+            {
+                this.SendResultEmail(form, emailTo, result.IncidentNo);
+            }
+            return result;
+        }
+
+        public void StartReturnSubmit(string taskId, ProductReworkForm form, string emailTo)
+        {
+            if (!string.IsNullOrEmpty(emailTo))
+            {
+                this.SendResultEmail(form, emailTo, this.GetIncidentNo(taskId));
+            }
+            this.Send(taskId, form);
         }
 
         public void QCSend(string taskId, ProductReworkForm form)
@@ -132,7 +146,7 @@ namespace Johnson.Process.Core
         {
             if (!string.IsNullOrEmpty(emailTo))
             {
-                this.SendResultEmail(form, emailTo);
+                this.SendResultEmail(form, emailTo, this.GetIncidentNo(taskId));
             }
             this.Send(taskId, form);
         }
@@ -141,7 +155,7 @@ namespace Johnson.Process.Core
         {
             if (!string.IsNullOrEmpty(emailTo))
             {
-                this.SendResultEmail(form, emailTo);
+                this.SendResultEmail(form, emailTo, this.GetIncidentNo(taskId));
             }
             this.Send(taskId, form);
         }
@@ -164,7 +178,7 @@ namespace Johnson.Process.Core
             this.Return(taskId, null, "", this.GetSummary(form), form);
         }
 
-        private void SendResultEmail(ProductReworkForm form, string emailTo)
+        private void SendResultEmail(ProductReworkForm form, string emailTo, int incidentNo)
         {
             string content = this._chaosongEmailTemplate;
             if (!string.IsNullOrEmpty(content))
@@ -187,7 +201,8 @@ namespace Johnson.Process.Core
                     .Replace("${WLJHAP}", form.WLJHAP)
                     .Replace("${SCJHAP}", form.SCJHAP)
                     .Replace("${FGJG}", this.MapFGJG(form.FGJG))
-                    .Replace("${XGCLDH}", form.XGCLDH);
+                    .Replace("${XGCLDH}", form.XGCLDH)
+                    .Replace("${incidentNo}", incidentNo.ToString());
                 ProcessEmailDataProvider.Current.Insert(emailTo, "返工返修抄送邮件", content);
             }
         }

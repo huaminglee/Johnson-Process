@@ -66,5 +66,7 @@ namespace Johnson.Process.Website.Models
         public string QEUserName { set; get; }
 
         public string submitRemark { set; get; }
+
+        public string emailTo { set; get; }
     }
 }

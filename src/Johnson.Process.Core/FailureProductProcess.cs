@@ -227,7 +227,7 @@ namespace Johnson.Process.Core
             return form.ComponentName + "," + form.Remark;
         }
 
-        public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, FailureProductForm form)
+        public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, FailureProductForm form, string emailTo)
         {
             form.StartUserAccount = startUserAccount;
             form.StartUserName = startUserName;
@@ -253,7 +253,21 @@ namespace Johnson.Process.Core
                     new Variable{ strVariableName = PARAM_PMC_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.PmcUserAccount)} },
                     new Variable{ strVariableName = PARAM_QE_USER, objVariableValue = new object[]{this.GetUltimusUserAccount(form.QEUserAccount)} }
                 };
-            return this.Start(startUserAccount, taskId, variable, "", this.GetSummary(form), form);
+            TaskSendResult result = this.Start(startUserAccount, taskId, variable, "", this.GetSummary(form), form);
+            if (!string.IsNullOrEmpty(emailTo))
+            {
+                this.SendResultEmail(form, emailTo);
+            }
+            return result;
+        }
+
+        public void StartResubmit(string taskId, FailureProductForm form, string emailTo)
+        {
+            this.Send(taskId, null, "", this.GetSummary(form), form);
+            if (!string.IsNullOrEmpty(emailTo))
+            {
+                this.SendResultEmail(form, emailTo);
+            }
         }
 
         public void QESend(string taskId, FailureProductForm form, string emailTo)

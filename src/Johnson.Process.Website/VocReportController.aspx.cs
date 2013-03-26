@@ -48,10 +48,6 @@ namespace Johnson.Process.Website
                             continue;
                         }
                         VocReportModel model = new VocReportModel(form);
-                        if (model.taskStatus != 1)
-                        {
-                            continue;
-                        }
                         models.Add(model);
                     }
                     catch (Exception ex)
@@ -155,11 +151,6 @@ namespace Johnson.Process.Website
                             {
                                 continue;
                             }
-                        }
-
-                        if (model.taskStatus != searchModel.taskStatus)
-                        {
-                            continue;
                         }
 
                         if (!string.IsNullOrEmpty(searchModel.vocCode))

@@ -42,8 +42,8 @@
                 投诉日期
             </td>
             <td style="width: 280px" class="textCol">
-                <input  name="applyTimeStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
-                <input  name="applyTimeEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
+                <input  name="applyTimeStart" type="text" style="width: 85px" value="<%=DateTime.Now.AddDays(-20).ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />到
+                <input  name="applyTimeEnd" type="text" style="width: 85px" value="<%=DateTime.Now.ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />
             </td>
             <td style="width: 200px" class="labelCol">
                 项目名称
@@ -82,13 +82,10 @@
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                流程状态
+                
             </td>
             <td style="width: 280px" class="textCol">
-                <select name="taskStatus">
-                    <option value="1">处理中</option>
-                    <option value="2">已完成</option>
-                </select>
+                
             </td>
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
@@ -112,7 +109,7 @@
                 <th field="tempMeasure" resizable="false" width="90">现场临时行动</th>
                 <th field="needCompleteDate" resizable="false" width="120">临时行动完成时间</th>
                 <th field="faultRemark" resizable="false" width="120">故障描述</th>
-                <th field="taskId" formatter="actionRender" resizable="false" width="120">操作</th>
+                <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -121,7 +118,10 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
-        $.get("VocReportController.aspx?action=get", { r: Math.random() }, function (data) {
+        var formValue = $("#searchForm").getFormValue();
+        var formJson = $.toJSON(formValue);
+
+        $.get("VocReportController.aspx?action=search", { formJson: formJson, r: Math.random() }, function (data) {
              $('#complaintGrid').datagrid('loadData', data);
         });
 
@@ -153,9 +153,9 @@
         });
     })
 
-    function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName=VOC&taskid=" + takId;
-        var detailsLink = "Voc_Completed2.aspx?taskId="+takId;
+    function actionRender(incidentNo, row){
+        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName=VOC";
+        var detailsLink = "Voc_Completed2.aspx?incidentNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }
 </script>

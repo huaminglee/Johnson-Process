@@ -21,7 +21,7 @@
             数量<span style="color: Red" >*</span>
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="Quantity" type="text" class="textInput txtwidth required digits" />
+            <input  name="Quantity" type="text" class="textInput txtwidth required number" />
         </td>
     </tr>
 </table>

@@ -623,13 +623,21 @@ namespace Johnson.Process.Website
         {
             try
             {
-                string taskId = Request["taskid"];
-                if (string.IsNullOrEmpty(taskId))
+                VocForm form = null;
+                if (!string.IsNullOrEmpty(Request["incidentNo"]))
                 {
-                    throw new ArgumentNullException("taskId");
+                    form = WebHelper.VocProcess.Get(int.Parse(Request["incidentNo"]));
                 }
-                taskId = taskId.Trim();
-                VocForm form = WebHelper.VocProcess.Get(taskId);
+                else
+                {
+                    string taskId = Request["taskid"];
+                    if (string.IsNullOrEmpty(taskId))
+                    {
+                        throw new ArgumentNullException("taskId");
+                    }
+                    taskId = taskId.Trim();
+                    form = WebHelper.VocProcess.Get(taskId);
+                }
                 VocModel model = null;
                 if (form != null)
                 {

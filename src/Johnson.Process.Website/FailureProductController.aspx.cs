@@ -178,7 +178,7 @@ namespace Johnson.Process.Website
                 form.Approves = new List<TaskApproveInfo>();
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.FailureProductProcess.Start(currentUserName, WebHelper.CurrentUserInfo.UserRealName, taskId, form);
+                WebHelper.FailureProductProcess.Start(currentUserName, WebHelper.CurrentUserInfo.UserRealName, taskId, form, model.emailTo);
             }
             catch (Exception ex)
             {
@@ -209,7 +209,7 @@ namespace Johnson.Process.Website
                 TaskInfo taskInfo = WebHelper.FailureProductProcess.GetTaskInfo(taskId);
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
-                WebHelper.FailureProductProcess.Send(taskId, form);
+                WebHelper.FailureProductProcess.StartResubmit(taskId, form, model.emailTo);
             }
             catch (Exception ex)
             {

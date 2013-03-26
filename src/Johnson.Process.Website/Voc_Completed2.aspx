@@ -110,8 +110,9 @@
 <script language="javascript" type="text/javascript">
     var edoc2BaseUrl = "<%= Johnson.Process.Website.WebHelper.EDoc2BaseUrl %>";
     var taskId = "<%= this.TaskId %>";
+    var incidentNo = '<%= Request["incidentNo"] %>';
     $(function () {
-        $.get("VocController.aspx?action=get", { taskId: taskId, r: Math.random() }, function (data) {
+        $.get("VocController.aspx?action=get", { taskId: taskId, incidentNo: incidentNo, r: Math.random() }, function (data) {
             $("#basicInfoForm, #reasonAndMeasuresForm").setFormValue(data).setFormReadOnly();
             if (data.files) {
                 $('#attachments').datagrid('loadData', data.files);
