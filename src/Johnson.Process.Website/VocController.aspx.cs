@@ -186,6 +186,7 @@ namespace Johnson.Process.Website
                     }
                 }
                 form.SolutionsFiles = solutionsFiles;
+                form.SolutionsStartTime = DateTime.Now;
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = model.submitRemark, StepName = taskInfo.StepName });
 
                 WebHelper.VocProcess.Send(model.taskId, form);
@@ -370,6 +371,7 @@ namespace Johnson.Process.Website
                 form.MeasureUserName = model.measureUserName;
                 form.MeasureUserAccount = model.measureUserAccount;
                 form.Reason = model.reason;
+                form.ReasonWanchengShijian = DateTime.Now;
 
                 List<ProcessFile> reasonFiles = new List<ProcessFile>();
                 if (model.reasonFiles != null)
@@ -580,6 +582,7 @@ namespace Johnson.Process.Website
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(taskId);
                 VocForm form = WebHelper.VocProcess.Get(taskId);
+                form.WanchengShijian = DateTime.Now;
 
                 form.Approves.Insert(0, new TaskApproveInfo { ApproveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ApproveUserName = WebHelper.CurrentUserInfo.UserRealName, Remark = submitRemark, StepName = taskInfo.StepName });
 

@@ -90,6 +90,7 @@
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
                 <input type="reset" name="btnReset" value="重置"/>
+                <input type="button" name="btnDaochu" value="导出Excel"/>
             </td>
             <td style="width: 280px" >
                 
@@ -141,9 +142,27 @@
             $.post("VocReportController.aspx?action=search", { formJson: formJson }, function (data) {
                 $('#complaintGrid').datagrid('loadData', data);
             });
+            return false;
         });
 
         $("#searchForm input[name='btnReset']").button();
+
+        $("#searchForm input[name='btnDaochu']").button().click(function(){
+            var self = this;
+            $(this).attr("disabled", "disabled");
+            var formValue = $("#searchForm").getFormValue();
+            var formJson = $.toJSON(formValue);
+
+            $.post("VocReportController.aspx?action=Daochu", { formJson: formJson }, function (data) {
+                $(self).removeAttr("disabled");
+                if(data.result != 0){
+                    alert(data.message);
+                    return;
+                }
+                window.open("VocReportExcelDownload.aspx?file="+data.data);
+            });
+            return false;
+        });
 
         $("#complaintGrid").datagrid({
             rownumbers: true,

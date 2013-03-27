@@ -65,6 +65,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI2">
+      <HintPath>..\..\lib\NPOI2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -433,6 +436,7 @@
     <Content Include="VocController.aspx" />
     <Content Include="VocReport.aspx" />
     <Content Include="VocReportController.aspx" />
+    <Content Include="VocReportExcelDownload.aspx" />
     <Content Include="VOC_ActionCompleted.aspx" />
     <Content Include="Voc_ASD.aspx" />
     <Content Include="Voc_Completed.aspx" />
@@ -1348,6 +1352,13 @@
     <Compile Include="VocReportController.aspx.designer.cs">
       <DependentUpon>VocReportController.aspx</DependentUpon>
     </Compile>
+    <Compile Include="VocReportExcelDownload.aspx.cs">
+      <DependentUpon>VocReportExcelDownload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VocReportExcelDownload.aspx.designer.cs">
+      <DependentUpon>VocReportExcelDownload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="VOC_ActionCompleted.aspx.cs">
       <DependentUpon>VOC_ActionCompleted.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1459,6 +1470,7 @@
   <ItemGroup>
     <None Include="jquery-easyui\themes\default\images\Thumbs.db" />
     <None Include="jquery-easyui\themes\gray\images\Thumbs.db" />
+    <None Include="VOC REPORT.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Johnson.Process.Core\Johnson.Process.Core.csproj">

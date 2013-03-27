@@ -46,6 +46,8 @@ namespace Johnson.Process.Core
 
         public string Reason { set; get; }
 
+        public DateTime? ReasonWanchengShijian { set; get; }
+
         public string Measures { set; get; }
 
         public List<ProcessFile> Files { set; get; }
@@ -56,10 +58,14 @@ namespace Johnson.Process.Core
 
         public string Solutions { set; get; }
 
+        public DateTime? SolutionsStartTime { set; get; }
+
         public DateTime? SolutionsCompleteTime { set; get; }
 
         public List<ProcessFile> SolutionsFiles { set; get; }
 
         public List<TaskApproveInfo> Approves { set; get; }
+
+        public DateTime? WanchengShijian { set; get; }
     }
 }

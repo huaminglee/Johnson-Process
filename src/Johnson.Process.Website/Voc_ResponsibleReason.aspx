@@ -35,12 +35,11 @@
                     预防措施负责人<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 380px" class="textCol" colspan="3">
-                    <input type="text" id="txtResponsibleUserRealName" name="measureUserName" class="textInput required" readonly="readonly"/>
-                    <input type="text" style="display: none" id="txtResponsibleUserAccount" name="measureUserAccount" value=""/>
-                    <%--<input type="text" id="txtResponsibleUserRealName" name="measureUserName" class="textInput required" />
-                    <input type="text" id="txtResponsibleUserAccount" name="measureUserAccount" value=""/>--%>
-                    <input type="hidden" id="txtResponsibleUserId" value="0"/>
-                    <input type="button" onclick="selUser('txtResponsibleUserId','txtResponsibleUserAccount','txtResponsibleUserRealName',false);" value="选择" class="btnCommon" />
+                    <div class="singleUserSelect">
+                        <input type="text" name="measureUserAccount" class="userAccount"/>
+                        <input type="text" name="measureUserName" class="textInput required userName"/>
+                        <input type="button" value="选择" class="btnCommon" />
+                    </div>
                 </td>
             </tr>
         </table>
