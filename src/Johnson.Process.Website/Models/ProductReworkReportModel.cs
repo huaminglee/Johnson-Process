@@ -27,6 +27,10 @@ namespace Johnson.Process.Website.Models
             this.OrderNumber = form.OrderNumber;
             this.StartDepartment = form.StartDepartment;
             this.incidentNo = processForm.IncidentNo;
+            this.GS = form.GS;
+            this.GSFY = form.GSFY.ToString();
+            this.WLFY = form.WLFY.ToString();
+            this.ZFY = form.ZFY.ToString();
         }
 
         private string Map(ProductType productType)
@@ -54,5 +58,21 @@ namespace Johnson.Process.Website.Models
         public string StartDepartment;
         public string taskId;
         public int incidentNo;
+        public string GS { set; get; }
+
+        /// <summary>
+        /// 工时费用
+        /// </summary>
+        public string GSFY { set; get; }
+
+        /// <summary>
+        /// 物料费用
+        /// </summary>
+        public string WLFY { set; get; }
+
+        /// <summary>
+        /// 总费用
+        /// </summary>
+        public string ZFY { set; get; }
     }
 }

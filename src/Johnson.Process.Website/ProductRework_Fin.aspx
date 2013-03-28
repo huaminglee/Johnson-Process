@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>返工返修单-QC</title>
+    <title>返工返修单-FIN</title>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css" />
@@ -23,7 +23,7 @@
 </head>
 <body>
     <%--head --%>
-    <johnson:Header runat="server" HeaderTitle="返工返修单-QC" ID="header"></johnson:Header>
+    <johnson:Header runat="server" HeaderTitle="返工返修单-FIN" ID="header"></johnson:Header>
     <div class="panel-header" ><div class="panel-title">基本信息</div></div>
 
     <form id="basicInfoForm">

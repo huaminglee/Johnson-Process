@@ -124,6 +124,30 @@
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
+                    工时费用(FIN 费用核算)<span style="color: Red" >*</span>
+                </td>
+                <td style="width: 280px" class="textCol">
+                    <input name="GSFY" type="text" class="textInput txtwidth required number" />
+                </td>
+                <td style="width: 200px" class="labelCol">
+                    物料费用<span style="color: Red" >*</span>
+                </td>
+                <td style="width: 280px" class="textCol">
+                    <input name="WLFY" type="text" class="textInput txtwidth required number" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px" class="labelCol">
+                    总费用<span style="color: Red" >*</span>
+                </td>
+                <td colspan="3" class="textCol">
+                    <input name="ZFY" readonly="readonly" type="text" class="textInput txtwidth required number" />
+                </td>
+            </tr>
+        </table>
+        <table class="formInfo">
+            <tr>
+                <td style="width: 200px" class="labelCol">
                     返工结果<span style="color: Red" >*</span>
                 </td>
                 <td style="width: 280px" class="textCol">

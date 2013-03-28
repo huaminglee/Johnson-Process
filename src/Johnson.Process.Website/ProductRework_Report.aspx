@@ -33,8 +33,8 @@
                 发起日期
             </td>
             <td style="width: 280px" class="textCol dateRange">
-                <input name="startTimeStart" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />到
-                <input name="startTimeEnd" type="text" style="width: 85px" class="textInput txtwidth  dateISO" />
+                <input name="startTimeStart" type="text" style="width: 85px" value="<%=DateTime.Now.AddDays(-10).ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />到
+                <input name="startTimeEnd" type="text" style="width: 85px" value="<%=DateTime.Now.ToString("yyyy-MM-dd") %>" class="textInput txtwidth  dateISO" />
             </td>
         </tr>
         <tr>
@@ -48,8 +48,11 @@
                 产品类型
             </td>
             <td style="width: 280px" class="textCol">
-                <input name="ProductType" type="radio" value="0" checked="checked"/><label>零部件</label>
-                <input name="ProductType" type="radio" value="1" /><label>产品</label>
+                <select name="ProductType">
+                    <option></option>
+                    <option value="0">零部件</option>
+                    <option value="1">产品</option>
+                </select>
             </td>
         </tr>
         <tr>
@@ -112,7 +115,7 @@
     </table>
 
     </form>
-    <table id="reportGrid" style="width:1100px;height:auto" title="不合格信息">
+    <table id="reportGrid" style="width:auto;height:auto" title="返工返修信息">
 		<thead>
 			<tr>
 				<th field="startUserName" resizable="false" width="80">发起人</th>
@@ -125,6 +128,10 @@
                 <th field="Quantity" resizable="false" width="100">数量</th>
                 <th field="OrderNumber" resizable="false" width="100">订单号</th>
                 <th field="StartDepartment" resizable="false" width="80">发出部门</th>
+                <th field="GS" resizable="false" width="80">工时</th>
+                <th field="GSFY" resizable="false" width="80">工时费用</th>
+                <th field="WLFY" resizable="false" width="80">物料费用</th>
+                <th field="ZFY" resizable="false" width="80">总费用</th>
                 <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
@@ -134,9 +141,6 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
-        $.get("ProductRework_ReportController.aspx?action=get", { r: Math.random() }, function (data) {
-             $('#reportGrid').datagrid('loadData', data);
-        });
 
         $(".dateRange").dateRange();
 
@@ -147,7 +151,7 @@
             $.post("ProductRework_ReportController.aspx?action=search", { formJson: formJson }, function (data) {
                 $('#reportGrid').datagrid('loadData', data);
             });
-        });
+        }).click();
 
         $("#searchForm input[name='btnReset']").button();
 
