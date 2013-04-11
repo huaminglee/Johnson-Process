@@ -10,7 +10,7 @@
     </tr>
     <tr>
         <td style="width: 200px" class="labelCol">
-            P.N<span style="color: Red" >*</span>
+            SAP<span style="color: Red" >*</span>
         </td>
         <td style="width: 280px" class="textCol">
             <input  name="PN" type="text" class="textInput txtwidth required" />
@@ -21,7 +21,7 @@
             数量<span style="color: Red" >*</span>
         </td>
         <td style="width: 280px" class="textCol">
-            <input  name="Quantity" type="text" class="textInput txtwidth required number" />
+            <input  name="Quantity" type="text" class="textInput txtwidth required" />
         </td>
     </tr>
 </table>

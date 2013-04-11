@@ -65,7 +65,7 @@
 		        <thead>
 			        <tr>
 				        <th field="Name" resizable="false" width="300">所需物料名称</th>
-                        <th field="PN" resizable="false" width="100">P.N</th>
+                        <th field="PN" resizable="false" width="100">SAP</th>
                         <th field="Quantity" resizable="false" width="100">数量</th>
 			        </tr>
 		        </thead>

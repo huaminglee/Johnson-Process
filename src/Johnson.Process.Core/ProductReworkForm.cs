@@ -10,7 +10,7 @@ namespace Johnson.Process.Core
 
         public string PN { set; get; }
 
-        public double Quantity { set; get; }
+        public string Quantity { set; get; }
     }
 
     /// <summary>
