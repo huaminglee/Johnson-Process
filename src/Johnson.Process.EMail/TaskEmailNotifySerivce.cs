@@ -28,6 +28,7 @@ namespace Johnson.Process.EMail
 
         public void Start()
         {
+            this._logger.Info("Task email server starting");
             Tasklist tasklist = null;
             try
             {
@@ -82,6 +83,7 @@ namespace Johnson.Process.EMail
             {
                 tasklist = null;
             }
+            this._logger.Info("Task email server end");
         }
 
         private bool Notified(Task task)

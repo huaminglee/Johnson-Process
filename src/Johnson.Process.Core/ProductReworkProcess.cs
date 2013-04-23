@@ -50,7 +50,7 @@ namespace Johnson.Process.Core
 
         private string GetSummary(ProductReworkForm form)
         {
-            return "";
+            return string.Format("不合格品编号:{0},名称:{1}", form.FailureNo, form.Name);
         }
 
         public TaskSendResult Start(string startUserAccount, string startUserName, string taskId, ProductReworkForm form, string emailTo)

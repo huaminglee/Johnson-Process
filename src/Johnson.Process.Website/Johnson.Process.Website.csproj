@@ -396,6 +396,7 @@
     <Content Include="OrderWenjianFafang_WuliaoWeihu.aspx" />
     <Content Include="OrderWenjianFafang_Zhuguan.aspx" />
     <Content Include="ProductReworkController.aspx" />
+    <Content Include="ProductReworkReportExcelDownload.aspx" />
     <Content Include="ProductRework_CID.aspx" />
     <Content Include="ProductRework_Completed.aspx" />
     <Content Include="ProductRework_Eng.aspx" />
@@ -1099,6 +1100,13 @@
       <DependentUpon>ProductReworkController.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductReworkReportModel.cs" />
+    <Compile Include="ProductReworkReportExcelDownload.aspx.cs">
+      <DependentUpon>ProductReworkReportExcelDownload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductReworkReportExcelDownload.aspx.designer.cs">
+      <DependentUpon>ProductReworkReportExcelDownload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProductRework_CID.aspx.cs">
       <DependentUpon>ProductRework_CID.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

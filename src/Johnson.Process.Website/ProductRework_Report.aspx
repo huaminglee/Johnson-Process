@@ -107,6 +107,7 @@
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
                 <input type="reset" name="btnReset" value="重置"/>
+                <input type="button" name="btnDaochu" value="导出Excel"/>
             </td>
             <td >
                 
@@ -161,10 +162,27 @@
             singleSelect: true,
             nowrap: false
         });
+
+        $("#searchForm input[name='btnDaochu']").button().click(function(){
+            var self = this;
+            $(this).attr("disabled", "disabled");
+            var formValue = $("#searchForm").getFormValue();
+            var formJson = $.toJSON(formValue);
+
+            $.post("ProductRework_ReportController.aspx?action=Daochu", { formJson: formJson }, function (data) {
+                $(self).removeAttr("disabled");
+                if(data.result != 0){
+                    alert(data.message);
+                    return;
+                }
+                window.open("ProductReworkReportExcelDownload.aspx?file="+data.data);
+            });
+            return false;
+        });
     })
 
     function actionRender(incidentNo, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("返工返修");
+        var processLink = "/EDoc2v4/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("返工返修");
         var detailsLink = "ProductRework_Completed.aspx?incNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }

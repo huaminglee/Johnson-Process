@@ -101,7 +101,7 @@
     })
 
     function actionRender(incidentNo, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("广州订单文件发放");
+        var processLink = "/EDoc2v4/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("广州订单文件发放");
         var detailsLink = "OrderWenjianFafang_Completed.aspx?incNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }

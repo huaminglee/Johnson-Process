@@ -204,11 +204,7 @@ namespace Johnson.Process.Website
                 List<ProcessForm<VocForm>> forms = WebHelper.VocProcess.Get();
 
                 forms = Guolv(searchModel, forms);
-#if DEBUG
                 string websiteBasePath = Server.MapPath("~/");
-#else
-                string websiteBasePath = Server.MapPath("~/JohnsonProcess");
-#endif
                 string vocReportXlsPath = Path.Combine(websiteBasePath, "VOC REPORT.xls");
                 FileStream stream = File.OpenRead(vocReportXlsPath);
                 HSSFWorkbook workbook = new HSSFWorkbook(stream);

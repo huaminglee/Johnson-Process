@@ -34,6 +34,7 @@ namespace Johnson.Process.Website
             ProductReworkProcess = FailureProductProcess.ProductReworkProcess;
             OrderPingShenProcess = new OrderPingShenProcess("广州订单评审");
             OrderWenjianFafangProcess = new OrderWenjianFafangProcess("广州订单文件发放");
+            ApiManager.Api.Connect();
         }
 
         public static EDoc2UserInfo CurrentUserInfo

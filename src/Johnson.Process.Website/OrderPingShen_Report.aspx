@@ -225,7 +225,7 @@
     })
 
     function actionRender(takId, row){
-        var processLink = "../WorkFlow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("订单评审")+"&taskid=" + takId;
+        var processLink = "/EDoc2v4/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("订单评审")+"&taskid=" + takId;
         var detailsLink = "OrderPingShen_Completed1.aspx?taskId="+takId;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }

@@ -37,6 +37,19 @@ namespace Johnson.Process.Core
         CP
     }
 
+    public class ProductReworkFormHelper
+    {
+        public static string Map(ProductType type)
+        {
+            switch (type)
+            {
+                case ProductType.CP: return "产品";
+                case ProductType.LJ: return "零部件";
+            }
+            return "";
+        }
+    }
+
     public class ProductReworkForm
     {
         public ProductReworkForm()

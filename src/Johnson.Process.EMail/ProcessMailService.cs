@@ -11,12 +11,12 @@ namespace Johnson.Process.EMail
     public class ProcessMailService
     {
         ILog _logger;
-        string _edoc2BaseUrl;
+        string _liuchengBaseUrl;
 
-        public ProcessMailService(ILog _logger, string edoc2BaseUrl)
+        public ProcessMailService(ILog _logger, string liuchengBaseUrl)
         {
             this._logger = _logger;
-            this._edoc2BaseUrl = edoc2BaseUrl;
+            this._liuchengBaseUrl = liuchengBaseUrl;
         }
 
         public void Start()
@@ -26,7 +26,7 @@ namespace Johnson.Process.EMail
                 List<ProcessEmailEntity> entitys = ProcessEmailDataProvider.Current.SelectStatusIs0();
                 foreach (ProcessEmailEntity entity in entitys)
                 {
-                    MailSender.Current.Send(entity.Email, entity.Subject, "", "", true, entity.Content.Replace("${edoc2BaseUrl}", this._edoc2BaseUrl));
+                    MailSender.Current.Send(entity.Email, entity.Subject, "", "", true, entity.Content.Replace("${liuchengBaseUrl}", this._liuchengBaseUrl));
                     ProcessEmailDataProvider.Current.UpdateStatusAs1(entity.ID);
                 }
             }
