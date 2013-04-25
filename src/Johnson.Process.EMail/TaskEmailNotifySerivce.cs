@@ -28,8 +28,8 @@ namespace Johnson.Process.EMail
 
         public void Start()
         {
-            this._logger.Info("Task email server starting");
-            Tasklist tasklist = null;
+            this._logger.Info("Task email server starting:" + this._process.Name);
+            Tasklist tasklist = null; 
             try
             {
                 ApiManager.NewApi();
@@ -37,6 +37,7 @@ namespace Johnson.Process.EMail
                 if (tasklist != null)
                 {
                     int taskCount = tasklist.GetTasksCount();
+                    this._logger.Info("task count:" + taskCount);
                     for (int i = 0; i < taskCount; i++)
                     {
                         try
@@ -71,7 +72,6 @@ namespace Johnson.Process.EMail
                         {
                             this._logger.Error(ex.Message, ex);
                         }
-                        Thread.Sleep(1000 * 30);
                     }
                 }
             }

@@ -182,7 +182,7 @@
     })
 
     function actionRender(incidentNo, row){
-        var processLink = "/EDoc2v4/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("返工返修");
+        var processLink = "/EDoc2v4/Workflow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+row.incidentNo+"&pProcessName="+encodeURIComponent("不合格品处理");
         var detailsLink = "ProductRework_Completed.aspx?incNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }

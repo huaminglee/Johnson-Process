@@ -130,7 +130,7 @@
     })
 
     function actionRender(incidentNo, row){
-        var processLink = "/EDoc2v4/Common/UltimusWfTxStatus.aspx?pIncidentNo="+incidentNo+"&pProcessName=" + encodeURIComponent("技术咨询及报价");
+        var processLink = "/EDoc2v4/Workflow/Common/UltimusWfTxStatus.aspx?pIncidentNo="+incidentNo+"&pProcessName=" + encodeURIComponent("技术咨询及报价");
         var detailsLink = "ConsultationAndQuotation_Completed2.aspx?incidentNo="+incidentNo;
         return "<a style='padding: 5px;' target='_blank' href='"+processLink+"'>流程信息</a><a target='_blank' href='"+detailsLink+"'>详细信息</a>";
     }
