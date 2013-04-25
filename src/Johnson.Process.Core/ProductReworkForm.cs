@@ -48,6 +48,19 @@ namespace Johnson.Process.Core
             }
             return "";
         }
+        public static string MapFYCD(string code)
+        {
+            switch (code)
+            {
+                case "0": return "客户";
+                case "1": return "办事处";
+                case "2": return "保险公司";
+                case "3": return "供方";
+                case "4": return "工厂内部";
+                case "5": return "无费用承担";
+            }
+            return "";
+        }
     }
 
     public class ProductReworkForm

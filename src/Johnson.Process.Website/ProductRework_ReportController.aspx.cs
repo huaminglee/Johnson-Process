@@ -314,7 +314,7 @@ namespace Johnson.Process.Website
                         row.CreateCell(11).SetCellValue(form.Form.GSFY.ToString());
                         row.CreateCell(12).SetCellValue(form.Form.WLFY.ToString());
                         row.CreateCell(13).SetCellValue(form.Form.ZFY.ToString());
-                        row.CreateCell(14).SetCellValue(form.Form.FYCD);
+                        row.CreateCell(14).SetCellValue(ProductReworkFormHelper.MapFYCD(form.Form.FYCD));
                     }
 
                 }
