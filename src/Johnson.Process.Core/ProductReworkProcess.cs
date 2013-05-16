@@ -202,7 +202,8 @@ namespace Johnson.Process.Core
                     .Replace("${SCJHAP}", form.SCJHAP)
                     .Replace("${FGJG}", this.MapFGJG(form.FGJG))
                     .Replace("${XGCLDH}", form.XGCLDH)
-                    .Replace("${incidentNo}", incidentNo.ToString());
+                    .Replace("${incidentNo}", incidentNo.ToString())
+                    .Replace("${FailureNo}", form.FailureNo);
                 ProcessEmailDataProvider.Current.Insert(emailTo, "返工返修抄送邮件", content);
             }
         }
