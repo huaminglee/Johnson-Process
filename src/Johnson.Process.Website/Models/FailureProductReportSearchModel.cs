@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using Johnson.Process.Core;
 
 namespace Johnson.Process.Website.Models
 {
@@ -15,5 +16,6 @@ namespace Johnson.Process.Website.Models
         public string BJXLH;
         public string JZXLH;
         public string GYSMC;
+        public FailureResult Result;
     }
 }

@@ -116,7 +116,7 @@
     </table>
 
     </form>
-    <table id="reportGrid" style="width:auto;height:auto" title="返工返修信息">
+    <table id="reportGrid" style="width:1450px;height:auto" title="返工返修信息">
 		<thead>
 			<tr>
 				<th field="startUserName" resizable="false" width="80">发起人</th>

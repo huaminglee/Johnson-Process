@@ -82,14 +82,20 @@
         </tr>
         <tr>
             <td style="width: 200px" class="labelCol">
-                
+                处理结果
             </td>
             <td style="width: 280px" class="textCol">
-                
+                <input name="Result" type="radio" value="1"/><label>退回供应商</label>
+                <input name="Result" type="radio" value="2" /><label>让步接收</label>
+                <input name="Result" type="radio" value="3" /><label>返工/返修</label>
+                <input name="Result" type="radio" value="4" /><label>报废</label>
+                <input name="Result" type="radio" value="5" /><label>挑选</label>
+                <input name="Result" type="radio" value="7" /><label>其它</label>
             </td>
             <td style="width: 200px" >
                 <input type="button" name="btnSearch" value="查询"/>
                 <input type="reset" name="btnReset" value="重置"/>
+                <input type="button" name="btnDaochu" value="导出Excel"/>
             </td>
             <td >
                 
@@ -110,7 +116,7 @@
 				<th field="JZXLH" resizable="false" width="100">机组系列号</th>
                 <th field="GYSMC" resizable="false" width="100">供应商名称</th>
                 <th field="ZRBM" resizable="false" width="80">责任部门</th>
-                <th field="qeResult" resizable="false" width="80">QE判定结果</th>
+                <th field="Result" resizable="false" width="80">处理结果</th>
                 <th field="incidentNo" formatter="actionRender" resizable="false" width="120">操作</th>
 			</tr>
 		</thead>
@@ -144,6 +150,22 @@
             showFooter: true,
             singleSelect: true,
             nowrap: false
+        });
+        $("#searchForm input[name='btnDaochu']").button().click(function(){
+            var self = this;
+            $(this).attr("disabled", "disabled");
+            var formValue = $("#searchForm").getFormValue();
+            var formJson = $.toJSON(formValue);
+
+            $.post("FailureProduct_ReportController.aspx?action=Daochu", { formJson: formJson }, function (data) {
+                $(self).removeAttr("disabled");
+                if(data.result != 0){
+                    alert(data.message);
+                    return;
+                }
+                window.open("ProductReworkReportExcelDownload.aspx?file="+data.data);
+            });
+            return false;
         });
     })
 

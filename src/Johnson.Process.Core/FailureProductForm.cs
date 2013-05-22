@@ -141,6 +141,38 @@ namespace Johnson.Process.Core
 
         public FailureResult QEResult { set; get; }
 
+        public FailureResult Result
+        {
+            get
+            {
+                if (this.QEResult != FailureResult.None && this.QEResult != FailureResult.MRB)
+                {
+                    return QEResult;
+                }
+                if (this.MrbResults != null)
+                {
+                    FailureResult finalResult = this.MrbResults[0].Result;
+                    foreach (MrbFailureResult mrbResult in this.MrbResults)
+                    {
+                        if (mrbResult.Result != finalResult)
+                        {
+                            finalResult = FailureResult.None;
+                            break;
+                        }
+                    }
+                    if (finalResult != FailureResult.None)
+                    {
+                        return finalResult;
+                    }
+                }
+                if (this.QAResult != FailureResult.None)
+                {
+                    return this.QAResult;
+                }
+                return FailureResult.None;
+            }
+        }
+
         public string SupplierDeal { set; get; }
 
         public string SupplierDealBillNumber { set; get; }

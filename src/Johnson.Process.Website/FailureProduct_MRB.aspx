@@ -54,7 +54,6 @@
                         <input name="QEResult" type="radio" value="3" /><label>返工/返修</label>
                         <input name="QEResult" type="radio" value="4" /><label>报废</label>
                         <input name="QEResult" type="radio" value="5" /><label>挑选</label>
-                        <input name="QEResult" type="radio" value="6" /><label>MRB会议</label>
                     </div>
                 </td>
             </tr>
