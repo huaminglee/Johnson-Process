@@ -32,12 +32,12 @@
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
-                    预防措施负责人<span style="color: Red" >*</span>
+                    预防措施负责人
                 </td>
                 <td style="width: 380px" class="textCol" colspan="3">
                     <div class="singleUserSelect">
                         <input type="text" name="measureUserAccount" class="userAccount"/>
-                        <input type="text" name="measureUserName" class="textInput required userName"/>
+                        <input type="text" name="measureUserName" class="textInput userName"/>
                         <input type="button" value="选择" class="btnCommon" />
                     </div>
                 </td>

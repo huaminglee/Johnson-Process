@@ -24,22 +24,24 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
-    </form>
+    <table id="attachments" style="width:900px;height:auto" >
+		<thead>
+			<tr> 
+				<th field="fileName" resizable="false" width="200">附件名称</th>
+                <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			</tr>
+		</thead>
+	</table>
     <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
+        <div class="panel-header" ><div class="panel-title">②现场解决方案</div></div>
+        <textarea name="solutions" class="textInput" style="width: 688px;" rows="5"></textarea>
     </div>
     <div style="margin-top: 1em;">
-        <table id="actionGrid" style="width:900px;height:auto" title="行动">
+        <div class="panel-header" ><div class="panel-title">③行动</div></div>
+        <table id="actionGrid" style="width:900px;height:auto">
 		    <thead>
 			    <tr>
                     <th field="remark" resizable="false" width="170">行动描述</th>
@@ -53,18 +55,9 @@
 	    </table>
     </div>
     <br />
-    <form id="reasonAndMeasuresForm">
-       <table class="formInfo">
-            <tr >
-                <td class="labelCol" style="width: 200px">
-                    原因分析<span style="color: Red">*</span>
-                </td>
-                <td class="textCol" colspan="3" >
-                    <textarea name="reason" class="textInput required" style="width: 688px;" rows="5"></textarea>
-                </td>
-            </tr>
-        </table>
-        <table id="reasonAttachments" style="width:900px;height:auto" title="原因分析附件">
+    <div class="panel-header" ><div class="panel-title">④原因分析</div></div>
+        <textarea name="reason" class="textInput required" style="width: 688px;" rows="5"></textarea>
+        <table id="reasonAttachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
@@ -72,18 +65,10 @@
 			    </tr>
 		    </thead>
 	    </table>
-       <br />
-       <table class="formInfo">
-            <tr >
-                <td class="labelCol" style="width: 200px">
-                    纠正预防措施<span style="color: Red">*</span>
-                </td>
-                <td class="textCol" colspan="3" >
-                    <textarea name="measures" class="textInput required" style="width: 688px;" rows="5"></textarea>
-                </td>
-            </tr>
-        </table>
-        <table id="measuresAttachments" style="width:900px;height:auto" title="纠正预防措施附件">
+        <br />
+        <div class="panel-header" ><div class="panel-title">⑤纠正预防措施</div></div>
+        <textarea name="measures" class="textInput required" style="width: 688px;" rows="5"></textarea>
+        <table id="measuresAttachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
@@ -113,7 +98,7 @@
     var incidentNo = '<%= Request["incidentNo"] %>';
     $(function () {
         $.get("VocController.aspx?action=get", { taskId: taskId, incidentNo: incidentNo, r: Math.random() }, function (data) {
-            $("#basicInfoForm, #reasonAndMeasuresForm").setFormValue(data).setFormReadOnly();
+            $("#basicInfoForm").setFormValue(data).setFormReadOnly();
             if (data.files) {
                 $('#attachments').datagrid('loadData', data.files);
             }

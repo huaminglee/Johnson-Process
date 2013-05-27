@@ -89,22 +89,6 @@ namespace Johnson.Process.Website
                         Response.Redirect("VOC_Measures.aspx?" + Request.QueryString.ToString());
                     }
                     break;
-                case "51":
-                    if (taskInfo.Status == 1)
-                    {
-                        Response.Redirect("Voc_ResponsiblePrevious.aspx?" + Request.QueryString.ToString());
-                    }
-                    else
-                    {
-                        Response.Redirect("Voc_Completed2.aspx?" + Request.QueryString.ToString());
-                    }
-                    break;
-                case "61":
-                    if (taskInfo.Status == 1)
-                    {
-                        Response.Redirect("Voc_ASD.aspx?" + Request.QueryString.ToString());
-                    }
-                    break;
             }
             if (taskInfo.Status != 1)
             {

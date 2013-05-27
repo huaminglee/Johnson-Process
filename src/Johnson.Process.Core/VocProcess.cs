@@ -12,6 +12,7 @@ namespace Johnson.Process.Core
         private const string PARAM_RESPONSIBLE_NEED_PREVIOUS_AUDIT = "needPreviousAudit";
         private const string PARAM_MEASURES_USER = "measuresUser";
         private const string PARAM_ACTION_USERS = "actionUsers";
+        private const string PARAM_XUYAO_JIUZHENG_YUFANG_CUOSHI = "xuyaoJiuzhengYufangCuoshi";
 
         public VocProcess(string processName)
             :base(processName)
@@ -131,13 +132,11 @@ namespace Johnson.Process.Core
             {
                 throw new ArgumentNullException("form");
             }
-            if (string.IsNullOrEmpty(form.MeasureUserAccount))
-            {
-                throw new ArgumentNullException("MeasureUserAccount");
-            }
 
+            string xuyaoJiuzhengYufangCuoshi = string.IsNullOrEmpty(form.MeasureUserAccount) ? "否" : "是";
             Variable[] variables = new Variable[]{
-                    new Variable{ strVariableName = PARAM_MEASURES_USER, objVariableValue = new object[]{ this.GetUltimusUserAccount(form.MeasureUserAccount)} }
+                    new Variable{ strVariableName = PARAM_MEASURES_USER, objVariableValue = new object[]{ this.GetUltimusUserAccount(form.MeasureUserAccount)} },
+                    new Variable{ strVariableName = PARAM_XUYAO_JIUZHENG_YUFANG_CUOSHI, objVariableValue = new object[]{ xuyaoJiuzhengYufangCuoshi} }
                 };
             this.Send(taskId, variables, "", this.GetSummary(form), form);
         }

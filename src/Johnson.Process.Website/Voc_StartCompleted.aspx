@@ -67,18 +67,6 @@
 		    </thead>
 	    </table>
     </form>
-    <div style="margin-top: 1em;">
-        <table id="remarks" style="width:900px;height:auto" title="提交信息">
-		    <thead>
-			    <tr> 
-				    <th field="remarkStepName" resizable="false" width="200">流程步骤</th>
-                    <th field="remarkUserName" resizable="false" width="100">提交人</th>
-                    <th field="remarkTime" resizable="false" width="130">提交日期</th>
-                    <th field="remark" resizable="false" width="300">备注</th>
-			    </tr>
-		    </thead>
-	    </table>
-    </div>
 </body>
 </html>
 <script language="javascript" type="text/javascript">
