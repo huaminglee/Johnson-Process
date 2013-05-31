@@ -21,18 +21,19 @@ namespace Johnson.Process.EMail
 
         public void Start()
         {
-            try
+            this._logger.Info("start ProcessMailService");
+            List<ProcessEmailEntity> entitys = ProcessEmailDataProvider.Current.SelectStatusIs0();
+            foreach (ProcessEmailEntity entity in entitys)
             {
-                List<ProcessEmailEntity> entitys = ProcessEmailDataProvider.Current.SelectStatusIs0();
-                foreach (ProcessEmailEntity entity in entitys)
+                try
                 {
                     MailSender.Current.Send(entity.Email, entity.Subject, "", "", true, entity.Content.Replace("${liuchengBaseUrl}", this._liuchengBaseUrl));
-                    ProcessEmailDataProvider.Current.UpdateStatusAs1(entity.ID);
                 }
-            }
-            catch (TaskEmailNotifySerivceException ex)
-            {
-                this._logger.Error(ex.Message, ex);
+                catch (TaskEmailNotifySerivceException ex)
+                {
+                    this._logger.Error(ex.Message, ex);
+                }
+                ProcessEmailDataProvider.Current.UpdateStatusAs1(entity.ID);
             }
         }
     }
