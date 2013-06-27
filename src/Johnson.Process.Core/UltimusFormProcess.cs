@@ -25,7 +25,10 @@ namespace Johnson.Process.Core
             _formListDictionaryByIncNo = new Dictionary<int, ProcessForm<TForm>>();
             foreach (ProcessForm<TForm> pform in this._formList)
             {
-                _formListDictionaryByIncNo.Add(pform.IncidentNo, pform);
+                if (!_formListDictionaryByIncNo.ContainsKey(pform.IncidentNo))
+                {
+                    _formListDictionaryByIncNo.Add(pform.IncidentNo, pform);
+                }
             }
         }
 

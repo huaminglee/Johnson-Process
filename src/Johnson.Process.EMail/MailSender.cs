@@ -53,7 +53,11 @@ namespace Johnson.Process.EMail
                 mailSender.From = new System.Net.Mail.MailAddress("edoc2@vip.163.com");
 #else
                 EDoc2.InstanceConfigInfo config;
-                ApiManager.Api.SystemManagement.GetInstanceConfig(ApiManager.CurrentUserToken, out config);
+                int result = ApiManager.Api.SystemManagement.GetInstanceConfig(ApiManager.CurrentUserToken, out config);
+                if (config == null)
+                {
+                    throw new Exception("config null, result:" + config);
+                }
                 EDoc2.Mail.CommonMailSender mailSender = new EDoc2.Mail.CommonMailSender(config.SendMailServerType);
                 mailSender.Server = config.SmtpServer;
                 mailSender.UserName = config.SmtpUserName;
