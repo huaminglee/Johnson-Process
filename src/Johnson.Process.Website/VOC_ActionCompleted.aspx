@@ -24,9 +24,46 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC-行动完成" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
+        <table id="attachments" style="width:900px;height:auto" >
+		    <thead>
+			    <tr> 
+				    <th field="fileName" resizable="false" width="200">附件名称</th>
+                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			    </tr>
+		    </thead>
+	    </table>
+        <div style="margin-top: 1em;">
+            <div class="panel-header" ><div class="panel-title">②现场解决方案</div></div>
+            <table class="formInfo">
+                <tr >
+                    <td class="labelCol" style="width: 200px">
+                        方案
+                    </td>
+                    <td class="textCol">
+                        <textarea name="solutions" class="textInput required" readonly="readonly" style="width: 688px;" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="labelCol" style="width: 200px">
+                        完成时间
+                    </td>
+                    <td class="textCol" >
+                        <input name="solutionsCompleteTime" type="text" class="textInput txtwidth required dateISO" />
+                    </td>
+                </tr>
+            </table>
+            <table id="solutionsAttachments" style="width:900px;height:auto">
+		        <thead>
+			        <tr> 
+				        <th field="fileName" resizable="false" width="200">附件名称</th>
+                        <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			        </tr>
+		        </thead>
+	        </table>
+        </div>
     </form>
 
     <div id="editVocActionPlanDialog" title="编辑行动计划">
@@ -38,19 +75,10 @@
             </div>
         </form>
     </div>
-    <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
-    </div>
 
     <div style="margin-top: 1em;">
-        <table id="actionGrid" style="width:900px;height:auto" title="行动计划">
+        <div class="panel-header" ><div class="panel-title">③行动</div></div>
+        <table id="actionGrid" style="width:900px;height:auto">
 		    <thead>
 			    <tr>
                     <th field="remark" resizable="false" width="150">行动描述</th>
@@ -110,6 +138,9 @@
             if (data.files) {
                 $('#attachments').datagrid('loadData', data.files);
             }
+            if (data.solutionsFiles) {
+                $('#solutionsAttachments').datagrid('loadData', data.solutionsFiles);
+            }
             $("#remarks").datagrid("loadData", data.remarks);
         });
 
@@ -155,7 +186,7 @@
 
         $(".edoc2FileUploader").edoc2SingleFile(tempFolderId);
 
-        $("#remarks, #attachments").datagrid({
+        $("#remarks, #attachments, #solutionsAttachments").datagrid({
             rownumbers: true
         });
 

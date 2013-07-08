@@ -23,7 +23,7 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC-ASD" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
 
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
@@ -44,10 +44,9 @@
                 </td>
             </tr>
         </table>
-    </form>
 
     <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
+        <table id="attachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
@@ -56,6 +55,7 @@
 		    </thead>
 	    </table>
     </div>
+    </form>
     
     <div style="margin-top: 1em;">
         <table id="remarks" style="width:900px;height:auto" title="提交信息">

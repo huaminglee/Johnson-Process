@@ -24,11 +24,108 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC-原因分析及纠正预防措施" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
+        <table id="attachments" style="width:900px;height:auto">
+		    <thead>
+			    <tr> 
+				    <th field="fileName" resizable="false" width="200">附件名称</th>
+                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			    </tr>
+		    </thead>
+	    </table>
+
+        <div style="margin-top: 1em;">
+            <div class="panel-header" ><div class="panel-title">②现场解决方案</div></div>
+            <table class="formInfo">
+                <tr >
+                    <td class="labelCol" style="width: 200px">
+                        方案
+                    </td>
+                    <td class="textCol">
+                        <textarea name="solutions" class="textInput required" readonly="readonly" style="width: 688px;" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="labelCol" style="width: 200px">
+                        完成时间
+                    </td>
+                    <td class="textCol" >
+                        <input name="solutionsCompleteTime" type="text" class="textInput txtwidth required dateISO" />
+                    </td>
+                </tr>
+            </table>
+            <table id="solutionsAttachments" style="width:900px;height:auto">
+		        <thead>
+			        <tr> 
+				        <th field="fileName" resizable="false" width="200">附件名称</th>
+                        <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			        </tr>
+		        </thead>
+	        </table>
+        </div>
     </form>
-    <form id="responnsibleUserPreviousForm">
+
+    <div style="margin-top: 1em;">
+        <div class="panel-header" ><div class="panel-title">③行动</div></div>
+        <table id="actionGrid" style="width:900px;height:auto">
+		    <thead>
+			    <tr>
+                    <th field="remark" resizable="false" width="170">行动描述</th>
+                    <th field="userName" resizable="false" width="80">负责人</th>
+                    <th field="endDate" resizable="false" width="80">完成时间</th>
+                    <th field="result" resizable="false" width="170">结果</th>
+                    <th field="resultFileName" resizable="false" width="110">附件</th>
+                    <th field="resultFileId" resizable="false" formatter="fileActionFormater" width="80"></th>
+			    </tr>
+		    </thead>
+	    </table>
+    </div>
+    <br />
+    <div class="panel-header" ><div class="panel-title">④原因分析</div></div>
+    <form id="reasonAndMeasuresForm">
+       <table class="formInfo">
+            <tr >
+                <td class="labelCol" style="width: 200px">
+                    原因分析<span style="color: Red">*</span>
+                </td>
+                <td class="textCol" colspan="3" >
+                    <textarea name="reason" class="textInput required" style="width: 688px;" rows="5"></textarea>
+                </td>
+            </tr>
+        </table>
+        <table id="reasonAttachments" style="width:900px;height:auto">
+		    <thead>
+			    <tr> 
+				    <th field="fileName" resizable="false" width="200">附件名称</th>
+                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			    </tr>
+		    </thead>
+	    </table>
+       <br />
+        <div class="panel-header" ><div class="panel-title">⑤纠正预防措施</div></div>
+       <table class="formInfo">
+            <tr >
+                <td class="labelCol" style="width: 200px">
+                    纠正预防措施<span style="color: Red">*</span>
+                </td>
+                <td class="textCol" colspan="3" >
+                    <textarea name="measures" class="textInput required" style="width: 688px;" rows="5"></textarea>
+                </td>
+            </tr>
+        </table>
+        <table id="measuresAttachments" style="width:900px;height:auto">
+		    <thead>
+			    <tr> 
+				    <th field="fileName" resizable="false" width="200">附件名称</th>
+                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			    </tr>
+		    </thead>
+	    </table>
+    </form>
+    
+    <form id="responnsibleUserPreviousForm" style="display: none">
         <table class="formInfo">
             <tr>
                 <td style="width: 200px" class="labelCol">
@@ -45,72 +142,6 @@
             </tr>
         </table>
     </form>
-    <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
-    </div>
-
-    <div style="margin-top: 1em;">
-        <table id="actionGrid" style="width:900px;height:auto" title="行动">
-		    <thead>
-			    <tr>
-                    <th field="remark" resizable="false" width="170">行动描述</th>
-                    <th field="userName" resizable="false" width="80">负责人</th>
-                    <th field="endDate" resizable="false" width="80">完成时间</th>
-                    <th field="result" resizable="false" width="170">结果</th>
-                    <th field="resultFileName" resizable="false" width="110">附件</th>
-                    <th field="resultFileId" resizable="false" formatter="fileActionFormater" width="80"></th>
-			    </tr>
-		    </thead>
-	    </table>
-    </div>
-    <br />
-    <form id="reasonAndMeasuresForm">
-       <table class="formInfo">
-            <tr >
-                <td class="labelCol" style="width: 200px">
-                    原因分析<span style="color: Red">*</span>
-                </td>
-                <td class="textCol" colspan="3" >
-                    <textarea name="reason" class="textInput required" style="width: 688px;" rows="5"></textarea>
-                </td>
-            </tr>
-        </table>
-        <table id="reasonAttachments" style="width:900px;height:auto" title="原因分析附件">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
-       <br />
-       <table class="formInfo">
-            <tr >
-                <td class="labelCol" style="width: 200px">
-                    纠正预防措施<span style="color: Red">*</span>
-                </td>
-                <td class="textCol" colspan="3" >
-                    <textarea name="measures" class="textInput required" style="width: 688px;" rows="5"></textarea>
-                </td>
-            </tr>
-        </table>
-        <table id="measuresAttachments" style="width:900px;height:auto" title="纠正预防措施附件">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
-    </form>
-    
     <div style="margin-top: 1em;">
         <table id="remarks" style="width:900px;height:auto" title="提交信息">
 		    <thead>
@@ -165,6 +196,9 @@
             if (data.measuresFiles) {
                 $("#measuresAttachments").datagrid("loadData", data.measuresFiles)
             }
+            if (data.solutionsFiles) {
+                $('#solutionsAttachments').datagrid('loadData', data.solutionsFiles);
+            }
             $("#remarks").datagrid("loadData", data.remarks);
         });
 
@@ -211,7 +245,7 @@
 
         $("#responnsibleUserPreviousForm, #reasonAndMeasuresForm").validate();
 
-        $("#remarks, #actionGrid, #attachments").datagrid({
+        $("#remarks, #actionGrid, #attachments, #solutionsAttachments").datagrid({
             rownumbers: true
         });
     })

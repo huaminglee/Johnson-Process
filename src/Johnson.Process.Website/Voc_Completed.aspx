@@ -24,12 +24,10 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
-    </form>
-    <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
+        <table id="attachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
@@ -37,8 +35,9 @@
 			    </tr>
 		    </thead>
 	    </table>
-    </div>
+    </form>
     <br />
+    <div class="panel-header" ><div class="panel-title">②原因分析</div></div>
     <form id="reasonAndMeasuresForm">
        <table class="formInfo">
             <tr >
@@ -50,7 +49,7 @@
                 </td>
             </tr>
         </table>
-        <table id="reasonAttachments" style="width:900px;height:auto" title="原因分析附件">
+        <table id="reasonAttachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
@@ -59,6 +58,7 @@
 		    </thead>
 	    </table>
        <br />
+        <div class="panel-header" ><div class="panel-title">③纠正预防措施</div></div>
        <table class="formInfo">
             <tr >
                 <td class="labelCol" style="width: 200px">
@@ -69,7 +69,7 @@
                 </td>
             </tr>
         </table>
-        <table id="measuresAttachments" style="width:900px;height:auto" title="纠正预防措施附件">
+        <table id="measuresAttachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>

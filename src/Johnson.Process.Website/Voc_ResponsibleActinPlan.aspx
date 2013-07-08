@@ -24,20 +24,20 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC-行动计划" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
+        <div style="margin-top: 1em;">
+            <table id="attachments" style="width:900px;height:auto">
+		        <thead>
+			        <tr> 
+				        <th field="fileName" resizable="false" width="200">附件名称</th>
+                        <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			        </tr>
+		        </thead>
+	        </table>
+        </div>
     </form>
-    <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
-    </div>
     <div id="addVocActionPlanDialog" title="添加行动计划">
         <form>
             <johnson:VocActionPlanDetails runat="server" ID="addVocActionPlanDetails"></johnson:VocActionPlanDetails>
@@ -59,7 +59,31 @@
     </div>
 
     <div style="margin-top: 1em;">
-        <table id="actionGrid" style="width:900px;height:auto" title="行动计划">
+        <div class="panel-header" ><div class="panel-title">②现场解决方案</div></div>
+        <form id="solutionsForm">
+           <table class="formInfo">
+                <tr >
+                    <td class="labelCol" style="width: 200px">
+                        现场解决方案<span style="color: Red">*</span>
+                    </td>
+                    <td class="textCol">
+                        <textarea name="solutions" class="textInput required" style="width: 688px;" rows="5"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <table id="solutionsAttachments" style="width:900px;height:auto">
+		        <thead>
+			        <tr> 
+				        <th field="fileName" resizable="false" width="200">附件名称</th>
+                        <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			        </tr>
+		        </thead>
+	        </table>
+        </form>
+    </div>
+
+    <div style="margin-top: 1em;">
+        <table id="actionGrid" style="width:900px;height:auto" title="③行动">
 		    <thead>
 			    <tr>
                     <th field="remark" resizable="false" width="400">行动描述</th>
@@ -71,26 +95,6 @@
     </div>
     
     <br />
-    <form id="solutionsForm">
-       <table class="formInfo">
-            <tr >
-                <td class="labelCol" style="width: 200px">
-                    现场解决方案<span style="color: Red">*</span>
-                </td>
-                <td class="textCol">
-                    <textarea name="solutions" class="textInput required" style="width: 688px;" rows="5"></textarea>
-                </td>
-            </tr>
-        </table>
-        <table id="solutionsAttachments" style="width:900px;height:auto" title="现场解决方案附件">
-		    <thead>
-			    <tr> 
-				    <th field="fileName" resizable="false" width="200">附件名称</th>
-                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
-			    </tr>
-		    </thead>
-	    </table>
-    </form>
     
     <div style="margin-top: 1em;">
         <table id="remarks" style="width:900px;height:auto" title="提交信息">

@@ -62,6 +62,14 @@ namespace Johnson.Process.Core
 
         public DateTime? SolutionsCompleteTime { set; get; }
 
+        public bool SolutionsCompleted
+        {
+            get
+            {
+                return this.SolutionsCompleteTime.HasValue;
+            }
+        }
+
         public List<ProcessFile> SolutionsFiles { set; get; }
 
         public List<TaskApproveInfo> Approves { set; get; }

@@ -37,7 +37,32 @@
 	</table>
     <div style="margin-top: 1em;">
         <div class="panel-header" ><div class="panel-title">②现场解决方案</div></div>
-        <textarea name="solutions" class="textInput" style="width: 688px;" rows="5"></textarea>
+        <table class="formInfo">
+            <tr >
+                <td class="labelCol" style="width: 200px">
+                    方案
+                </td>
+                <td class="textCol">
+                    <textarea name="solutions" class="textInput required" readonly="readonly" style="width: 688px;" rows="5"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="labelCol" style="width: 200px">
+                    完成时间
+                </td>
+                <td class="textCol" >
+                    <input name="solutionsCompleteTime" type="text" class="textInput txtwidth required dateISO" />
+                </td>
+            </tr>
+        </table>
+        <table id="solutionsAttachments" style="width:900px;height:auto">
+		    <thead>
+			    <tr> 
+				    <th field="fileName" resizable="false" width="200">附件名称</th>
+                    <th field="fileId" resizable="false" formatter="fileActionFormater" width="100">操作</th>
+			    </tr>
+		    </thead>
+	    </table>
     </div>
     <div style="margin-top: 1em;">
         <div class="panel-header" ><div class="panel-title">③行动</div></div>
@@ -111,10 +136,13 @@
             if (data.actions) {
                 $("#actionGrid").datagrid("loadData", data.actions)
             }
+            if (data.solutionsFiles) {
+                $('#solutionsAttachments').datagrid('loadData', data.solutionsFiles);
+            }
             $("#remarks").datagrid("loadData", data.remarks);
         });
 
-        $("#remarks,#measuresAttachments,#reasonAttachments,#actionGrid, #attachments").datagrid({
+        $("#remarks,#measuresAttachments,#reasonAttachments,#actionGrid, #attachments, #solutionsAttachments").datagrid({
             rownumbers: true
         });
     })

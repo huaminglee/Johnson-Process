@@ -442,6 +442,10 @@ namespace Johnson.Process.Website
 
                 TaskInfo taskInfo = WebHelper.VocProcess.GetTaskInfo(model.taskId);
                 VocForm form = WebHelper.VocProcess.Get(model.taskId);
+                if (!form.SolutionsCompleted)
+                {
+                    throw new Exception("现场解决方案没完成，无法关闭。");
+                }
                 form.ResponsibleUserPreviousAccount = model.responsibleUserPreviousAccount;
                 form.ResponsibleUserPreviousName = model.responsibleUserPreviousName;
                 form.Reason = model.reason;

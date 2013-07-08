@@ -23,12 +23,10 @@
 <body>
     <%--head --%>
     <johnson:Header runat="server" HeaderTitle="VOC-给出现场解决方案" ID="header"></johnson:Header>
-    <div class="panel-header" ><div class="panel-title">基本信息</div></div>
+    <div class="panel-header" ><div class="panel-title">①基本信息</div></div>
     <form id="basicInfoForm">
         <johnson:VocDetails runat="server" ID="vocDetails"></johnson:VocDetails>
-    </form>
-    <div style="margin-top: 1em;">
-        <table id="attachments" style="width:900px;height:auto" title="附件信息">
+        <table id="attachments" style="width:900px;height:auto" >
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
@@ -36,8 +34,9 @@
 			    </tr>
 		    </thead>
 	    </table>
-    </div>
+    </form>
     <br />
+    <div class="panel-header" ><div class="panel-title">②现场解决方案</div></div>
     <form id="solutionsForm">
        <table class="formInfo">
             <tr >
@@ -49,7 +48,7 @@
                 </td>
             </tr>
         </table>
-        <table id="solutionsAttachments" style="width:900px;height:auto" title="现场解决方案附件">
+        <table id="solutionsAttachments" style="width:900px;height:auto">
 		    <thead>
 			    <tr> 
 				    <th field="fileName" resizable="false" width="200">附件名称</th>
